@@ -89,6 +89,9 @@ PKGA=(
   'universal-ctags'
   'doxygen'
   'texlive-full'
+  
+  # Tmux
+  'tmux'
 
   # Neovim
   'ripgrep' # Better "grep"
@@ -258,6 +261,14 @@ for PKG in "${PKGE[@]}"; do
   sync
   sleep 1s
 done
+
+."$HOMEPATH"/.config/tmux/plugins/tpm/bin/install_plugins
+sync
+
+cd "$HOMEPATH"/.config/tmux/plugins/tmux-thumbs
+cargo build --release && sync
+
+tmux source "$HOMEPATH"/.config/tmux/tmux.conf && sync
 
 printf "\nexport PATH=\$PATH:/snap/bin:\$HOME/.local/bin:\$HOME/.cargo/bin\n" | tee -a ~/.bashrc
 printf "DOTNET_CLI_TELEMETRY_OPTOUT=1\n" | tee -a ~/.bashrc
