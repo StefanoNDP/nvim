@@ -106,6 +106,7 @@ PKGA=(
 
   # Misc
   'fonts-inter'
+  'x11-xserver-utils'
 
   # C Sharp
   'dotnet-sdk-9.0'
@@ -118,7 +119,7 @@ PKGA=(
   'libuv1-dev'
 
   # Github
-  'gh' # Github cli
+  'gh' # Github cli  
 )
 
 for PKG in "${PKGA[@]}"; do
