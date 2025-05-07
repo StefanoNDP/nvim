@@ -107,6 +107,7 @@ PKGA=(
   # Misc
   'fonts-inter'
   'x11-xserver-utils'
+  'ssh'
 
   # C Sharp
   'dotnet-sdk-8.0'
@@ -279,6 +280,8 @@ printf "\nexport PATH=\$PATH:/snap/bin:\$HOME/.local/bin:\$HOME/.cargo/bin\n" | 
 printf "DOTNET_CLI_TELEMETRY_OPTOUT=1\n" | tee -a ~/.bashrc
 printf "\nDOTNET_CLI_TELEMETRY_OPTOUT=1\n" | sudo tee -a /etc/environment
 printf "FrameworkPathOverride=/lib/mono/4.8-api\n" | sudo tee -a /etc/environment
+
+sudo systemctl enable --now ssh.service
 
 echo
 echo "Done"
