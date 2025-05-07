@@ -1,0 +1,5 @@
+require("config.set")
+require("config.autocmds")
+require("config.lazy")
+require("config.remap")
+require("config.macro")
