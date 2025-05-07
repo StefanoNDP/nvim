@@ -109,6 +109,10 @@ PKGA=(
   'x11-xserver-utils'
 
   # C Sharp
+  'dotnet-sdk-8.0'
+  'aspnetcore-runtime-8.0'
+  'dotnet-targeting-pack-8.0'
+  'aspnetcore-targeting-pack-8.0'
   'dotnet-sdk-9.0'
   'aspnetcore-runtime-9.0'
   'dotnet-targeting-pack-9.0'
