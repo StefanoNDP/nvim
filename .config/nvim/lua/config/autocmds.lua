@@ -189,6 +189,27 @@ vim.api.nvim_create_autocmd("InsertCharPre", {
   end,
 })
 
+-- Example of a file watcher using Neovim's built-in autocommands
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*.csproj",
+    callback = function()
+        -- Send a /filesChanged request to the LSP server
+        vim.lsp.buf.execute_command({
+            command = "workspace/didChangeWatchedFiles",
+            arguments = {
+                {
+                    changes = {
+                        {
+                            uri = vim.uri_from_fname(vim.fn.expand("<afile>")),
+                            type = 2, -- Changed
+                        },
+                    },
+                },
+            },
+        })
+    end,
+})
+
 -- Map "q" to quit in nvim-dap-ui/view
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "dap-view", "dap-view-term", "dap-repl" }, -- dap-repl is set by `nvim-dap`

@@ -34,13 +34,12 @@ return {
           "codelldb", -- DAP (lldb)
           "clang-format", -- formatter
           -- CSHARP
-          "csharp-language-server", -- LSP
+          -- "csharp-language-server", -- LSP
           -- "omnisharp", -- LSP
           -- "omnisharp-mono", -- LSP
           "csharpier", -- Formatter
           "netcoredbg", -- DAP
-          -- "roslyn", -- LSP
-          "roslynv4", -- LSP
+          "roslyn", -- LSP
           -- "rzls", -- LSP -- Use ':MasonInstall rzls@9.0.0-preview.25156.2' instead
           -- GODOT SCRIPT
           -- "gdscript", -- LSP

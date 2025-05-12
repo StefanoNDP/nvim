@@ -127,18 +127,18 @@ M.line = function()
         "filesize",
         cond = M.conditions.checkFileSize,
       },
-      {
-        function()
-          return ""
-        end,
-        cond = M.conditions.buffer_not_empty,
-      },
-      {
-        "filename",
-        path = 0,
-        newfile_status = true,
-        cond = M.conditions.buffer_not_empty,
-      },
+      -- {
+      --   function()
+      --     return ""
+      --   end,
+      --   cond = M.conditions.buffer_not_empty,
+      -- },
+      -- {
+      --   "filename",
+      --   path = 0,
+      --   newfile_status = true,
+      --   cond = M.conditions.buffer_not_empty,
+      -- },
     },
     line_b = {
       {
@@ -242,27 +242,27 @@ M.line = function()
         end,
         cond = M.conditions.buffer_not_empty,
       },
-      { "encoding", cond = M.conditions.buffer_not_empty },
-      function()
-        return ""
-      end,
-      { "fileformat" },
-      {
-        function()
-          return ""
-        end,
-        cond = M.conditions.buffer_not_empty,
-      },
+      -- { "encoding", cond = M.conditions.buffer_not_empty },
+      -- function()
+      --   return ""
+      -- end,
+      -- { "fileformat" },
+      -- {
+      --   function()
+      --     return ""
+      --   end,
+      --   cond = M.conditions.buffer_not_empty,
+      -- },
       {
         "filetype",
       },
     },
     line_y = {
-      "progress",
-      function()
-        return ""
-      end,
-      "location",
+      -- "progress",
+      -- function()
+      --   return ""
+      -- end,
+      -- "location",
     },
     line_z = {
       "os.date('%d/%m/%Y %H:%M:%S')",

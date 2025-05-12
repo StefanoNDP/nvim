@@ -40,7 +40,7 @@ require("lazy").setup({
     { import = "plugins.formatting" },
     { import = "plugins.linting" },
 
-    -- { import = "plugins.util" },
+    { import = "plugins.util" },
     { import = "plugins.test" },
     { import = "plugins.misc" },
   },

@@ -57,10 +57,11 @@ return { -- C#
     dependencies = {
       {
         "tris203/rzls.nvim",
-        config = function()
-          ---@diagnostic disable-next-line: missing-fields
-          require("rzls").setup({})
-        end,
+        -- config = function()
+        --   ---@diagnostic disable-next-line: missing-fields
+        --   require("rzls").setup({})
+        -- end,
+        config = true,
       },
     },
     version = false,
@@ -71,32 +72,51 @@ return { -- C#
       local documentstore = require("rzls.documentstore")
       local razor = require("rzls.razor")
       local Log = require("rzls.log")
+      -- local roslyn_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "roslyn", "libexec")
+      -- local rzls_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "rzls", "libexec")
+      -- local cmd = {
+      --   "dotnet",
+      --   vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+      --   "--stdio",
+      --   "--logLevel=Information",
+      --   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+      --   "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+      --   "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      -- }
 
       return {
-        args = {
-          "--stdio",
-          "--logLevel=Information",
-          "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-          "--razorSourceGenerator=" .. vim.fs.joinpath(
-            vim.fn.stdpath("data") --[[@as string]],
-            "mason",
-            "packages",
-            "roslyn",
-            "libexec",
-            "Microsoft.CodeAnalysis.Razor.Compiler.dll"
-          ),
-          "--razorDesignTimePath=" .. vim.fs.joinpath(
-            vim.fn.stdpath("data") --[[@as string]],
-            "mason",
-            "packages",
-            "rzls",
-            "libexec",
-            "Targets",
-            "Microsoft.NET.Sdk.Razor.DesignTime.targets"
-          ),
-        },
+        -- args = {
+        --   "--stdio",
+        --   "--logLevel=Information",
+        --   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        --   "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+        --   "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+        -- },
+        -- args = {
+        --   "--stdio",
+        --   "--logLevel=Information",
+        --   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        --   "--razorSourceGenerator=" .. vim.fs.joinpath(
+        --     vim.fn.stdpath("data") --[[@as string]],
+        --     "mason",
+        --     "packages",
+        --     "roslyn",
+        --     "libexec",
+        --     "Microsoft.CodeAnalysis.Razor.Compiler.dll"
+        --   ),
+        --   "--razorDesignTimePath=" .. vim.fs.joinpath(
+        --     vim.fn.stdpath("data") --[[@as string]],
+        --     "mason",
+        --     "packages",
+        --     "rzls",
+        --     "libexec",
+        --     "Targets",
+        --     "Microsoft.NET.Sdk.Razor.DesignTime.targets"
+        --   ),
+        -- },
         ---@diagnostic disable-next-line: missing-fields
         config = {
+          -- cmd = cmd,
           capabilities = {
             textDocument = {
               _vs_onAutoInsert = { dynamicRegistration = false },

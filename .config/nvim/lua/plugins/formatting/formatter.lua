@@ -28,9 +28,15 @@ return {
             return #diag > 0
           end,
         },
+        -- csharpier = {
+        --   command = "dotnet-csharpier",
+        --   args = { "--write-stdout" },
+        -- },
         csharpier = {
-          command = "dotnet-csharpier",
-          args = { "--write-stdout" },
+          command = "csharpier",
+          args = { "format", "$FILENAME" },
+          stdin = false,
+          require_cwd = true,
         },
         sqlfluff = {
           args = { "format", "--dialect=ansi", "-" },
@@ -65,7 +71,7 @@ return {
         -- name = { "formatter1", "formatter2", stop_after_first = true },
       },
       format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 2500,
         lsp_format = "fallback",
       },
     }
