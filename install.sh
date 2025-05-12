@@ -24,6 +24,12 @@ fi
 if ! [ -d "$HOMEPATH"/.cache/ccls ]; then
   mkdir -p "$HOMEPATH"/.cache/ccls
 fi
+if ! [ -d "$HOMEPATH"/.local ]; then
+  mkdir -p "$HOMEPATH"/.local
+fi
+if ! [ -d "$HOMEPATH"/.config ]; then
+  mkdir -p "$HOMEPATH"/.config
+fi
 if ! [ -d "$APPSPATH" ]; then
   mkdir "$HOMEPATH"/.apps
 fi
@@ -34,9 +40,13 @@ ln -svf "$DOTFILESPATH"/.config/nvim "$HOMEPATH"/.config/
 ln -svf "$DOTFILESPATH"/.editorconfig "$HOMEPATH"/
 ln -svf "$DOTFILESPATH"/.clang-format "$HOMEPATH"/
 
+curl -sS https://starship.rs/install.sh | sh
+
 sudo add-apt-repository universe
 
 sudo add-apt-repository ppa:dotnet/backports
+
+sudo add-apt-repository ppa:kisak/kisak-mesa
 
 mkdir -p ~/.local/share/fonts
 
@@ -89,9 +99,14 @@ PKGA=(
   'universal-ctags'
   'doxygen'
   'texlive-full'
-  
+
   # Tmux
   'tmux'
+
+  # Kitty
+  'kitty'
+  'kitty-terminfo'
+  'kitty-shell-integration'
 
   # Neovim
   'ripgrep' # Better "grep"
@@ -103,20 +118,29 @@ PKGA=(
   'python3'
   'pipx'
   'imagemagick'
+  'jq'
 
   # Misc
   'fonts-inter'
   'x11-xserver-utils'
+  'x11-apps'
   'ssh'
+  'mesa-utils'
+  'libglu1-mesa-dev'
+  'freeglut3-dev'
+  'mesa-common-dev'
+  'golang-go'
 
   # C Sharp
   'dotnet-sdk-8.0'
-  'aspnetcore-runtime-8.0'
+  'dotnet-runtime-8.0'
   'dotnet-targeting-pack-8.0'
+  'aspnetcore-runtime-8.0'
   'aspnetcore-targeting-pack-8.0'
   'dotnet-sdk-9.0'
-  'aspnetcore-runtime-9.0'
+  'dotnet-runtime-9.0'
   'dotnet-targeting-pack-9.0'
+  'aspnetcore-runtime-9.0'
   'aspnetcore-targeting-pack-9.0'
   'mono-complete'
   'mono-xbuild'
@@ -205,6 +229,9 @@ PKGD=(
   'gdtoolkit'
   'grip'
   'hererocks'
+  'sphinx'
+  'sphinx-copybutton'
+  'sphinx-inline-tabs'
 )
 
 for PKG in "${PKGD[@]}"; do
@@ -268,6 +295,10 @@ for PKG in "${PKGE[@]}"; do
   sleep 1s
 done
 
+git clone --depth=1 https://github.com/akinomyoga/ble.sh.git ~/.apps/ble.sh
+make -C ~/.apps/ble.sh install PREFIX=~/.local
+source ~/.local/share/blesh/ble.sh
+
 ."$HOMEPATH"/.config/tmux/plugins/tpm/bin/install_plugins
 sync
 
@@ -282,6 +313,13 @@ printf "\nDOTNET_CLI_TELEMETRY_OPTOUT=1\n" | sudo tee -a /etc/environment
 printf "FrameworkPathOverride=/lib/mono/4.8-api\n" | sudo tee -a /etc/environment
 
 sudo systemctl enable --now ssh.service
+
+echo
+echo "Must install powershell 7 and VcXsrv"
+echo "Run the following in Micro\$oft's Powershell commands"
+echo "winget install --id Microsoft.PowerShell --source winget"
+echo "winget install --id marha.VcXsrv --source winget"
+echo
 
 echo
 echo "Done"

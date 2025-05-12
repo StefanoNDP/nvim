@@ -1,16 +1,3 @@
----@class LineRange
----@field line integer
----@field character integer
-
----@class EditRange
----@field start LineRange
----@field end LineRange
-
----@class TextEdit
----@field newText string
----@field range EditRange
-
----@param edit TextEdit
 local apply_vs_text_edit = function(edit)
   local bufnr = vim.api.nvim_get_current_buf()
   local start_line = edit.range.start.line
@@ -66,8 +53,6 @@ return { -- C#
     },
     version = false,
     ft = { "cs", "razor" },
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
     opts = function()
       local documentstore = require("rzls.documentstore")
       local razor = require("rzls.razor")
@@ -131,14 +116,10 @@ return { -- C#
             end,
 
             -- VS Windows and VS Code
-            ---@param _err lsp.ResponseError
-            ---@param result VBufUpdate
             ["razor/updateCSharpBuffer"] = function(_err, result)
               documentstore.update_vbuf(result, razor.language_kinds.csharp)
               documentstore.refresh_parent_views(result)
             end,
-            ---@param _err lsp.ResponseError
-            ---@param result VBufUpdate
             ["razor/updateHtmlBuffer"] = function(_err, result)
               documentstore.update_vbuf(result, razor.language_kinds.html)
             end,
@@ -219,7 +200,6 @@ return { -- C#
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
         get_sdk_path = "/usr/share/dotnet/sdk/9.0.104",
-        ---@type TestRunnerOptions
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",

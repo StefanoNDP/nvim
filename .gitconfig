@@ -90,5 +90,9 @@
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
 
+[user]
+	email = sndobbin+pro@gmail.com
+  name = StefanoNDP
+
 [credential]
-  helper = "/mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe"
+	helper = store

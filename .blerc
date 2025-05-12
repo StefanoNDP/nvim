@@ -1,0 +1,52 @@
+#
+# ~/.blerc
+#
+
+# # Enable bash programmable completion features in interactive shells
+# if [ -f /usr/share/bash-completion/bash_completion ]; then
+#   source /usr/share/bash-completion/bash_completion
+# elif [ -f /etc/bash_completion ]; then
+#   source /etc/bash_completion
+# fi
+#
+# ble-import -d integration/fzf-completion
+# ble-import -d integration/fzf-key-bindings
+
+bleopt default_keymap=vi
+
+# Changes terminal cursosrs according to current mode
+ble-bind -m vi_nmap --cursor 2
+ble-bind -m vi_imap --cursor 5
+ble-bind -m vi_omap --cursor 4
+ble-bind -m vi_xmap --cursor 2
+ble-bind -m vi_cmap --cursor 0
+
+# Enter and Ctrl+m executes the command
+ble-bind -m vi_imap -f 'RET' 'accept-line'
+ble-bind -m vi_nmap -f 'RET' 'accept-line'
+ble-bind -m vi_imap -f 'C-m' 'accept-line'
+ble-bind -m vi_nmap -f 'C-m' 'accept-line'
+
+# Ctrl-Enter executes the command (Requires Enter and Ctrl+m bindings above)
+ble-bind -m vi_imap -f 'C-RET' 'accept-line'
+ble-bind -m vi_nmap -f 'C-RET' 'accept-line'
+
+# gg goest to first line and G goest to last line in command history/current command
+ble-bind -m vi_nmap -f 'g g' vi-command/first-nol
+ble-bind -m vi_omap -f 'g g' vi-command/first-nol
+ble-bind -m vi_xmap -f 'g g' vi-command/first-nol
+ble-bind -m vi_nmap -f 'G' vi-command/last-line
+ble-bind -m vi_omap -f 'G' vi-command/last-line
+ble-bind -m vi_xmap -f 'G' vi-command/last-line
+
+function blerc/vim-mode-hook {
+  # Install vim-surround plugin
+  source "$_ble_base/lib/vim-surround.sh"
+
+  # Show '-- NORMAL --' instead of '~' when in normal mode
+  bleopt keymap_vi_mode_string_nmap=$'\e[1m-- NORMAL --\e[m'
+
+  # Alt-Enter inserts a new line
+  ble-decode/keymap:vi_imap/define-meta-bindings
+}
+blehook/eval-after-load keymap_vi blerc/vim-mode-hook
