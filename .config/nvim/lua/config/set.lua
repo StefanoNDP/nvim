@@ -1,6 +1,8 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
 
+vim.g.nofsync = true
+
 -- recommended settings
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -43,7 +45,7 @@ vim.o.rnu = true
 
 -- Clipboard accross everything
 -- vim.opt.clipboard:append("unnamedplus") -- Use system clipboard as default register
-vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+-- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- Set python3 host prog
 vim.g.python3_host_prog = "/usr/bin/python3"
@@ -203,8 +205,11 @@ vim.api.nvim_set_hl(0, "hl_fg_crust", { fg = "#11111b", bg = "#1e1e2e" })
 vim.g.conceallevel = 0
 vim.o.conceallevel = 0
 
--- -- Godot
--- local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
--- if not (vim.uv or vim.loop).fs_stat(pipepath) then
---   vim.fn.serverstart(pipepath)
--- end
+-- Omnisharp
+-- vim.g.Omnisharp_translate_cygwin_wsl = 1
+
+-- Godot
+local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
+if not (vim.uv or vim.loop).fs_stat(pipepath) then
+  vim.fn.serverstart(pipepath)
+end

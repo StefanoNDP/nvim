@@ -100,23 +100,23 @@ wk.add({
       desc = "Replace all instances of the word under the cursor",
     },
 
-    -- Tmux
-    {
-      "<C-f>",
-      "<cmd>silent !tmux neww ~/dotfiles/scripts/tmux-sessionizer<CR>",
-      desc = "Search and create a new tmux session based on the basename of the file chosen",
-    },
-    { "<M-Left>", "<cmd>TmuxNavigateLeft<CR>", desc = "Move to left window" },
-    { "<M-Down>", "<cmd>TmuxNavigateDown<CR>", desc = "Move to Down window" },
-    { "<M-Up>", "<cmd>TmuxNavigateUp<CR>", desc = "Move to Up window" },
-    { "<M-Right>", "<cmd>TmuxNavigateRight<CR>", desc = "Move to right window" },
-    {
-      "<leader>tm",
-      function()
-        vim.cmd([[silent !tmux set status]])
-      end,
-      desc = "Toggle tmux statusline on/off",
-    },
+    -- -- Tmux
+    -- {
+    --   "<C-f>",
+    --   "<cmd>silent !tmux neww ~/dotfiles/scripts/tmux-sessionizer<CR>",
+    --   desc = "Search and create a new tmux session based on the basename of the file chosen",
+    -- },
+    -- { "<M-Left>", "<cmd>TmuxNavigateLeft<CR>", desc = "Move to left window" },
+    -- { "<M-Down>", "<cmd>TmuxNavigateDown<CR>", desc = "Move to Down window" },
+    -- { "<M-Up>", "<cmd>TmuxNavigateUp<CR>", desc = "Move to Up window" },
+    -- { "<M-Right>", "<cmd>TmuxNavigateRight<CR>", desc = "Move to right window" },
+    -- {
+    --   "<leader>tm",
+    --   function()
+    --     vim.cmd([[silent !tmux set status]])
+    --   end,
+    --   desc = "Toggle tmux statusline on/off",
+    -- },
 
     -- HACK: Create table of contents in neovim with markdown-toc
     -- https://youtu.be/BVyrXsZ_ViA

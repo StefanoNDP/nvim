@@ -213,11 +213,6 @@ M.line = function()
     line_x = {
       {
         function()
-          return require("pomodoro").get_pomodoro_status("🍅❌", "🍅", "☕")
-        end,
-      },
-      {
-        function()
           return ""
         end,
         cond = snacks.profiler.running,
@@ -284,14 +279,7 @@ M.win = {
       color_correction = "dynamic",
     },
   },
-  win_x = {
-
-    {
-      function()
-        return require("pomodoro").get_pomodoro_status("🍅❌", "🍅", "☕")
-      end,
-    },
-  },
+  win_x = { },
   win_y = {
     "os.date('%d/%m/%Y %H:%M:%S')",
   },
@@ -308,9 +296,6 @@ M.lualine = {
   enabled = true,
   version = false,
   event = "VeryLazy",
-  dependencies = {
-    "quentingruber/pomodoro.nvim",
-  },
   opts = function()
     return {
       options = {

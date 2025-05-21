@@ -9,6 +9,50 @@ vim.cmd([[autocmd VimEnter * cd $PWD]])
 -- api.nvim_command("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 vim.cmd([[autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni]])
 
+-- Turn on/off tmux statusline on vim enter/leave
+vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
+vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
+
+-- ftplugin start
+local ftmodule = "ftplugin.%s"
+local function loadftmodule(ft, action)
+  local modname = ftmodule:format(ft)
+  local _, res = pcall(require, modname)
+  if type(res) == "table" then
+    if type(res[action]) == "function" then
+      res[action]()
+    end
+  elseif
+    type(res) == "string"
+    and not res:match("Module '" .. modname .. "' not found")
+    and not res:match("	no file")
+  then
+    print(res)
+  end
+end
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter", "Colorscheme" }, {
+  pattern = { "*" },
+  callback = function()
+    loadftmodule(vim.bo.filetype, "ftplugin")
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "*" },
+  callback = function()
+    loadftmodule(vim.bo.filetype, "newfile")
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "VimEnter", "BufWinEnter", "Colorscheme" }, {
+  pattern = { "*" },
+  callback = function()
+    loadftmodule(vim.bo.filetype, "syntax")
+  end,
+})
+-- ftplugin end
+
 -- It's free real estate
 -- vim.opt.cmdheight = 0
 
@@ -17,10 +61,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\r\+$//e]],
 })
-
--- Turn on/off tmux statusline on vim enter/leave
-vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
-vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
 
 -- Set conceallevel for certain file types
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -103,46 +143,6 @@ vim.api.nvim_create_autocmd("BufDelete", {
     end
   end,
 })
-
--- ftplugin start
-local ftmodule = "ftplugin.%s"
-local function loadftmodule(ft, action)
-  local modname = ftmodule:format(ft)
-  local _, res = pcall(require, modname)
-  if type(res) == "table" then
-    if type(res[action]) == "function" then
-      res[action]()
-    end
-  elseif
-    type(res) == "string"
-    and not res:match("Module '" .. modname .. "' not found")
-    and not res:match("	no file")
-  then
-    print(res)
-  end
-end
-
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter", "Colorscheme" }, {
-  pattern = { "*" },
-  callback = function()
-    loadftmodule(vim.bo.filetype, "ftplugin")
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "*" },
-  callback = function()
-    loadftmodule(vim.bo.filetype, "newfile")
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "VimEnter", "BufWinEnter", "Colorscheme" }, {
-  pattern = { "*" },
-  callback = function()
-    loadftmodule(vim.bo.filetype, "syntax")
-  end,
-})
--- ftplugin end
 
 -- Diagnostic refresh
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {

@@ -143,6 +143,10 @@ return { -- C#
           },
           filewatching = "roslyn",
           settings = {
+            ["csharp|background_analysis"] = {
+              dotnet_analyzer_diagnostics_scope = "fullSolution",
+              dotnet_compiler_diagnostics_scope = "fullSolution",
+            },
             ["csharp|inlay_hints"] = {
               csharp_enable_inlay_hints_for_implicit_object_creation = true,
               csharp_enable_inlay_hints_for_implicit_variable_types = true,
@@ -159,9 +163,18 @@ return { -- C#
             },
             ["csharp|code_lens"] = {
               dotnet_enable_references_code_lens = true,
+              dotnet_enable_tests_code_lens = true,
             },
             ["csharp|formatting"] = {
               dotnet_organize_imports_on_format = true,
+            },
+            ["csharp|completion"] = {
+              dotnet_provide_regex_completions = true,
+              dotnet_show_completion_items_from_unimported_namespaces = true,
+              dotnet_show_name_completion_suggestions = true,
+            },
+            ["csharp|symbol_search"] = {
+              dotnet_search_reference_assemblies = true,
             },
           },
         },
@@ -171,6 +184,12 @@ return { -- C#
       require("roslyn").setup(opts)
     end,
   },
+  -- {
+  --   "OmniSharp/omnisharp-vim",
+  --   dependencies = { "Hoffs/omnisharp-extended-lsp.nvim" },
+  --   enabled = true,
+  --   version = false,
+  -- },
   {
     "GustavEikaas/easy-dotnet.nvim",
     enabled = true,
@@ -199,7 +218,7 @@ return { -- C#
         --Optional function to return the path for the dotnet sdk (e.g C:/ProgramFiles/dotnet/sdk/8.0.0)
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
-        get_sdk_path = "/usr/share/dotnet/sdk/9.0.104",
+        get_sdk_path = "/usr/share/dotnet/sdk/8.0.409",
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",
