@@ -48,7 +48,7 @@ return { -- colorscheme
         dap_ui = true,
         fidget = true,
         gitgutter = false,
-        gitsigns = true,
+        gitsigns = false,
         harpoon = true,
         lsp_trouble = true,
         mason = true,

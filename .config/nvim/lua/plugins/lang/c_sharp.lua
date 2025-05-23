@@ -57,17 +57,32 @@ return { -- C#
       local documentstore = require("rzls.documentstore")
       local razor = require("rzls.razor")
       local Log = require("rzls.log")
-      -- local roslyn_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "roslyn", "libexec")
-      -- local rzls_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "rzls", "libexec")
-      -- local cmd = {
-      --   "dotnet",
-      --   vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
-      --   "--stdio",
-      --   "--logLevel=Information",
-      --   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-      --   "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
-      --   "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
-      -- }
+      local roslyn_base_path =
+        vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "roslyn", "libexec")
+      local rzls_base_path =
+        vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "rzls", "libexec")
+      local cmd = {
+        "dotnet",
+        vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+        "--stdio",
+        "--logLevel=Information",
+        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        -- "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+        -- "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+      }
+
+      local not_implemented = function(err, result, ctx, config)
+        vim.print("Called " .. ctx.method)
+        vim.print(vim.inspect(err))
+        vim.print(vim.inspect(result))
+        vim.print(vim.inspect(ctx))
+        vim.print(vim.inspect(config))
+        return { "error" }
+      end
+
+      local not_supported = function()
+        return {}, nil
+      end
 
       return {
         -- args = {
@@ -101,7 +116,7 @@ return { -- C#
         -- },
         ---@diagnostic disable-next-line: missing-fields
         config = {
-          -- cmd = cmd,
+          cmd = cmd,
           capabilities = {
             textDocument = {
               _vs_onAutoInsert = { dynamicRegistration = false },
@@ -115,26 +130,62 @@ return { -- C#
               apply_vs_text_edit(result._vs_textEdit)
             end,
 
+            -- VS Windows only
+            ["razor/inlineCompletion"] = not_implemented,
+            ["razor/validateBreakpointRange"] = not_implemented,
+            ["razor/onAutoInsert"] = not_implemented,
+            ["razor/semanticTokensRefresh"] = not_implemented,
+            ["razor/textPresentation"] = not_implemented,
+            ["razor/uriPresentation"] = not_implemented,
+            ["razor/spellCheck"] = not_implemented,
+            ["razor/projectContexts"] = not_implemented,
+            ["razor/pullDiagnostics"] = not_implemented,
+            ["razor/mapCode"] = not_implemented,
+
             -- VS Windows and VS Code
+            ---@param _err lsp.ResponseError
+            ---@param result razor.VBufUpdate
             ["razor/updateCSharpBuffer"] = function(_err, result)
-              documentstore.update_vbuf(result, razor.language_kinds.csharp)
-              documentstore.refresh_parent_views(result)
+              local buf = documentstore.update_vbuf(result, razor.language_kinds.csharp)
+              if buf then
+                require("rzls.refresh").diagnostics.add(buf)
+              end
             end,
+            ---@param _err lsp.ResponseError
+            ---@param result razor.VBufUpdate
             ["razor/updateHtmlBuffer"] = function(_err, result)
               documentstore.update_vbuf(result, razor.language_kinds.html)
             end,
+            ["razor/provideCodeActions"] = require("rzls.handlers.providecodeactions"),
+            ["razor/resolveCodeActions"] = require("rzls.handlers.resolvecodeactions"),
+            ["razor/provideHtmlColorPresentation"] = not_supported,
             ["razor/provideHtmlDocumentColor"] = require("rzls.handlers.providehtmldocumentcolor"),
             ["razor/provideSemanticTokensRange"] = require("rzls.handlers.providesemantictokensrange"),
             ["razor/foldingRange"] = require("rzls.handlers.foldingrange"),
 
             ["razor/htmlFormatting"] = require("rzls.handlers.htmlformatting"),
+            ["razor/htmlOnTypeFormatting"] = not_implemented,
+            ["razor/simplifyMethod"] = not_implemented,
+            ["razor/formatNewFile"] = not_implemented,
             ["razor/inlayHint"] = require("rzls.handlers.inlayhint"),
             ["razor/inlayHintResolve"] = require("rzls.handlers.inlayhintresolve"),
+
+            -- VS Windows only at the moment, but could/should be migrated
+            ["razor/documentSymbol"] = not_implemented,
+            ["razor/rename"] = not_implemented,
+            ["razor/hover"] = not_implemented,
+            ["razor/definition"] = not_implemented,
+            ["razor/documentHighlight"] = not_implemented,
+            ["razor/signatureHelp"] = not_implemented,
+            ["razor/implementation"] = not_implemented,
+            ["razor/references"] = not_implemented,
 
             -- Called to get C# diagnostics from Roslyn when publishing diagnostics for VS Code
             ["razor/csharpPullDiagnostics"] = require("rzls.handlers.csharppulldiagnostics"),
             ["razor/completion"] = require("rzls.handlers.completion"),
             ["razor/completionItem/resolve"] = require("rzls.handlers.completionitemresolve"),
+
+            -- Standard LSP methods
             [vim.lsp.protocol.Methods.textDocument_colorPresentation] = not_supported,
             [vim.lsp.protocol.Methods.window_logMessage] = function(_, result)
               Log.rzls = result.message
@@ -142,6 +193,7 @@ return { -- C#
             end,
           },
           filewatching = "roslyn",
+          broad_search = true,
           settings = {
             ["csharp|background_analysis"] = {
               dotnet_analyzer_diagnostics_scope = "fullSolution",
@@ -213,12 +265,15 @@ return { -- C#
         end
         return path
       end
+      -- local sdkPath = function()
+      --   return "/usr/share/dotnet/sdk/8.0.409"
+      -- end
 
       return {
         --Optional function to return the path for the dotnet sdk (e.g C:/ProgramFiles/dotnet/sdk/8.0.0)
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
-        get_sdk_path = "/usr/share/dotnet/sdk/8.0.409",
+        -- get_sdk_path = sdkPath,
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",
@@ -263,19 +318,19 @@ return { -- C#
         terminal = function(path, action, args)
           local commands = {
             run = function()
-              return string.format("dotnet run --project %s %s", path, args)
+              return string.format("dotnet run -p:Targetframework=net8.0 --project %s %s", path, args)
             end,
             test = function()
-              return string.format("dotnet test %s %s", path, args)
+              return string.format("dotnet test -p:Targetframework=net8.0 %s %s", path, args)
             end,
             restore = function()
-              return string.format("dotnet restore %s %s", path, args)
+              return string.format("dotnet restore -p:Targetframework=net8.0 %s %s", path, args)
             end,
             build = function()
-              return string.format("dotnet build %s %s", path, args)
+              return string.format("dotnet build -p:Targetframework=net8.0 %s %s", path, args)
             end,
             watch = function()
-              return string.format("dotnet watch --project %s %s", path, args)
+              return string.format("dotnet watch -p:Targetframework=net8.0 --project %s %s", path, args)
             end,
           }
 

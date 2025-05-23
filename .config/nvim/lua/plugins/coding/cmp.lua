@@ -47,6 +47,32 @@ return {
           require("blink.compat").setup()
         end,
       },
+      {
+        -- "Exafunction/codeium.nvim",
+        "Exafunction/windsurf.nvim",
+        version = false,
+        lazy = true,
+        cmd = "Codeium",
+        event = "InsertEnter",
+        dependencies = { "nvim-lua/plenary.nvim", "saghen/blink.compat" },
+        opts = function()
+          return {
+            enable_cmp_source = true,
+            virtual_text = {
+              enabled = true,
+              enable_chat = true,
+              -- filetypes = {
+              --   python = true,
+              --   markdown = true,
+              -- },
+              default_filetype_enabled = true,
+            },
+          }
+        end,
+        config = function(_, opts)
+          require("codeium").setup(opts)
+        end,
+      },
     },
     opts = {
       completion = {
@@ -166,6 +192,8 @@ return {
           File = "󰈙",
           Operator = "󰆕",
           TypeParameter = "",
+
+          codeium = "",
         },
       },
       -- Merge custom sources with the existing ones from LazyVim
@@ -187,6 +215,7 @@ return {
       },
       sources = {
         default = {
+          "codeium",
           "cmdline",
           "lsp",
           "easy-dotnet",
@@ -200,6 +229,7 @@ return {
         per_filetype = {
           -- org = { "orgmode" },
           sql = {
+            "codeium",
             "snippets",
             "dadbod",
             "buffer",
@@ -208,6 +238,7 @@ return {
             -- "ripgrep",}
           },
           lua = {
+            "codeium",
             "lazydev",
             "lsp",
             "snippets",
@@ -224,6 +255,19 @@ return {
           --   module = "orgmode.org.autocompletion.blink",
           --   fallbacks = { "bugger" },
           -- },
+          codeium = {
+            name = "codeium",
+            module = "blink.compat.source",
+            score_offset = 100,
+            enabled = true,
+            async = true,
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.kind_icon = " "
+              end
+              return items
+            end,
+          },
           cmdline = {
             module = "blink.cmp.sources.cmdline",
             name = "[cmd]",

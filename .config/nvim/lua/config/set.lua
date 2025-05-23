@@ -45,7 +45,7 @@ vim.o.rnu = true
 
 -- Clipboard accross everything
 -- vim.opt.clipboard:append("unnamedplus") -- Use system clipboard as default register
--- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- Set python3 host prog
 vim.g.python3_host_prog = "/usr/bin/python3"

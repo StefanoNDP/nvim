@@ -65,8 +65,8 @@ return {
     debug = { enabled = false },
     dim = { enabled = false },
     explorer = { enabled = true, replace_netrw = true },
-    git = { enabled = false },
-    gitbrowse = { enabled = false },
+    -- git = { enabled = false },
+    -- gitbrowse = { enabled = false },
     image = { enabled = true },
     indent = {
       enabled = true,
@@ -80,7 +80,7 @@ return {
       },
     },
     input = { enabled = true },
-    lazygit = { enabled = true },
+    -- lazygit = { enabled = true },
     notifier = { enabled = true, margin = { top = 1, right = 1, bottom = 1 }, top_down = false },
     notify = { enabled = true },
     profiler = { enabled = true },
@@ -91,10 +91,12 @@ return {
     scroll = { enabled = false },
     statuscolumn = {
       enabled = true,
-      left = { "fold", "git" },
+      -- left = { "fold", "git" },
+      left = { "fold" },
       right = { "mark", "sign" },
-      folds = { open = true, git_hl = true },
-      git = { patterns = { "GitSign", "GitSigns", "MiniDiffSign" } },
+      -- folds = { open = true, git_hl = true },
+      folds = { open = true, git_hl = false },
+      -- git = { patterns = { "GitSign", "GitSigns", "MiniDiffSign" } },
     },
     terminal = { enabled = true },
     toggle = { enabled = true },
@@ -145,10 +147,7 @@ return {
               },
             },
           },
-          exclude = funcs.mergeTablesNoDup(
-            excludeAll,
-            excludeExplorer
-          ),
+          exclude = funcs.mergeTablesNoDup(excludeAll, excludeExplorer),
         },
         files = {
           hidden = true,
@@ -164,10 +163,7 @@ return {
             },
           },
           cmd = "rg",
-          exclude = funcs.mergeTablesNoDup(
-            excludeAll,
-            excludeFiles
-          ),
+          exclude = funcs.mergeTablesNoDup(excludeAll, excludeFiles),
         },
         grep = {
           hidden = true,
@@ -182,10 +178,7 @@ return {
               },
             },
           },
-          exclude = funcs.mergeTablesNoDup(
-            excludeAll,
-            excludeGrep
-          ),
+          exclude = funcs.mergeTablesNoDup(excludeAll, excludeGrep),
         },
         register = {
           finder = "vim_registers",

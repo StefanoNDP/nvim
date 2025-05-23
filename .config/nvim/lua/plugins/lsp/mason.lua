@@ -29,29 +29,23 @@ return {
           "bash-language-server", -- LSP
           "bash-debug-adapter", -- DAP
           "shellharden", -- formatter and linter
-          -- C/C++
-          "clangd", -- LSP and linter
-          "codelldb", -- DAP (lldb)
-          "clang-format", -- formatter
+          -- -- C/C++
+          -- "clangd", -- LSP and linter
+          -- "codelldb", -- DAP (lldb)
+          -- "clang-format", -- formatter
           -- CSHARP
-          -- "csharp-language-server", -- LSP
-          -- "omnisharp", -- LSP
-          -- "omnisharp-mono", -- LSP
           "csharpier", -- Formatter
           "netcoredbg", -- DAP
           "roslyn", -- LSP
           -- "rzls", -- LSP -- Use ':MasonInstall rzls@9.0.0-preview.25156.2' instead
           -- GODOT SCRIPT
-          -- "gdscript", -- LSP
-          -- "gdformat", -- formatter
           "gdtoolkit", -- formatter and linter
-          -- HTML
-          "html-lsp",
-          -- JavaScript/TypeScript
-          "typescript-language-server", -- LSP
-          "vtsls", -- LSP
-          -- "tailwindcss-language-server", -- Autocomplete
-          "js-debug-adapter", -- DAP
+          -- -- HTML
+          -- "html-lsp",
+          -- -- JavaScript/TypeScript
+          -- "typescript-language-server", -- LSP
+          -- "vtsls", -- LSP
+          -- "js-debug-adapter", -- DAP
           -- JSON
           "jsonls", -- LSP
           -- LUA
@@ -61,10 +55,10 @@ return {
           "marksman",
           "markdownlint-cli2", -- Linter
           "markdown-toc", -- TOC Formatter
-          -- SQL
-          "sqlls", -- LSP
-          "sql-formatter", -- formatter
-          "sqlfluff", -- linter
+          -- -- SQL
+          -- "sqlls", -- LSP
+          -- "sql-formatter", -- formatter
+          -- "sqlfluff", -- linter
           -- YAML
           "yaml-language-server", -- LSP
           "yamllint", -- linter

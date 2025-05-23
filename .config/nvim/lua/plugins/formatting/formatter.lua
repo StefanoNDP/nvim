@@ -2,7 +2,7 @@ return {
   "stevearc/conform.nvim",
   enabled = true,
   version = false,
-  lazy = true,
+  lazy = false,
   cmd = "ConformInfo",
   opts = function()
     return {

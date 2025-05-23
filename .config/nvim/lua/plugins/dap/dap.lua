@@ -1,50 +1,50 @@
 local servers = function()
   local dap = require("dap")
 
-  -- C/C++
-  if not dap.adapters["codelldb"] then
-    require("dap").adapters["codelldb"] = {
-      -- Executable
-      type = "executable",
-      command = vim.fn.exepath("codelldb"),
-
-      -- -- Server
-      -- type = "server",
-      -- port = "${port}",
-      -- executable = {
-      --   command = vim.fn.exepath("codelldb"),
-      --   args = { "--port", "${port}" },
-      -- },
-
-      -- -- Server from separate terminal
-      -- type = "server",
-      -- host = "127.0.0.1",
-      -- port = 13000,
-      -- executable = {
-      --   command = vim.fn.exepath("codelldb"),
-      --   args = { "--port", 13000 },
-      -- },
-    }
-  end
-  dap.configurations.cpp = {
-    {
-      name = "Launch file",
-      type = "codelldb",
-      request = "launch",
-      program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-      end,
-      cwd = "${workspaceFolder}",
-    },
-    -- {
-    --   name = "Attach to process",
-    --   type = "codelldb",
-    --   request = "attach",
-    --   pid = require("dap.utils").pick_process,
-    --   cwd = "${workspaceFolder}",
-    -- },
-  }
-  dap.configurations.c = dap.configurations.cpp
+  -- -- C/C++
+  -- if not dap.adapters["codelldb"] then
+  --   require("dap").adapters["codelldb"] = {
+  --     -- Executable
+  --     type = "executable",
+  --     command = vim.fn.exepath("codelldb"),
+  --
+  --     -- -- Server
+  --     -- type = "server",
+  --     -- port = "${port}",
+  --     -- executable = {
+  --     --   command = vim.fn.exepath("codelldb"),
+  --     --   args = { "--port", "${port}" },
+  --     -- },
+  --
+  --     -- -- Server from separate terminal
+  --     -- type = "server",
+  --     -- host = "127.0.0.1",
+  --     -- port = 13000,
+  --     -- executable = {
+  --     --   command = vim.fn.exepath("codelldb"),
+  --     --   args = { "--port", 13000 },
+  --     -- },
+  --   }
+  -- end
+  -- dap.configurations.cpp = {
+  --   {
+  --     name = "Launch file",
+  --     type = "codelldb",
+  --     request = "launch",
+  --     program = function()
+  --       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+  --     end,
+  --     cwd = "${workspaceFolder}",
+  --   },
+  --   -- {
+  --   --   name = "Attach to process",
+  --   --   type = "codelldb",
+  --   --   request = "attach",
+  --   --   pid = require("dap.utils").pick_process,
+  --   --   cwd = "${workspaceFolder}",
+  --   -- },
+  -- }
+  -- dap.configurations.c = dap.configurations.cpp
 
   -- C#
   if not dap.adapters["netcoredbg"] then
@@ -154,63 +154,63 @@ local servers = function()
   -- -- Rust
   -- dap.configurations.rust = dap.configurations.cpp
 
-  -- Typescript
-  if not dap.adapters["pwa-node"] then
-    require("dap").adapters["pwa-node"] = {
-      type = "server",
-      host = "localhost",
-      port = "${port}",
-      executable = {
-        command = "node",
-        -- 💀 Make sure to update this path to point to your installation
-        args = {
-          -- LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
-          vim.fn.stdpath("data") .. "/mason/bin/js-debug-adapter",
-          "${port}",
-        },
-      },
-    }
-  end
-  if not dap.adapters["node"] then
-    dap.adapters["node"] = function(cb, config)
-      if config.type == "node" then
-        config.type = "pwa-node"
-      end
-      local nativeAdapter = dap.adapters["pwa-node"]
-      if type(nativeAdapter) == "function" then
-        nativeAdapter(cb, config)
-      else
-        cb(nativeAdapter)
-      end
-    end
-  end
-
-  local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
-
-  local vscode = require("dap.ext.vscode")
-  vscode.type_to_filetypes["node"] = js_filetypes
-  vscode.type_to_filetypes["pwa-node"] = js_filetypes
-
-  for _, language in ipairs(js_filetypes) do
-    if not dap.configurations[language] then
-      dap.configurations[language] = {
-        {
-          type = "pwa-node",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}",
-          cwd = "${workspaceFolder}",
-        },
-        {
-          type = "pwa-node",
-          request = "attach",
-          name = "Attach",
-          processId = require("dap.utils").pick_process,
-          cwd = "${workspaceFolder}",
-        },
-      }
-    end
-  end
+  -- -- Typescript
+  -- if not dap.adapters["pwa-node"] then
+  --   require("dap").adapters["pwa-node"] = {
+  --     type = "server",
+  --     host = "localhost",
+  --     port = "${port}",
+  --     executable = {
+  --       command = "node",
+  --       -- 💀 Make sure to update this path to point to your installation
+  --       args = {
+  --         -- LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+  --         vim.fn.stdpath("data") .. "/mason/bin/js-debug-adapter",
+  --         "${port}",
+  --       },
+  --     },
+  --   }
+  -- end
+  -- if not dap.adapters["node"] then
+  --   dap.adapters["node"] = function(cb, config)
+  --     if config.type == "node" then
+  --       config.type = "pwa-node"
+  --     end
+  --     local nativeAdapter = dap.adapters["pwa-node"]
+  --     if type(nativeAdapter) == "function" then
+  --       nativeAdapter(cb, config)
+  --     else
+  --       cb(nativeAdapter)
+  --     end
+  --   end
+  -- end
+  --
+  -- local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+  --
+  -- local vscode = require("dap.ext.vscode")
+  -- vscode.type_to_filetypes["node"] = js_filetypes
+  -- vscode.type_to_filetypes["pwa-node"] = js_filetypes
+  --
+  -- for _, language in ipairs(js_filetypes) do
+  --   if not dap.configurations[language] then
+  --     dap.configurations[language] = {
+  --       {
+  --         type = "pwa-node",
+  --         request = "launch",
+  --         name = "Launch file",
+  --         program = "${file}",
+  --         cwd = "${workspaceFolder}",
+  --       },
+  --       {
+  --         type = "pwa-node",
+  --         request = "attach",
+  --         name = "Attach",
+  --         processId = require("dap.utils").pick_process,
+  --         cwd = "${workspaceFolder}",
+  --       },
+  --     }
+  --   end
+  -- end
 end
 
 -- Catppuccin compatibility
