@@ -25,10 +25,10 @@ return {
     opts = function()
       return {
         ensure_installed = {
-          -- BASH
-          "bash-language-server", -- LSP
-          "bash-debug-adapter", -- DAP
-          "shellharden", -- formatter and linter
+          -- -- BASH
+          -- "bash-language-server", -- LSP
+          -- "bash-debug-adapter", -- DAP
+          -- "shellharden", -- formatter and linter
           -- -- C/C++
           -- "clangd", -- LSP and linter
           -- "codelldb", -- DAP (lldb)
@@ -46,25 +46,25 @@ return {
           -- "typescript-language-server", -- LSP
           -- "vtsls", -- LSP
           -- "js-debug-adapter", -- DAP
-          -- JSON
-          "jsonls", -- LSP
+          -- -- JSON
+          -- "jsonls", -- LSP
           -- LUA
           "lua-language-server", -- LSP
           "stylua", -- formatter and linter
           -- MARKDOWN
           "marksman",
-          "markdownlint-cli2", -- Linter
-          "markdown-toc", -- TOC Formatter
+          -- "markdownlint-cli2", -- Linter
+          -- "markdown-toc", -- TOC Formatter
           -- -- SQL
           -- "sqlls", -- LSP
           -- "sql-formatter", -- formatter
           -- "sqlfluff", -- linter
-          -- YAML
-          "yaml-language-server", -- LSP
-          "yamllint", -- linter
-          -- GLOBAL
-          "biome", -- formatter and linter - JS/TS, Json
-          "prettier", -- formatter - Markdown
+          -- -- YAML
+          -- "yaml-language-server", -- LSP
+          -- "yamllint", -- linter
+          -- -- GLOBAL
+          -- "biome", -- formatter and linter - JS/TS, Json
+          -- "prettier", -- formatter - Markdown
         },
         automatic_installation = true,
         auto_update = true,
