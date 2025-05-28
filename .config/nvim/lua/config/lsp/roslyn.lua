@@ -202,7 +202,10 @@ end
 local capabilities = require("config.lsp.capabilities").capabilities
 
 ---@type vim.lsp.ClientConfig
-return vim.lsp.config("roslyn", {
+return {
+  on_attach = function(client, bufnr)
+    print("Hello Roslyn!")
+  end,
   name = "roslyn_ls",
   offset_encoding = "utf-8",
   -- cmd = {
@@ -294,4 +297,4 @@ return vim.lsp.config("roslyn", {
       dotnet_search_reference_assemblies = true,
     },
   },
-})
+}
