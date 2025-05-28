@@ -11,12 +11,12 @@ fi
 # For server using debian
 #sudo apt install -y clang clangd clang-tools clang-format clang-tidy cmake cmake-extras && sync
 
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export PATH=$PATH:/snap/bin:$HOME/.local/bin:$HOME/.cargo/bin
+# export DOTNET_CLI_TELEMETRY_OPTOUT=1
+# export PATH=$PATH:/snap/bin:$HOME/.local/bin:$HOME/.cargo/bin
 
 HOMEPATH="$HOME"
 APPSPATH="$HOMEPATH"/.apps
-DOTFILESPATH="$HOMEPATH"/dotfiles
+DOTFILESPATH="$HOMEPATH"/nvim
 
 if ! [ -d "$HOMEPATH"/.vim/undodir ]; then
   mkdir -p "$HOMEPATH"/.vim/undodir
@@ -34,79 +34,66 @@ if ! [ -d "$APPSPATH" ]; then
   mkdir "$HOMEPATH"/.apps
 fi
 
-ln -svf "$DOTFILESPATH"/.config/tmux "$HOMEPATH"/.config/
 ln -svf "$DOTFILESPATH"/.config/nvim "$HOMEPATH"/.config/
 
 ln -svf "$DOTFILESPATH"/.editorconfig "$HOMEPATH"/
-ln -svf "$DOTFILESPATH"/.clang-format "$HOMEPATH"/
 
-curl -sS https://starship.rs/install.sh | sh
-
-sudo add-apt-repository universe
-
-sudo add-apt-repository ppa:dotnet/backports
-
-sudo add-apt-repository ppa:kisak/kisak-mesa
-
-mkdir -p ~/.local/share/fonts
+# curl -sS https://starship.rs/install.sh | sh
+#
+# sudo add-apt-repository universe
+#
+# sudo add-apt-repository ppa:dotnet/backports
+#
+# mkdir -p ~/.local/share/fonts
 
 sudo apt update && sudo apt upgrade -y
 
 # Apt - Neovim
 PKGA=(
-  # Dev
-  'build-essential'
-  'libssl-dev'
-  'libreadline-dev'
-  'zlib1g-dev'
-  'rustc'
-  'cargo'
-  'rustfmt'
-  'nodejs'
-  'unzip'
-  'gettext'
-  'wget'
-  'git'
-  'make'
-  'fzf'
-  'bat'
-  'zoxide'
-  'eza'
-  'xclip'
-  'xsel'
-  'ninja-build'
-  'curl'
-  'ccache'
-  'libreadline-dev'
-  'g++-14'
-  'g++-14-multilib'
-  'gcc-14'
-  'gcc-14-multilib'
-  'cmake'        # CMake Software Builder
-  'cmake-extras' # CMake Addons
-  'llvm'
-  'clang' # C family goodie
-  'clangd'
-  'clang-tools'
-  'clang-format'
-  'clang-tidy'
-  'automake'
-  'libtool'
-  'premake4'
-  'bear'
-  'lldb'
-  'gdb'
-  'universal-ctags'
-  'doxygen'
-  'texlive-full'
-
-  # Tmux
-  'tmux'
-
-  # Kitty
-  'kitty'
-  'kitty-terminfo'
-  'kitty-shell-integration'
+  # # Dev
+  # 'build-essential'
+  # 'libssl-dev'
+  # 'libreadline-dev'
+  # 'zlib1g-dev'
+  # 'rustc'
+  # 'cargo'
+  # 'rustfmt'
+  # 'nodejs'
+  # 'unzip'
+  # 'gettext'
+  # 'wget'
+  # 'git'
+  # 'make'
+  # 'fzf'
+  # 'bat'
+  # 'zoxide'
+  # 'eza'
+  # 'xclip'
+  # 'xsel'
+  # 'ninja-build'
+  # 'curl'
+  # 'ccache'
+  # 'libreadline-dev'
+  # 'g++-14'
+  # 'g++-14-multilib'
+  # 'gcc-14'
+  # 'gcc-14-multilib'
+  # 'cmake'        # CMake Software Builder
+  # 'cmake-extras' # CMake Addons
+  # 'llvm'
+  # 'clang' # C family goodie
+  # 'clangd'
+  # 'clang-tools'
+  # 'clang-format'
+  # 'clang-tidy'
+  # 'automake'
+  # 'libtool'
+  # 'premake4'
+  # 'bear'
+  # 'lldb'
+  # 'gdb'
+  # 'universal-ctags'
+  # 'doxygen'
 
   # Neovim
   'ripgrep' # Better "grep"
@@ -123,12 +110,7 @@ PKGA=(
   # Misc
   'fonts-inter'
   'x11-xserver-utils'
-  'x11-apps'
   'ssh'
-  'mesa-utils'
-  'libglu1-mesa-dev'
-  'freeglut3-dev'
-  'mesa-common-dev'
   'golang-go'
 
   # C Sharp
@@ -148,7 +130,7 @@ PKGA=(
   'libuv1-dev'
 
   # Github
-  'gh' # Github cli  
+  'gh' # Github cli
 )
 
 for PKG in "${PKGA[@]}"; do
@@ -225,13 +207,13 @@ sudo make install && sync
 PKGD=(
   # nvim Dependencies
   'pynvim'
-  'cmake-language-server'
+  # 'cmake-language-server'
   'gdtoolkit'
   'grip'
   'hererocks'
-  'sphinx'
-  'sphinx-copybutton'
-  'sphinx-inline-tabs'
+  # 'sphinx'
+  # 'sphinx-copybutton'
+  # 'sphinx-inline-tabs'
 )
 
 for PKG in "${PKGD[@]}"; do
@@ -261,9 +243,9 @@ PKGE=(
   # LSP
   # 'vscode-langservers-extracted'
   'bash-language-server'
-  'tailwindcss-language-server'
-  'typescript'
-  'typescript-language-server'
+  # 'tailwindcss-language-server'
+  # 'typescript'
+  # 'typescript-language-server'
   'yarn'
   '@vscode/vsce'
   '@fsouza/prettierd'
@@ -282,8 +264,11 @@ npm audit fix && sync
 
 PKGE=(
   # LSP
-  'csharp-ls'
+  # 'csharp-ls'
   'csharpier'
+  'dotnet-outdated-tool'
+  'dotnet-ef'
+  'EasyDotnet'
 )
 
 for PKG in "${PKGE[@]}"; do
@@ -299,14 +284,6 @@ git clone --depth=1 https://github.com/akinomyoga/ble.sh.git ~/.apps/ble.sh
 make -C ~/.apps/ble.sh install PREFIX=~/.local
 source ~/.local/share/blesh/ble.sh
 
-."$HOMEPATH"/.config/tmux/plugins/tpm/bin/install_plugins
-sync
-
-cd "$HOMEPATH"/.config/tmux/plugins/tmux-thumbs
-cargo build --release && sync
-
-tmux source "$HOMEPATH"/.config/tmux/tmux.conf && sync
-
 printf "\nexport PATH=\$PATH:/snap/bin:\$HOME/.local/bin:\$HOME/.cargo/bin\n" | tee -a ~/.bashrc
 printf "DOTNET_CLI_TELEMETRY_OPTOUT=1\n" | tee -a ~/.bashrc
 printf "\nDOTNET_CLI_TELEMETRY_OPTOUT=1\n" | sudo tee -a /etc/environment
@@ -315,10 +292,9 @@ printf "FrameworkPathOverride=/lib/mono/4.8-api\n" | sudo tee -a /etc/environmen
 sudo systemctl enable --now ssh.service
 
 echo
-echo "Must install powershell 7 and VcXsrv"
-echo "Run the following in Micro\$oft's Powershell commands"
+echo "Must install powershell 7"
+echo "Run the following in Micro\$oft's Powershell command"
 echo "winget install --id Microsoft.PowerShell --source winget"
-echo "winget install --id marha.VcXsrv --source winget"
 echo
 
 echo
