@@ -11,8 +11,8 @@ fi
 # For server using debian
 #sudo apt install -y clang clangd clang-tools clang-format clang-tidy cmake cmake-extras && sync
 
-# export DOTNET_CLI_TELEMETRY_OPTOUT=1
-# export PATH=$PATH:/snap/bin:$HOME/.local/bin:$HOME/.cargo/bin
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export PATH=$PATH:/snap/bin:$HOME/.local/bin:$HOME/.cargo/bin
 
 HOMEPATH="$HOME"
 APPSPATH="$HOMEPATH"/.apps
@@ -38,62 +38,62 @@ ln -svf "$DOTFILESPATH"/.config/nvim "$HOMEPATH"/.config/
 
 ln -svf "$DOTFILESPATH"/.editorconfig "$HOMEPATH"/
 
-# curl -sS https://starship.rs/install.sh | sh
-#
-# sudo add-apt-repository universe
-#
-# sudo add-apt-repository ppa:dotnet/backports
-#
-# mkdir -p ~/.local/share/fonts
+curl -sS https://starship.rs/install.sh | sh
+
+sudo add-apt-repository universe
+
+sudo add-apt-repository ppa:dotnet/backports
+
+mkdir -p ~/.local/share/fonts
 
 sudo apt update && sudo apt upgrade -y
 
 # Apt - Neovim
 PKGA=(
-  # # Dev
-  # 'build-essential'
-  # 'libssl-dev'
-  # 'libreadline-dev'
-  # 'zlib1g-dev'
-  # 'rustc'
-  # 'cargo'
-  # 'rustfmt'
-  # 'nodejs'
-  # 'unzip'
-  # 'gettext'
-  # 'wget'
-  # 'git'
-  # 'make'
-  # 'fzf'
-  # 'bat'
-  # 'zoxide'
-  # 'eza'
-  # 'xclip'
-  # 'xsel'
-  # 'ninja-build'
-  # 'curl'
-  # 'ccache'
-  # 'libreadline-dev'
-  # 'g++-14'
-  # 'g++-14-multilib'
-  # 'gcc-14'
-  # 'gcc-14-multilib'
-  # 'cmake'        # CMake Software Builder
-  # 'cmake-extras' # CMake Addons
-  # 'llvm'
-  # 'clang' # C family goodie
-  # 'clangd'
-  # 'clang-tools'
-  # 'clang-format'
-  # 'clang-tidy'
-  # 'automake'
-  # 'libtool'
-  # 'premake4'
-  # 'bear'
-  # 'lldb'
-  # 'gdb'
-  # 'universal-ctags'
-  # 'doxygen'
+  # Dev
+  'build-essential'
+  'libssl-dev'
+  'libreadline-dev'
+  'zlib1g-dev'
+  'rustc'
+  'cargo'
+  'rustfmt'
+  'nodejs'
+  'unzip'
+  'gettext'
+  'wget'
+  'git'
+  'make'
+  'fzf'
+  'bat'
+  'zoxide'
+  'eza'
+  'xclip'
+  'xsel'
+  'ninja-build'
+  'curl'
+  'ccache'
+  'libreadline-dev'
+  'g++-14'
+  'g++-14-multilib'
+  'gcc-14'
+  'gcc-14-multilib'
+  'cmake'        # CMake Software Builder
+  'cmake-extras' # CMake Addons
+  'llvm'
+  'clang' # C family goodie
+  'clangd'
+  'clang-tools'
+  'clang-format'
+  'clang-tidy'
+  'automake'
+  'libtool'
+  'premake4'
+  'bear'
+  'lldb'
+  'gdb'
+  'universal-ctags'
+  'doxygen'
 
   # Neovim
   'ripgrep' # Better "grep"
