@@ -3,28 +3,6 @@ local max_width = 120
 
 return {
   {
-    "xzbdmw/colorful-menu.nvim",
-    enabled = true,
-    version = false,
-    event = "VeryLazy",
-    opts = function()
-      return {
-        ls = {
-          -- If provided, the plugin truncates the final displayed text to
-          -- this width (measured in display cells). Any highlights that extend
-          -- beyond the truncation point are ignored. When set to a float
-          -- between 0 and 1, it'll be treated as percentage of the width of
-          -- the window: math.floor(max_width * vim.api.nvim_win_get_width(0))
-          -- Default 60.
-          max_width = max_width,
-        },
-      }
-    end,
-    config = function(_, opts)
-      require("colorful-menu").setup(opts)
-    end,
-  },
-  {
     "Saghen/blink.cmp",
     enabled = true,
     version = "*",
@@ -34,9 +12,9 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      "moyiz/blink-emoji.nvim",
-      "mikavilpas/blink-ripgrep.nvim",
-      "kristijanhusak/vim-dadbod-completion",
+      -- "moyiz/blink-emoji.nvim",
+      -- "mikavilpas/blink-ripgrep.nvim",
+      -- "kristijanhusak/vim-dadbod-completion",
       "GustavEikaas/easy-dotnet.nvim",
       {
         "saghen/blink.compat",
@@ -79,10 +57,14 @@ return {
         -- trigger = {
         --   show_in_snippet = false,
         -- },
+        list = {
+          max_items = 50,
+        },
         documentation = {
           window = { border = "rounded", max_height = max_height },
           auto_show = true,
-          auto_show_delay_ms = 0,
+          auto_show_delay_ms = 200,
+          treesitter_highlighting = false,
         },
         menu = {
           max_height = max_height,
@@ -101,27 +83,27 @@ return {
               },
               label = {
                 width = { fill = true, max = max_width },
-                text = function(ctx)
-                  local highlights_info = require("colorful-menu").blink_highlights(ctx)
-                  if highlights_info ~= nil then
-                    -- Or you want to add more item to label
-                    return highlights_info.label
-                  else
-                    return ctx.label
-                  end
-                end,
-                highlight = function(ctx)
-                  local highlights = {}
-                  local highlights_info = require("colorful-menu").blink_highlights(ctx)
-                  if highlights_info ~= nil then
-                    highlights = highlights_info.highlights
-                  end
-                  for _, idx in ipairs(ctx.label_matched_indices) do
-                    table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
-                  end
-                  -- Do something else
-                  return highlights
-                end,
+                -- text = function(ctx)
+                --   local highlights_info = require("colorful-menu").blink_highlights(ctx)
+                --   if highlights_info ~= nil then
+                --     -- Or you want to add more item to label
+                --     return highlights_info.label
+                --   else
+                --     return ctx.label
+                --   end
+                -- end,
+                -- highlight = function(ctx)
+                --   local highlights = {}
+                --   local highlights_info = require("colorful-menu").blink_highlights(ctx)
+                --   if highlights_info ~= nil then
+                --     highlights = highlights_info.highlights
+                --   end
+                --   for _, idx in ipairs(ctx.label_matched_indices) do
+                --     table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+                --   end
+                --   -- Do something else
+                --   return highlights
+                -- end,
               },
             },
           },
@@ -214,135 +196,66 @@ return {
         end,
       },
       sources = {
-        default = {
-          "codeium",
-          "cmdline",
-          "lsp",
-          "easy-dotnet",
-          "snippets",
-          "path",
-          "buffer",
-          "omni",
-          -- "emoji",
-          -- "ripgrep",
-        },
+        default = { "codeium", "cmdline", "lsp", "snippets", "path" },
         per_filetype = {
-          -- org = { "orgmode" },
-          sql = {
-            "codeium",
-            "snippets",
-            "dadbod",
-            "buffer",
-            "omni",
-            -- "emoji",
-            -- "ripgrep",}
-          },
-          lua = {
-            "codeium",
-            "lazydev",
-            "lsp",
-            "snippets",
-            "path",
-            "buffer",
-            "omni",
-            -- "emoji",
-            -- "ripgrep",}
-          },
+          lua = { "lazydev", "codeium", "cmdline", "lsp", "snippets", "path" },
+          cs = { "easy-dotnet", "codeium", "cmdline", "lsp", "snippets", "path" },
         },
         providers = {
-          -- orgmode = {
-          --   name = "Orgmode",
-          --   module = "orgmode.org.autocompletion.blink",
-          --   fallbacks = { "bugger" },
-          -- },
           codeium = {
             name = "codeium",
             module = "blink.compat.source",
-            score_offset = 100,
-            enabled = true,
-            async = true,
+            score_offset = 5,
             transform_items = function(_, items)
               for _, item in ipairs(items) do
                 item.kind_icon = " "
               end
               return items
             end,
+            async = true,
           },
           cmdline = {
             module = "blink.cmp.sources.cmdline",
             name = "[cmd]",
-            score_offset = 100,
-            async = true,
+            score_offset = 5,
             -- Disable shell commands on windows, since they cause neovim to hang
             enabled = function()
               return vim.fn.has("win32") == 0
                 or vim.fn.getcmdtype() ~= ":"
                 or not vim.fn.getcmdline():match("^[%%0-9,'<>%-]*!")
             end,
+            async = true,
           },
           lazydev = {
             name = "[LazyDev]",
             module = "lazydev.integrations.blink",
-            score_offset = 95,
-            async = true,
-          },
-          dadbod = {
-            name = "[DB]",
-            module = "vim_dadbod_completion.blink",
-            score_offset = 95,
+            score_offset = 3,
             async = true,
           },
           lsp = {
             name = "[LSP]",
-            score_offset = 95,
+            score_offset = 3,
             async = true,
           },
           ["easy-dotnet"] = {
             name = "[.NET]",
             enabled = true,
             module = "easy-dotnet.completion.blink",
-            score_offset = 95,
+            score_offset = 3,
             async = true,
           },
           snippets = {
             name = "[snip]",
-            score_offset = 90,
-            async = true,
+            score_offset = 2,
             opts = {
               use_show_condition = true,
               show_autosnippets = true,
             },
+            async = true,
           },
           path = {
             name = "[path]",
-            score_offset = 85,
-            async = true,
-          },
-          buffer = {
-            name = "[buf]",
-            score_offset = 75,
-            async = true,
-          },
-          omni = {
-            score_offset = 70,
-            async = true,
-            ---@type blink.cmp.CompleteFuncOpts
-            opts = {
-              complete_func = function()
-                return vim.bo.omnifunc
-              end,
-            },
-          },
-          ripgrep = {
-            name = "[ripgrep]",
-            module = "blink-ripgrep",
-            score_offset = 65,
-            async = true,
-          },
-          emoji = {
-            name = "[emoji]",
-            module = "blink-emoji",
-            score_offset = 60,
+            score_offset = 1,
             async = true,
           },
         },
@@ -353,9 +266,17 @@ return {
           -- show_on_trigger_character = false,
           show_on_insert = true,
         },
-        window = { border = "rounded", max_height = max_height },
+        window = {
+          border = "rounded",
+          max_height = max_height,
+          treesitter_highlighting = false,
+        },
       },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
+      fuzzy = {
+        use_frecency = false,
+        -- use_typo_resistance = false,
+        implementation = "prefer_rust_with_warning",
+      },
     },
     opts_extend = { "sources.default" },
   },

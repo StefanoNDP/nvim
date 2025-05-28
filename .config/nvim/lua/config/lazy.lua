@@ -33,10 +33,10 @@ require("lazy").setup({
     { import = "plugins.lang" },
     { import = "plugins.coding" },
 
-    { import = "plugins.dap.servers" },
-    { import = "plugins.dap" },
     { import = "plugins.lsp" },
     { import = "plugins.lsp.servers" },
+    { import = "plugins.dap.servers" },
+    { import = "plugins.dap" },
     { import = "plugins.formatting" },
     { import = "plugins.linting" },
 
@@ -68,7 +68,7 @@ require("lazy").setup({
         "gzip",
         -- "matchit",
         -- "matchparen",
-        "netrwPlugin",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",

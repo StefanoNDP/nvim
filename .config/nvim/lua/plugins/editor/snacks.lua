@@ -90,7 +90,7 @@ return {
     scratch = { enabled = true },
     scroll = { enabled = false },
     statuscolumn = {
-      enabled = true,
+      enabled = false,
       -- left = { "fold", "git" },
       left = { "fold" },
       right = { "mark", "sign" },

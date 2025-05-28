@@ -17,7 +17,6 @@ return {
   config = function()
     -- Text editing
     require("mini.ai").setup({})
-    require("mini.align").setup({})
     require("mini.move").setup({
       mappings = {
         left = "<M-h>",
@@ -38,13 +37,13 @@ return {
     -- General workflow
     require("mini.basics").setup({})
     require("mini.bracketed").setup({})
-    require("mini.clue").setup({})
-    require("mini.diff").setup({
-      view = {
-        style = vim.go.number and "number",
-        signs = { add = "+", change = "~", delete = "-", topdelete = "‾", changedelete = "~" },
-      },
-    })
+    -- require("mini.clue").setup({})
+    -- require("mini.diff").setup({
+    --   view = {
+    --     style = vim.go.number and "number",
+    --     signs = { add = "+", change = "~", delete = "-", topdelete = "‾", changedelete = "~" },
+    --   },
+    -- })
     -- vim.keymap.set("v", "<leader>to", ":lua require('mini.diff').toggle_overlay()<CR>", kopts)
     require("mini.jump").setup({ mappings = { forward = "<M-f>", backward = "<M-F>" } })
     require("mini.jump2d").setup({ mappings = { start_jumping = "<M-CR>" } })
@@ -107,13 +106,13 @@ return {
     require("mini.map").setup({
       integrations = {
         map.gen_integration.builtin_search(),
-        map.gen_integration.diff(),
+        -- map.gen_integration.diff(),
         map.gen_integration.diagnostic(),
         -- map.gen_integration.gitsigns(),
       },
       window = {
         width = 6,
-        show_integration_count = true,
+        show_integration_count = false,
       },
     })
     require("mini.map").toggle()

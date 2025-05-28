@@ -137,14 +137,6 @@ return {
           --     vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
           --   end
           -- end
-
-          if client then
-            if client.name ~= "omnisharp" and client.name ~= "omnisharp_mono" then
-              require("config.keymaps.languages.global")
-            else
-              require("config.keymaps.languages.c_sharp")
-            end
-          end
         end,
       })
 

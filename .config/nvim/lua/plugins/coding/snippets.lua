@@ -34,20 +34,11 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load({ paths = path })
 
-    luasnip.filetype_extend("c", { "cdoc" })
-    luasnip.filetype_extend("cpp", { "cppdoc" })
     luasnip.filetype_extend("cs", { "csharpdoc" })
     luasnip.filetype_extend("gdscript", { "gdscriptdoc" })
-    luasnip.filetype_extend("javascript", { "jsdoc" })
     luasnip.filetype_extend("lua", { "luadoc" })
     luasnip.filetype_extend("markdown", { "mddoc" })
     luasnip.filetype_extend("sh", { "shelldoc" })
-    luasnip.filetype_extend("typescript", { "tsdoc" })
-    luasnip.filetype_extend("unrealengine", { "unrealdoc" })
-
-    luasnip.filetype_extend("cpp", { "c" })
-    luasnip.filetype_extend("unrealengine", { "c", "cpp" })
-    luasnip.filetype_extend("typescript", { "javascript" })
 
     -- require("config.keymaps.snippets")
   end,

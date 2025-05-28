@@ -122,7 +122,7 @@ vim.opt.spelloptions = "camel" -- Split camelCase words when spellchecking
 
 vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
 vim.opt.list = true -- Show some invisible characters (tab...
-vim.opt.listchars:append("lead:᛫")
+vim.opt.listchars:append("lead:")
 
 -- Folds
 vim.o.foldcolumn = "1" -- '0' is not bad

@@ -11,19 +11,8 @@ return { -- Linting
       -- Event to trigger linters
       linters_by_ft = {
         bash = { "shellharden" },
-        c = { "/usr/bin/clang-tidy" },
-        cpp = { "/usr/bin/clang-tidy" },
         markdown = { "markdownlint-cli2" },
         gdscript = { "gdlint" },
-        sql = { "sqlfluff" },
-        mysql = { "sqlfluff" },
-        plsql = { "sqlfluff" },
-        javascript = { "biome" },
-        javascriptreact = { "biome" },
-        ["javascript.jsx"] = { "biome" },
-        typescript = { "biome" },
-        typescriptreact = { "biome" },
-        ["typescript.tsx"] = { "biome" },
         -- Use the "*" filetype to run linters on all filetypes.
         ["*"] = { "global linter" },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.

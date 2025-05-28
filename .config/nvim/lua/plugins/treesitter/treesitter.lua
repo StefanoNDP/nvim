@@ -6,19 +6,19 @@ return {
       require("nvim-dap-repl-highlights").setup()
     end,
   },
-  { -- HTML and JSX
-    "windwp/nvim-ts-autotag",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    enabled = true,
-    version = false,
-    event = "VeryLazy",
-    opts = function()
-      return {}
-    end,
-    config = function(_, opts)
-      require("nvim-ts-autotag").setup(opts)
-    end,
-  },
+  -- { -- HTML and JSX
+  --   "windwp/nvim-ts-autotag",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   enabled = true,
+  --   version = false,
+  --   event = "VeryLazy",
+  --   opts = function()
+  --     return {}
+  --   end,
+  --   config = function(_, opts)
+  --     require("nvim-ts-autotag").setup(opts)
+  --   end,
+  -- },
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -293,7 +293,7 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
       -- vim.treesitter.language.register("bash", "kitty")
-      vim.treesitter.language.register("markdown", "octo")
+      -- vim.treesitter.language.register("markdown", "octo")
 
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

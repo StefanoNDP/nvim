@@ -21,6 +21,8 @@ M.workspace = {
 }
 
 M.textDocument = {
+  _vs_onAutoInsert = { dynamicRegistration = false },
+  diagnostic = { dynamicRegistration = true },
   didChangeConfiguration = { dynamicRegistration = true },
   completion = {
     completionItem = {
@@ -54,6 +56,7 @@ M.lspCapabilities.capabilities.encoding = M.encoding
 M.lspCapabilities.capabilities.workspace = M.workspace
 M.lspCapabilities.capabilities.textDocument = M.textDocument
 
-M.capabilities = require("blink.cmp").get_lsp_capabilities(M.lspCapabilities.capabilities)
+-- M.capabilities = require("blink.cmp").get_lsp_capabilities(M.lspCapabilities.capabilities)
+M.capabilities = M.lspCapabilities.capabilities
 
 return M

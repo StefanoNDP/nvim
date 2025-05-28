@@ -14,6 +14,22 @@ M.keymaps = wk.add({
     { "<leader>du", dapui .. "toggle()<CR>", desc = "DAP UI Toggle" },
     -- stylua: ignore
     { "<leader>dB", dap .. "set_breakpoint(vim.fn.input('Condition: '))", desc = "Breakpoint Condition" },
+    {
+      "<leader>d<space>",
+      function()
+        require("which-key").show({ delay = 1000000000, keys = "<leader>d", loop = true })
+      end,
+      desc = "DAP Hydra Mode (which-key)",
+    },
+    {
+      "<leader>dR",
+      function()
+        local dapl = require("dap")
+        local extension = vim.fn.expand("%:e")
+        dapl.run(dapl.configurations[extension][1])
+      end,
+      desc = "Run default configuration",
+    },
     { "<leader>db", dap .. "toggle_breakpoint()<CR>", desc = "DAP Toggle Breakpoint" },
     { "<leader>dc", dap .. "continue()<CR>", desc = "DAP Run/Continue" },
     { "<leader>da", dap .. "continue({ before = get_args })<CR>", desc = "DAP Run with Args" },
@@ -35,6 +51,7 @@ M.keymaps = wk.add({
   },
   {
     mode = { "n", "v" },
+    { "<leader>d", "", desc = "+debuf" },
     { "<leader>de", dapui .. "eval()<CR>", desc = "Eval" },
   },
 })

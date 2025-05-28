@@ -23,6 +23,11 @@ M.keymaps = wk.add({
     { "<leader>wr", lsp .. "remove_workspace_folder()<CR>", desc = "" },
     { "<leader>wi", "<cmd>print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "" },
 
+    { "gd", lsp .. "definition()<CR>", desc = "Go to definition" },
+    { "gtd", lsp .. "type_definition()<CR>", desc = "Go to type definition" },
+    { "gr", lsp .. "references()<CR>", desc = "Go to reference" },
+    { "gi", lsp .. "implementation()<CR>", desc = "Go to implementation" },
+
     { "gpd", preview .. "goto_preview_definition()<CR>", desc = "" },
     { "gpt", preview .. "goto_preview_type_definition()<CR>", desc = "" },
     { "gpD", preview .. "goto_preview_declaration()<CR>", desc = "" },

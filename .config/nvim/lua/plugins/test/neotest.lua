@@ -9,7 +9,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "nvim-neotest/neotest-plenary",
     "Issafalcon/neotest-dotnet", -- Dotnet
-    "alfaix/neotest-gtest", -- C++
+    -- "alfaix/neotest-gtest", -- C++
     "rcasia/neotest-bash", -- Bash
   },
   opts = function()
@@ -18,7 +18,7 @@ return {
       adapters = {
         ["neotest-dotnet"] = {},
         ["neotest-plenary"] = {},
-        ["neotest-gtest"] = {},
+        -- ["neotest-gtest"] = {},
         ["neotest-bash"] = {},
         ["rustaceanvim.neotest"] = {},
       },
