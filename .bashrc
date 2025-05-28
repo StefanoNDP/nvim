@@ -155,10 +155,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-# Needed for WSL 2 GUI Apps
-export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-export LIBGL_ALWAYS_INDIRECT=0
-
 #######################################################
 # EVAL START
 #######################################################
