@@ -1,5 +1,4 @@
 # NVIM
 
-## My NeoVim config for Windows
+## My NeoVim config for Windows (WSL2)
 
-Currently converting from WSL2 to Window.

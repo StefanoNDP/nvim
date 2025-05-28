@@ -157,6 +157,8 @@ for PKG in "${PKGB[@]}"; do
   sleep 1s
 done
 
+sudo snap install zig --classic --beta
+
 NVM_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
 
