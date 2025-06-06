@@ -163,8 +163,8 @@ NVM_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" 
 curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 nvm install --latest-npm node && sync
 
@@ -285,6 +285,8 @@ done
 git clone --depth=1 https://github.com/akinomyoga/ble.sh.git ~/.apps/ble.sh
 make -C ~/.apps/ble.sh install PREFIX=~/.local
 source ~/.local/share/blesh/ble.sh
+
+git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
 
 printf "\nexport PATH=\$PATH:/snap/bin:\$HOME/.local/bin:\$HOME/.cargo/bin\n" | tee -a ~/.bashrc
 printf "DOTNET_CLI_TELEMETRY_OPTOUT=1\n" | tee -a ~/.bashrc
