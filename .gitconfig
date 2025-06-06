@@ -89,10 +89,3 @@
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
-
-[user]
-	email = sndobbin+pro@gmail.com
-  name = StefanoNDP
-
-[credential]
-	helper = store
