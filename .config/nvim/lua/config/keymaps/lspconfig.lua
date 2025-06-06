@@ -13,8 +13,22 @@ M.keymaps = wk.add({
     { "gw", lsp .. "document_symbol()<CR>", desc = "" },
     { "gW", lsp .. "workspace_symbol()<CR>", desc = "" },
     { "gD", lsp .. "declaration({ border = 'rounded' })<CR>", desc = "" },
-    { "K", lsp .. "hover({ popup_opts = { border = 'rounded' } })<CR>", desc = "" },
+    -- { "K", lsp .. "hover({ popup_opts = { border = 'rounded' } })<CR>", desc = "" },
+    {
+      "K",
+      function()
+        vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 80 })
+      end,
+      desc = "",
+    },
     { "<leader>ca", lsp .. "code_action()<CR>", desc = "" },
+    {
+      "<leader>cd",
+      function()
+        vim.diagnostic.open_float(nil, { focus = false })
+      end,
+      desc = "",
+    },
     { "<leader>cA", lsp .. "range_code_action()<CR>", desc = "" },
     -- { "<leader>cr", lsp .. "rename()<CR>", desc = "" },
     { "<leader>cr", ":IncRename " .. vim.fn.expand("<cword>"), desc = "Rename" },

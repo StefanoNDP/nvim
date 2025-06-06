@@ -1,9 +1,3 @@
-local servers = function()
-  require("plugins.dap.adapters.c_sharp")
-  require("plugins.dap.adapters.godot")
-  require("plugins.dap.adapters.lua")
-end
-
 -- Catppuccin compatibility
 local catppuccin = function()
   local sign = vim.fn.sign_define
@@ -95,9 +89,9 @@ return {
       require("nvim-dap-virtual-text").setup(opts)
     end,
   },
-  {
+  { -- DAP UI
     "rcarriga/nvim-dap-ui",
-    enabled = true,
+    enabled = false,
     version = false,
     event = "VeryLazy",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -108,34 +102,70 @@ return {
       require("dapui").setup(opts)
     end,
   },
+  { -- Minimalistic DAP UI
+    "igorlfs/nvim-dap-view",
+    enabled = true,
+    version = false,
+    lazy = true,
+    ---@module 'dap-view'
+    ---@type dapview.config
+    opts = {
+      winbar = {
+        sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+        default_section = "repl",
+        controls = { enabled = true },
+      },
+    },
+  },
   {
     "mfussenegger/nvim-dap",
     enabled = true,
     version = false,
     -- lazy = true,
-    dependencies = { "jbyuki/one-small-step-for-vimkind" },
+    dependencies = { "jbyuki/one-small-step-for-vimkind", "igorlfs/nvim-dap-view" },
     config = function()
       local dap = require("dap")
-      local dapui = require("dapui")
+      -- local dapui = require("dapui")
+      local dapui = require("dap-view")
 
       require("config.keymaps.dap")
       catppuccin()
-      servers()
+      require("plugins.dap.adapters.c_sharp")
+      require("plugins.dap.adapters.godot")
+      require("plugins.dap.adapters.lua")
       require("overseer").enable_dap()
 
-      dap.listeners.after.event_initialized.dapui_config = function()
+      -- DAP UI
+      -- dap.listeners.after.event_initialized.dapui_config = function()
+      --   dapui.open()
+      -- end
+      -- dap.listeners.before.attach.dapui_config = function()
+      --   dapui.open()
+      -- end
+      -- dap.listeners.before.launch.dapui_config = function()
+      --   dapui.open()
+      -- end
+      -- dap.listeners.before.event_terminated.dapui_config = function()
+      --   dapui.close()
+      -- end
+      -- dap.listeners.before.event_exited.dapui_config = function()
+      --   dapui.close()
+      -- end
+
+      -- DAP View
+      dap.listeners.after.event_initialized["dap-view-config"] = function()
         dapui.open()
       end
-      dap.listeners.before.attach.dapui_config = function()
+      dap.listeners.before.attach["dap-view-config"] = function()
         dapui.open()
       end
-      dap.listeners.before.launch.dapui_config = function()
+      dap.listeners.before.launch["dap-view-config"] = function()
         dapui.open()
       end
-      dap.listeners.before.event_terminated.dapui_config = function()
+      dap.listeners.before.event_terminated["dap-view-config"] = function()
         dapui.close()
       end
-      dap.listeners.before.event_exited.dapui_config = function()
+      dap.listeners.before.event_exited["dap-view-config"] = function()
         dapui.close()
       end
 

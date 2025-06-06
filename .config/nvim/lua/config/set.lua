@@ -208,8 +208,8 @@ vim.o.conceallevel = 0
 -- Omnisharp
 -- vim.g.Omnisharp_translate_cygwin_wsl = 1
 
--- -- Godot
--- local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
--- if not (vim.uv or vim.loop).fs_stat(pipepath) then
---   vim.fn.serverstart(pipepath)
--- end
+-- Godot
+local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
+if not (vim.uv or vim.loop).fs_stat(pipepath) then
+  vim.fn.serverstart(pipepath)
+end

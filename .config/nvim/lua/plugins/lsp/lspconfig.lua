@@ -152,7 +152,7 @@ return {
           header = "",
           prefix = "",
         },
-        virtual_text = true,
+        virtual_text = false,
         severity_sort = true,
         signs = {
           text = {
@@ -169,6 +169,9 @@ return {
           },
         },
       })
+
+      -- Show line diagnostics automatically in hover window
+      -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
     end,
   },
 }
