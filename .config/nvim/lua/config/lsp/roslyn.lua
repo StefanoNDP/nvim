@@ -1,19 +1,21 @@
 local documentstore = require("rzls.documentstore")
 local razor = require("rzls.razor")
 local Log = require("rzls.log")
-local roslyn_base_path =
-  vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "roslyn", "libexec")
+-- local roslyn_base_path =
+--   vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "roslyn", "libexec")
 local rzls_base_path = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "packages", "rzls", "libexec")
 local cmd = {
-  "dotnet",
-  vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+  "roslyn",
+  "--stdio",
   "--logLevel=Information",
   "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-  "--stdio",
   "--razorSourceGenerator="
     .. vim.fs.joinpath(rzls_base_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
   "--razorDesignTimePath="
     .. vim.fs.joinpath(rzls_base_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+  "--extension",
+  -- vim.fs.joinpath(roslyn_base_path, "Microsoft.CodeAnalysis.LanguageServer.dll"),
+  vim.fs.joinpath(rzls_base_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
 }
 
 local not_implemented = function(err, result, ctx, config)
