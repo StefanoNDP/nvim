@@ -3,6 +3,9 @@ backup
 # Tmux
 .config/tmux/plugins/
 
+# Node Modules
+.config/nvim/node_modules/
+
 # Ctags
 tags
 .tags
