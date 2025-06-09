@@ -85,7 +85,7 @@ return { -- C#
       end
       local sdkPath = function()
         if require("easy-dotnet.extensions").isWindows() then
-          return "C:\\Program Files\\dotnet\\sdk\\8.0.409"
+          return "C:\\Program Files\\dotnet\\sdk\\8.0.410"
         else
           return "/usr/lib/dotnet/sdk/8.0.116"
         end

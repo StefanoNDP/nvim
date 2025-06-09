@@ -65,8 +65,8 @@ wk.add({
 
     -- { "j", "gj", desc = "Move down wrapped line" },
     -- { "k", "gk", desc = "Move up wrapped line" },
-    { "j", "<cmd>norm! gj<cr>", desc = "Move down wrapped line" },
-    { "k", "<cmd>norm! gk<cr>", desc = "Move up wrapped line" },
+    -- { "j", "<cmd>norm! gj<cr>", desc = "Move down wrapped line" },
+    -- { "k", "<cmd>norm! gk<cr>", desc = "Move up wrapped line" },
     { "<down>", "<cmd>norm! gj<cr>", desc = "Move down wrapped line" },
     { "<up>", "<cmd>norm! gk<cr>", desc = "Move up wrapped line" },
 
