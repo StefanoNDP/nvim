@@ -241,7 +241,7 @@ return {
             name = "[.NET]",
             enabled = true,
             module = "easy-dotnet.completion.blink",
-            score_offset = 3,
+            score_offset = 10000,
             async = true,
           },
           snippets = {

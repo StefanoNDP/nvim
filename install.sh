@@ -245,6 +245,7 @@ PKGE=(
   # LSP
   # 'vscode-langservers-extracted'
   'bash-language-server'
+  'markdownlint-cli2'
   # 'tailwindcss-language-server'
   # 'typescript'
   # 'typescript-language-server'

@@ -84,7 +84,11 @@ return { -- C#
         return path
       end
       local sdkPath = function()
-        return "C:\\Program Files\\dotnet\\sdk\\8.0.409"
+        if require("easy-dotnet.extensions").isWindows() then
+          return "C:\\Program Files\\dotnet\\sdk\\8.0.409"
+        else
+          return "/usr/lib/dotnet/sdk/8.0.116"
+        end
       end
 
       return {
@@ -141,21 +145,12 @@ return { -- C#
             test = function()
               return string.format("dotnet test %s %s", path, args)
             end,
-            -- restore = function() return string.format("dotnet restore %s %s", path, args) end,
             restore = function()
-              return string.format(
-                "dotnet restore --configfile %s %s %s",
-                os.getenv("NUGET_CONFIG"),
-                path,
-                args
-              )
+              return string.format("dotnet restore %s %s", path, args)
             end,
             build = function()
               return string.format("dotnet build %s %s", path, args)
             end,
-            -- build = function()
-            --   return string.format("dotnet build %s /flp:v=q /flp:logfile=%s %s", path, logPath, args)
-            -- end,
             watch = function()
               return string.format("dotnet watch --project %s %s", path, args)
             end,
@@ -222,6 +217,7 @@ return { -- C#
         -- the available one automatically with this priority:
         -- telescope -> fzf -> snacks ->  basic
         picker = "snacks",
+        background_scanning = true,
       }
     end,
     config = function(_, opts)

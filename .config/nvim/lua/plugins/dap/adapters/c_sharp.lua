@@ -35,6 +35,11 @@ M.c_sharp = function()
     }
   end
 
+  local function file_exists(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat and stat.type == "file"
+  end
+
   local function ensure_dll()
     if debug_dll ~= nil then
       return debug_dll
@@ -63,16 +68,16 @@ M.c_sharp = function()
       --     cwd = "${workspaceFolder}",
       --   },
       -- }
-      {
-        type = "netcoredbg",
-        name = "Launch file",
-        request = "launch",
-        ---@diagnostic disable-next-line: redundant-parameter
-        program = function()
-          return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
-        end,
-        cwd = "${workspaceFolder}",
-      },
+      -- {
+      --   type = "netcoredbg",
+      --   name = "Launch file",
+      --   request = "launch",
+      --   ---@diagnostic disable-next-line: redundant-parameter
+      --   program = function()
+      --     return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
+      --   end,
+      --   cwd = "${workspaceFolder}",
+      -- },
       {
         type = "coreclr",
         name = "netcoredbg [coreclr]",
@@ -86,11 +91,14 @@ M.c_sharp = function()
           local dll = ensure_dll()
           local co = coroutine.running()
           M.rebuild_project(co, dll.project_path)
-          return dll.relative_dll_path
+          if not file_exists(dll.target_path) then
+            error("Project has not been built, path: " .. dll.target_path)
+          end
+          return dll.target_path
         end,
         cwd = function()
           local dll = ensure_dll()
-          return dll.relative_project_path
+          return dll.absolute_project_path
         end,
       },
       {
@@ -121,6 +129,12 @@ M.c_sharp = function()
     dap.listeners.before["event_terminated"]["easy-dotnet"] = function()
       debug_dll = nil
     end
+
+    dap.adapters.coreclr = {
+      type = "executable",
+      command = "netcoredbg",
+      args = { "--interpreter=vscode" },
+    }
   end
 end
 

@@ -128,6 +128,8 @@ return {
       -- local dapui = require("dapui")
       local dapui = require("dap-view")
 
+      dap.set_log_level("TRACE")
+
       require("config.keymaps.dap")
       catppuccin()
       require("plugins.dap.adapters.c_sharp")
