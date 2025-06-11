@@ -90,30 +90,30 @@ M.line = function()
   local snacks = require("snacks")
   return {
     line_a = {
-      "mode",
-      {
-        function()
-          return ""
-        end,
-        cond = M.conditions.checkFileSize,
-      },
+      -- "mode",
+      -- {
+      --   function()
+      --     return ""
+      --   end,
+      --   cond = M.conditions.checkFileSize,
+      -- },
       {
         -- filesize component
         "filesize",
         cond = M.conditions.checkFileSize,
       },
-      -- {
-      --   function()
-      --     return ""
-      --   end,
-      --   cond = M.conditions.buffer_not_empty,
-      -- },
-      -- {
-      --   "filename",
-      --   path = 0,
-      --   newfile_status = true,
-      --   cond = M.conditions.buffer_not_empty,
-      -- },
+      {
+        function()
+          return ""
+        end,
+        cond = M.conditions.buffer_not_empty,
+      },
+      {
+        "filename",
+        path = 0,
+        newfile_status = true,
+        cond = M.conditions.buffer_not_empty,
+      },
     },
     line_b = {
       {
@@ -183,10 +183,10 @@ M.line = function()
         end,
         cond = M.conditions.buffer_not_empty,
       },
-      -- { "encoding", cond = M.conditions.buffer_not_empty },
-      -- function()
-      --   return ""
-      -- end,
+      { "encoding", cond = M.conditions.buffer_not_empty },
+      function()
+        return ""
+      end,
       -- { "fileformat" },
       -- {
       --   function()
@@ -199,15 +199,15 @@ M.line = function()
       },
     },
     line_y = {
-      -- "progress",
-      -- function()
-      --   return ""
-      -- end,
-      -- "location",
+      "progress",
+      function()
+        return ""
+      end,
+      "location",
     },
-    line_z = {
-      "os.date('%d/%m/%Y %H:%M:%S')",
-    },
+    -- line_z = {
+    --   "os.date('%d/%m/%Y %H:%M:%S')",
+    -- },
   }
 end
 
@@ -225,7 +225,7 @@ M.win = {
       color_correction = "dynamic",
     },
   },
-  win_x = { },
+  win_x = {},
   win_y = {
     "os.date('%d/%m/%Y %H:%M:%S')",
   },

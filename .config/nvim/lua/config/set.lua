@@ -106,7 +106,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 vim.opt.completeopt = "menu,menuone,preview,noselect" -- Better completion experience
-vim.opt.textwidth = 105 -- Max width/columns
+vim.opt.textwidth = 80 -- Max width/columns
 vim.opt.colorcolumn = "+1" -- Show gutter after textwidth
 vim.opt.signcolumn = "yes" -- Show sign column so that text doesn't shift
 
