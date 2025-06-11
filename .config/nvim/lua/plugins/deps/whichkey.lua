@@ -11,7 +11,6 @@ return {
       {
         mode = { "n", "v" },
         { "<leader>ts", group = "TS CPP Tools" },
-        { "<leader>o", group = "overseer" },
         { "<leader>q", group = "persistence" },
         { "<leader>p", group = "pomodoro" },
         { "<leader>d", group = "dap" },

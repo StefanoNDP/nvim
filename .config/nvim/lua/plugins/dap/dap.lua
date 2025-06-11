@@ -135,7 +135,6 @@ return {
       require("plugins.dap.adapters.c_sharp")
       require("plugins.dap.adapters.godot")
       require("plugins.dap.adapters.lua")
-      require("overseer").enable_dap()
 
       -- DAP UI
       -- dap.listeners.after.event_initialized.dapui_config = function()

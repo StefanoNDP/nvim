@@ -101,29 +101,6 @@ M.c_sharp = function()
           return dll.absolute_project_path
         end,
       },
-      {
-        log_level = "DEBUG",
-        type = "netcoredbg",
-        justMyCode = false,
-        stopAtEntry = false,
-        name = "netcoredbg [overseer]",
-        request = "launch",
-        env = function()
-          local dll = ensure_dll()
-          local vars = dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
-          return vars or nil
-        end,
-        program = function()
-          require("overseer").enable_dap()
-          local dll = ensure_dll()
-          return dll.relative_dll_path
-        end,
-        cwd = function()
-          local dll = ensure_dll()
-          return dll.relative_project_path
-        end,
-        preLaunchTask = "Build .NET App With Spinner",
-      },
     }
 
     dap.listeners.before["event_terminated"]["easy-dotnet"] = function()

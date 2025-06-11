@@ -54,7 +54,7 @@ return { -- colorscheme
         mason = true,
         notify = true,
         nvimtree = false,
-        overseer = true,
+        overseer = false,
         rainbow_delimiters = true,
         semantic_tokens = true,
         telescope = false,
