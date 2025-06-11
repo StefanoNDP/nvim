@@ -160,6 +160,9 @@ dotnet_diagnostic.IDE0055.severity = warning
 
 # CSharp code style settings:
 [*.cs]
+# Style
+csharp_style_namespace_declarations = file_scoped:suggestion
+
 # Newline settings
 csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
