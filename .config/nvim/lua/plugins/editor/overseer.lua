@@ -21,7 +21,8 @@ return {
   opts = function()
     return {
       dap = true,
-      templates = { "builtin", "user.c_sharp.easy_dotnet", "user.run_script" },
+      -- templates = { "builtin", "user.c_sharp.easy_dotnet", "user.run_script" },
+      templates = { "builtin" },
       -- task_list = {
       --   bindings = { ["<C-h>"] = false, ["<C-j>"] = false, ["<C-k>"] = false, ["<C-l>"] = false, },
       -- },
