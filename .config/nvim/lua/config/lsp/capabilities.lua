@@ -21,7 +21,6 @@ M.workspace = {
 }
 
 M.textDocument = {
-  _vs_onAutoInsert = { dynamicRegistration = false },
   diagnostic = { dynamicRegistration = true },
   didChangeConfiguration = { dynamicRegistration = true },
   completion = {

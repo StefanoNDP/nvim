@@ -158,7 +158,7 @@ return { -- C#
           }
 
           local command = commands[action]() .. "\r"
-          vim.cmd("vsplit")
+          vim.cmd("split")
           vim.cmd("term " .. command)
         end,
         secrets = {

@@ -151,7 +151,7 @@ end
 config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu", "-u", "sd" }
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
-config.font_size = 12.0
+config.font_size = 14.0
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "HorizontalLcd"
 config.freetype_load_flags = "FORCE_AUTOHINT"
