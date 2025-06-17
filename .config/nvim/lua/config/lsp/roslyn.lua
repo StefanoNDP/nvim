@@ -60,6 +60,7 @@ return {
   cmd = cmd,
   filetypes = { "cs" },
   handlers = require("rzls.roslyn_handlers"),
+  -- handlers = vim.tbl_deep_extend("force", require("rzls.roslyn_handlers"), {}),
   root_dir = function(bufnr, cb)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries

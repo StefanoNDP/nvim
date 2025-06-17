@@ -115,17 +115,16 @@ return {
 
           -- Codelens
           -- if client and client:supports_method(vim.lsp.protocol.Methods.codeLens) then
-          if opts.codelens.enabled and vim.lsp.codelens then
-            if client and client:supports_method(vim.lsp.protocol.Methods.codelens, buffer) then
-              vim.lsp.codelens.refresh()
-              vim.api.nvim_create_autocmd(
-                { "BufWritePost", "BufEnter", "CursorHold", "InsertLeave", "TextChanged" },
-                {
-                  buffer = buffer,
-                  callback = vim.lsp.codelens.refresh,
-                }
-              )
-            end
+          if client and client:supports_method(vim.lsp.protocol.Methods.codelens, buffer) then
+            vim.lsp.codelens.refresh()
+            vim.api.nvim_create_autocmd(
+              -- { "BufWritePost", "BufEnter", "CursorHold", "InsertLeave", "TextChanged" },
+              { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
+              {
+                buffer = buffer,
+                callback = vim.lsp.codelens.refresh,
+              }
+            )
           end
 
           -- if client and client:supports_method(vim.lsp.protocol.Methods.inlayHint) then

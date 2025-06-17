@@ -147,8 +147,8 @@ vim.api.nvim_create_autocmd("BufDelete", {
   end,
 })
 
--- Diagnostic refresh
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+-- Roslyn: Diagnostic refresh
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" }, {
   pattern = "*",
   callback = function()
     local clients = vim.lsp.get_clients({ name = "roslyn" })
@@ -163,7 +163,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   end,
 })
 
--- textDocument/_vs_onAutoInsert
+-- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -219,7 +219,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Example of a file watcher using Neovim's built-in autocommands
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = "*.csproj",
+  pattern = { "*.csproj" },
   callback = function()
     -- Send a /filesChanged request to the LSP server
     vim.lsp.buf.execute_command({

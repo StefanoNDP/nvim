@@ -49,35 +49,14 @@ M.c_sharp = function()
     return dll
   end
 
+  dap.adapters.coreclr = {
+    type = "executable",
+    command = "netcoredbg",
+    args = { "--interpreter=vscode" },
+  }
+
   for _, lang in ipairs({ "cs", "fsharp", "vb" }) do
     dap.configurations[lang] = {
-      --   {
-      --     type = "netcoredbg",
-      --     name = "Launch file",
-      --     request = "launch",
-      --     ---@diagnostic disable-next-line: redundant-parameter
-      --     program = function()
-      --       -- return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
-      --       local line = 1
-      --       local file = vim.fn.getcwd() .. "/.debugpath"
-      --       local cmd = string.format("sed -n %dp %s", line, file)
-      --       local output = vim.fn.system(cmd)
-      --       return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. output, "file")
-      --       -- return output
-      --     end,
-      --     cwd = "${workspaceFolder}",
-      --   },
-      -- }
-      -- {
-      --   type = "netcoredbg",
-      --   name = "Launch file",
-      --   request = "launch",
-      --   ---@diagnostic disable-next-line: redundant-parameter
-      --   program = function()
-      --     return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
-      --   end,
-      --   cwd = "${workspaceFolder}",
-      -- },
       {
         type = "coreclr",
         name = "netcoredbg [coreclr]",
@@ -106,12 +85,6 @@ M.c_sharp = function()
     dap.listeners.before["event_terminated"]["easy-dotnet"] = function()
       debug_dll = nil
     end
-
-    dap.adapters.coreclr = {
-      type = "executable",
-      command = "netcoredbg",
-      args = { "--interpreter=vscode" },
-    }
   end
 end
 

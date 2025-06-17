@@ -45,20 +45,14 @@ return { -- C#
     },
     version = false,
     ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
-    opts = function()
-      return {
-        filewatching = "roslyn",
-        choose_target = nil,
-        ignore_target = nil,
-        broad_search = true,
-        lock_target = false,
-      }
-    end,
-    config = function(_, opts)
-      vim.lsp.config("roslyn", { require("config.lsp.roslyn") })
-
-      require("roslyn").setup(opts)
-    end,
+    opts = {
+      filewatching = "roslyn",
+      choose_target = nil,
+      ignore_target = nil,
+      broad_search = true,
+      lock_target = false,
+    },
+    config = true,
   },
   {
     "GustavEikaas/easy-dotnet.nvim",

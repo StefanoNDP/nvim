@@ -29,6 +29,8 @@ vim.g.deprecation_warnings = false
 vim.o.nu = true
 vim.o.rnu = true
 
+vim.g.whichDap = 1
+
 -- -- OSC 52 (Operating System Command) support
 -- -- Control sequence that causes the terminal emulator to write to or read from the system clipboard.
 -- vim.g.clipboard = {
@@ -125,11 +127,17 @@ vim.opt.list = true -- Show some invisible characters (tab...
 vim.opt.listchars:append("lead:")
 
 -- Folds
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = false
-vim.o.foldmethod = "manual"
+vim.opt.foldcolumn = "1"
+vim.opt.foldmethod = "manual"
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+
+vim.opt.foldnestmax = 6
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 vim.opt.fillchars = {
   foldopen = "",
   foldclose = "",

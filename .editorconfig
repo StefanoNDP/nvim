@@ -20,6 +20,7 @@ spelling_exclusion_path = SpellingExclusions.dic
 indent_size = 4
 insert_final_newline = true
 charset = utf-8-bom
+max_line_length = 80
 
 formatters = csharpier
 
@@ -38,14 +39,17 @@ indent_size = 2
 # Powershell files
 [*.ps1]
 indent_size = 2
+max_line_length = 80
 
 # Shell script files
 [*.sh]
 end_of_line = lf
 indent_size = 2
+max_line_length = 80
 
 # Dotnet code style settings:
 [*.{cs,vb}]
+max_line_length = 80
 
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
@@ -161,6 +165,7 @@ dotnet_diagnostic.IDE0055.severity = warning
 
 # CSharp code style settings:
 [*.cs]
+max_line_length = 80
 # Style
 csharp_style_namespace_declarations = file_scoped:suggestion
 
@@ -292,6 +297,7 @@ dotnet_diagnostic.IDE2005.severity = warning
 dotnet_diagnostic.IDE2006.severity = warning
 
 [src/{VisualStudio}/**/*.{cs,vb}]
+max_line_length = 80
 # CA1822: Make member static
 # There is a risk of accidentally breaking an internal API that partners rely on though IVT.
 dotnet_code_quality.CA1822.api_surface = private
@@ -321,6 +327,7 @@ indent_size = 4
 indent_size = 2
 
 [*.lua]
+max_line_length = 80
 indent_size = 2
 
 # Markdown - match markdownlint settings

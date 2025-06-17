@@ -2,7 +2,13 @@ local M = {}
 
 local dap = ":lua require('dap')."
 -- local dapui = ":lua require('dapui')."
-local dapui = ":lua require('dap-view')."
+-- local dapui = ":lua require('dap-view')."
+local dapui
+if vim.g.whichDap == 0 then
+  dapui = ":lua require('dapui')."
+else
+  dapui = ":lua require('dap-view')."
+end
 local widgets = ":lua require('dap.ui.widgets')."
 local neotest = ":lua require('neotest')."
 local vimkind = ":lua require('osv')."

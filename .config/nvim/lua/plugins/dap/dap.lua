@@ -91,7 +91,7 @@ return {
   },
   { -- DAP UI
     "rcarriga/nvim-dap-ui",
-    enabled = false,
+    enabled = true,
     version = false,
     event = "VeryLazy",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -126,7 +126,8 @@ return {
     config = function()
       local dap = require("dap")
       -- local dapui = require("dapui")
-      local dapui = require("dap-view")
+      -- local dapui = require("dap-view")
+      local dapui
 
       dap.set_log_level("TRACE")
 
@@ -136,38 +137,42 @@ return {
       require("plugins.dap.adapters.godot")
       require("plugins.dap.adapters.lua")
 
-      -- DAP UI
-      -- dap.listeners.after.event_initialized.dapui_config = function()
-      --   dapui.open()
-      -- end
-      -- dap.listeners.before.attach.dapui_config = function()
-      --   dapui.open()
-      -- end
-      -- dap.listeners.before.launch.dapui_config = function()
-      --   dapui.open()
-      -- end
-      -- dap.listeners.before.event_terminated.dapui_config = function()
-      --   dapui.close()
-      -- end
-      -- dap.listeners.before.event_exited.dapui_config = function()
-      --   dapui.close()
-      -- end
-
-      -- DAP View
-      dap.listeners.after.event_initialized["dap-view-config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.attach["dap-view-config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch["dap-view-config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dap-view-config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dap-view-config"] = function()
-        dapui.close()
+      if vim.g.whichDap == 0 then
+        dapui = require("dapui")
+        -- DAP UI
+        dap.listeners.after.event_initialized.dapui_config = function()
+          dapui.open()
+        end
+        dap.listeners.before.attach.dapui_config = function()
+          dapui.open()
+        end
+        dap.listeners.before.launch.dapui_config = function()
+          dapui.open()
+        end
+        dap.listeners.before.event_terminated.dapui_config = function()
+          dapui.close()
+        end
+        dap.listeners.before.event_exited.dapui_config = function()
+          dapui.close()
+        end
+      else
+        dapui = require("dap-view")
+        -- DAP View
+        dap.listeners.after.event_initialized["dap-view-config"] = function()
+          dapui.open()
+        end
+        dap.listeners.before.attach["dap-view-config"] = function()
+          dapui.open()
+        end
+        dap.listeners.before.launch["dap-view-config"] = function()
+          dapui.open()
+        end
+        dap.listeners.before.event_terminated["dap-view-config"] = function()
+          dapui.close()
+        end
+        dap.listeners.before.event_exited["dap-view-config"] = function()
+          dapui.close()
+        end
       end
 
       -- vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
