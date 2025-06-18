@@ -35,6 +35,8 @@ if ! [ -d "$APPSPATH" ]; then
 fi
 
 ln -svf "$DOTFILESPATH"/.config/nvim "$HOMEPATH"/.config/
+ln -svf "$DOTFILESPATH"/.config/kitty "$HOMEPATH"/.config/
+ln -svf "$DOTFILESPATH"/.config/fontconfig "$HOMEPATH"/.config/
 
 ln -svf "$DOTFILESPATH"/.editorconfig "$HOMEPATH"/
 
@@ -94,6 +96,16 @@ PKGA=(
   'gdb'
   'universal-ctags'
   'doxygen'
+
+  # WSL XLaunch
+  'mesa-utils'
+  'libglu1-mesa-dev'
+  'freeglut3-dev'
+  'mesa-common-dev'
+  'kitty'
+  'kitty-terminfo'
+  'kitty-shell-integration'
+  'imagemagick'
 
   # Neovim
   'ripgrep' # Better "grep"
