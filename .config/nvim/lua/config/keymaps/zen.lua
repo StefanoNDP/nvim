@@ -3,18 +3,18 @@ local M = {}
 local wk = require("which-key")
 
 M.keymaps = wk.add({
-    {
-      mode = { "v" },
-      { "<leader>zn", ":'<,'>TZNarrow<CR>", desc = "Zen Narrow Visual" },
-    },
-    {
-      mode = { "n" },
-      { "<leader>zn", ":TZNarrow<CR>", desc = "Zen Narrow" },
-      { "<leader>zf", ":TZFocus<CR>", desc = "Zen Focus" },
-      { "<leader>zm", ":TZMinimalist<CR>", desc = "Zen Minimalist" },
-      { "<leader>za", ":TZAtaraxis<CR>", desc = "Zen Ataraxis" }
-    },
+  {
+    mode = { "v" },
+    { "<leader>z", "", desc = "+Zen" },
+    { "<leader>zn", ":'<,'>Narrow<CR>", desc = "Zen Narrow Visual" },
+  },
+  {
+    mode = { "n" },
+    { "<leader>z", "", desc = "+Zen" },
+    { "<leader>zn", ":Narrow<CR>", desc = "Zen Narrow" },
+    { "<leader>zf", ":Focus<CR>", desc = "Zen Focus" },
+    { "<leader>zz", ":Zen<CR>", desc = "Zen Minimalist" },
+  },
 })
 
 return M.keymaps
-

@@ -25,32 +25,32 @@ return {
           require("blink.compat").setup()
         end,
       },
-      {
-        -- "Exafunction/codeium.nvim",
-        "Exafunction/windsurf.nvim",
-        version = false,
-        lazy = true,
-        cmd = "Codeium",
-        event = "InsertEnter",
-        dependencies = { "nvim-lua/plenary.nvim", "saghen/blink.compat" },
-        opts = function()
-          return {
-            enable_cmp_source = true,
-            virtual_text = {
-              enabled = true,
-              enable_chat = true,
-              -- filetypes = {
-              --   python = true,
-              --   markdown = true,
-              -- },
-              default_filetype_enabled = true,
-            },
-          }
-        end,
-        config = function(_, opts)
-          require("codeium").setup(opts)
-        end,
-      },
+      -- {
+      --   -- "Exafunction/codeium.nvim",
+      --   "Exafunction/windsurf.nvim",
+      --   version = false,
+      --   lazy = true,
+      --   cmd = "Codeium",
+      --   event = "InsertEnter",
+      --   dependencies = { "nvim-lua/plenary.nvim", "saghen/blink.compat" },
+      --   opts = function()
+      --     return {
+      --       enable_cmp_source = true,
+      --       virtual_text = {
+      --         enabled = true,
+      --         enable_chat = true,
+      --         -- filetypes = {
+      --         --   python = true,
+      --         --   markdown = true,
+      --         -- },
+      --         default_filetype_enabled = true,
+      --       },
+      --     }
+      --   end,
+      --   config = function(_, opts)
+      --     require("codeium").setup(opts)
+      --   end,
+      -- },
     },
     opts = {
       completion = {
@@ -175,7 +175,7 @@ return {
           Operator = "󰆕",
           TypeParameter = "",
 
-          codeium = "",
+          -- codeium = "",
         },
       },
       -- Merge custom sources with the existing ones from LazyVim
@@ -196,24 +196,27 @@ return {
         end,
       },
       sources = {
-        default = { "codeium", "cmdline", "lsp", "snippets", "path" },
+        -- default = { "codeium", "cmdline", "lsp", "snippets", "path" },
+        default = { "cmdline", "lsp", "snippets", "path" },
         per_filetype = {
-          lua = { "lazydev", "codeium", "cmdline", "lsp", "snippets", "path" },
-          cs = { "easy-dotnet", "codeium", "cmdline", "lsp", "snippets", "path" },
+          -- lua = { "lazydev", "codeium", "cmdline", "lsp", "snippets", "path" },
+          lua = { "lazydev", "cmdline", "lsp", "snippets", "path" },
+          -- cs = { "easy-dotnet", "codeium", "cmdline", "lsp", "snippets", "path" },
+          cs = { "easy-dotnet", "cmdline", "lsp", "snippets", "path" },
         },
         providers = {
-          codeium = {
-            name = "codeium",
-            module = "blink.compat.source",
-            score_offset = 5,
-            transform_items = function(_, items)
-              for _, item in ipairs(items) do
-                item.kind_icon = " "
-              end
-              return items
-            end,
-            async = true,
-          },
+          -- codeium = {
+          --   name = "codeium",
+          --   module = "blink.compat.source",
+          --   score_offset = 5,
+          --   transform_items = function(_, items)
+          --     for _, item in ipairs(items) do
+          --       item.kind_icon = " "
+          --     end
+          --     return items
+          --   end,
+          --   async = true,
+          -- },
           cmdline = {
             module = "blink.cmp.sources.cmdline",
             name = "[cmd]",
