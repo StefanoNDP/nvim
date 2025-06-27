@@ -13,6 +13,7 @@ return { -- Linting
         bash = { "shellharden" },
         markdown = { "markdownlint-cli2" },
         gdscript = { "gdlint" },
+        xml = { "sonarlint-language-server" },
         -- Use the "*" filetype to run linters on all filetypes.
         ["*"] = { "global linter" },
         -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
@@ -39,7 +40,8 @@ return { -- Linting
 
     for name, linter in pairs(opts.linters) do
       if type(linter) == "table" and type(lint.linters[name]) == "table" then
-        lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
+        lint.linters[name] =
+          vim.tbl_deep_extend("force", lint.linters[name], linter)
         if type(linter.prepend_args) == "table" then
           lint.linters[name].args = lint.linters[name].args or {}
           vim.list_extend(lint.linters[name].args, linter.prepend_args)
@@ -88,7 +90,11 @@ return { -- Linting
         --   LazyVim.warn("Linter not found: " .. name, { title = "nvim-lint" })
         -- end
         return linter
-          and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+          and not (
+            type(linter) == "table"
+            and linter.condition
+            and not linter.condition(ctx)
+          )
       end, names)
 
       -- Run linters.

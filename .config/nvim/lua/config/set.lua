@@ -1,7 +1,28 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
+vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
 
-vim.g.nofsync = true
+-- 0 for dap-ui 1 for dap-view
+vim.g.whichDap = 1
+
+local funcs = require("config.functions")
+if funcs.getOSLowerCase():match("windows") ~= 0 then
+  vim.g.nofsync = true
+
+  vim.opt.shell = "powershell"
+  vim.o.shellcmdflag =
+    "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';"
+
+  -- Setting shell redirection
+  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+
+  -- Setting shell pipe
+  vim.o.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
+
+  -- Setting shell quote options
+  vim.o.shellquote = ""
+  vim.o.shellxquote = ""
+end
 
 -- recommended settings
 vim.g.loaded_netrw = 1
@@ -28,8 +49,6 @@ vim.g.deprecation_warnings = false
 -- Line numbers
 vim.o.nu = true
 vim.o.rnu = true
-
-vim.g.whichDap = 1
 
 -- -- OSC 52 (Operating System Command) support
 -- -- Control sequence that causes the terminal emulator to write to or read from the system clipboard.
@@ -211,13 +230,12 @@ vim.api.nvim_set_hl(0, "hl_fg_mantle", { fg = "#181825", bg = "#1e1e2e" })
 vim.api.nvim_set_hl(0, "hl_fg_crust", { fg = "#11111b", bg = "#1e1e2e" })
 
 vim.g.conceallevel = 0
-vim.o.conceallevel = 0
 
 -- Omnisharp
 -- vim.g.Omnisharp_translate_cygwin_wsl = 1
 
--- Godot
-local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
-if not (vim.uv or vim.loop).fs_stat(pipepath) then
-  vim.fn.serverstart(pipepath)
-end
+-- -- Godot
+-- local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
+-- if not (vim.uv or vim.loop).fs_stat(pipepath) then
+--   vim.fn.serverstart(pipepath)
+-- end

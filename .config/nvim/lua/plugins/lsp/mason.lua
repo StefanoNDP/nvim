@@ -59,6 +59,10 @@ return {
           -- "sqlls", -- LSP
           -- "sql-formatter", -- formatter
           -- "sqlfluff", -- linter
+          -- XML
+          "lemminx", -- LSP
+          "sonarlint-language-server", -- Linter
+          "xmlformatter", -- formatter
           -- -- YAML
           -- "yaml-language-server", -- LSP
           -- "yamllint", -- linter

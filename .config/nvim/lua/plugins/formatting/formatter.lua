@@ -13,8 +13,13 @@ return {
         },
         ["markdown-toc"] = {
           condition = function(_, ctx)
-            for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
-              if line:find("<!%-%- toc %-%->") or line:find("<!%-%-toc:start%-%->") then
+            for _, line in
+              ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false))
+            do
+              if
+                line:find("<!%-%- toc %-%->")
+                or line:find("<!%-%-toc:start%-%->")
+              then
                 return true
               end
             end
@@ -38,6 +43,9 @@ return {
           stdin = false,
           require_cwd = true,
         },
+        xmlformatter = {
+          command = "xmlformat --blanks indent-char ' ' compress",
+        },
       },
       formatters_by_ft = {
         bash = { "shellharden" },
@@ -47,6 +55,7 @@ return {
         gdscript = { "gdformat" },
         json = { "biome" },
         jsonc = { "biome" },
+        xml = { "xmlformatter" },
         ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" }, -- Don't stop after first
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" }, -- Don't stop after first
         -- Stop searching after finding first formatter

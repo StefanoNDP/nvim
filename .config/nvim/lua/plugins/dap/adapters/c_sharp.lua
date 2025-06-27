@@ -91,6 +91,7 @@ M.c_sharp = function()
       type = "executable",
       command = "netcoredbg",
       args = { "--interpreter=vscode" },
+      options = { detached = false },
     }
   end
 end

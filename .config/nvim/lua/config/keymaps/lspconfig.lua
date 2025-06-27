@@ -17,10 +17,15 @@ M.keymaps = wk.add({
     {
       "K",
       function()
-        vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 80 })
+        vim.lsp.buf.hover({
+          border = "rounded",
+          max_height = 25,
+          max_width = 80,
+        })
       end,
       desc = "",
     },
+    { "<C-s>", lsp .. "signature_help({ border = 'rounded' })<CR>", desc = "" },
     { "<leader>ca", lsp .. "code_action()<CR>", desc = "" },
     {
       "<leader>cd",
@@ -31,11 +36,19 @@ M.keymaps = wk.add({
     },
     { "<leader>cA", lsp .. "range_code_action()<CR>", desc = "" },
     -- { "<leader>cr", lsp .. "rename()<CR>", desc = "" },
-    { "<leader>cr", ":IncRename " .. vim.fn.expand("<cword>"), desc = "Rename" },
+    {
+      "<leader>cr",
+      ":IncRename " .. vim.fn.expand("<cword>"),
+      desc = "Rename",
+    },
 
     { "<leader>wa", lsp .. "add_workspace_folder()<CR>", desc = "" },
     { "<leader>wr", lsp .. "remove_workspace_folder()<CR>", desc = "" },
-    { "<leader>wi", "<cmd>print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", desc = "" },
+    {
+      "<leader>wi",
+      "<cmd>print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+      desc = "",
+    },
 
     { "gd", lsp .. "definition()<CR>", desc = "Go to definition" },
     { "gtd", lsp .. "type_definition()<CR>", desc = "Go to type definition" },
@@ -50,14 +63,22 @@ M.keymaps = wk.add({
     { "gP", preview .. "close_all_win()<CR>", desc = "" },
 
     { "gG", diagnostic .. "open_float()<CR>", desc = "" },
-    { "gL", diagnostic .. "show_line_diagnostic({ border = 'rounded' })<CR>", desc = "" },
+    {
+      "gL",
+      diagnostic .. "show_line_diagnostic({ border = 'rounded' })<CR>",
+      desc = "",
+    },
     { "]d", diagnostic .. "goto_next({ border = 'rounded' })<CR>", desc = "" },
     { "[d", diagnostic .. "goto_prev({ border = 'rounded' })<CR>", desc = "" },
     { "<leader>sl", ":LspStop<CR>", desc = "" },
 
     { "<leader>bc", ":Navbuddy<CR>", desc = "Open breadcrumbs" },
 
-    { "<leader>cL", codelens .. "refresh()<CR>", desc = "Refresh & Display Codelens" },
+    {
+      "<leader>cL",
+      codelens .. "refresh()<CR>",
+      desc = "Refresh & Display Codelens",
+    },
 
     {
       "<leader>lsc",
@@ -70,7 +91,13 @@ M.keymaps = wk.add({
           -- if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and lclient.name ~= "null-ls" then
           if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
             -- return client.name
-            if lclient and lclient:supports_method(vim.lsp.protocol.Methods.codeLens, buffer) then
+            if
+              lclient
+              and lclient:supports_method(
+                vim.lsp.protocol.Methods.codeLens,
+                buffer
+              )
+            then
               print("True")
               return true
             end
@@ -83,16 +110,16 @@ M.keymaps = wk.add({
     },
   },
   {
-    mode = { "i" },
-    { "<C-s>", lsp .. "signature_help({ border = 'rounded' })<CR>", desc = "" },
-  },
-  {
     mode = { "n", "v" },
     { "<leader>cl", codelens .. "run()<CR>", desc = "Run Codelens" },
   },
   {
     mode = { "n", "x" },
-    { "<leader>cf", conform .. "format({ bufnr = bufnr })<CR>", desc = "Format buffer" },
+    {
+      "<leader>cf",
+      conform .. "format({ bufnr = bufnr })<CR>",
+      desc = "Format buffer",
+    },
   },
 })
 
