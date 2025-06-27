@@ -27,6 +27,7 @@
   "mason.nvim": { "branch": "main", "commit": "8024d64e1330b86044fed4c8494ef3dcd483a67c" },
   "mini.icons": { "branch": "main", "commit": "94848dad1589a199f876539bd79befb0c5e3abf0" },
   "mini.nvim": { "branch": "main", "commit": "145476d74aaa3236db9dc6705d0fa3eb0f4f8352" },
+  "mssql.nvim": { "branch": "main", "commit": "f79f41874f24cdf16773003f028328d9f09c607e" },
   "neoconf.nvim": { "branch": "main", "commit": "e6285272cbda137ff7ebfacb35f2717a9fb32221" },
   "neogen": { "branch": "main", "commit": "d7f9461727751fb07f82011051338a9aba07581d" },
   "neotest": { "branch": "master", "commit": "1d4b3bd89afa8bfa12fffd2bb1ccd26ac3c92ce5" },
