@@ -14,7 +14,7 @@ return {
       "rafamadriz/friendly-snippets",
       -- "moyiz/blink-emoji.nvim",
       -- "mikavilpas/blink-ripgrep.nvim",
-      -- "kristijanhusak/vim-dadbod-completion",
+      "kristijanhusak/vim-dadbod-completion",
       "GustavEikaas/easy-dotnet.nvim",
       {
         "saghen/blink.compat",
@@ -134,7 +134,10 @@ return {
         preset = "none",
         ["<Tab>"] = {
           function(cmp)
-            if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() or cmp.snippet_active() then
+            if
+              cmp.is_ghost_text_visible() and not cmp.is_menu_visible()
+              or cmp.snippet_active()
+            then
               return cmp.accept()
             else
               return cmp.select_and_accept()
@@ -203,6 +206,8 @@ return {
           lua = { "lazydev", "cmdline", "lsp", "snippets", "path" },
           -- cs = { "easy-dotnet", "codeium", "cmdline", "lsp", "snippets", "path" },
           cs = { "easy-dotnet", "cmdline", "lsp", "snippets", "path" },
+          -- sql = { "dadbod", "codeium", "cmdline", "lsp", "snippets", "path" },
+          sql = { "dadbod", "cmdline", "lsp", "snippets", "path" },
         },
         providers = {
           -- codeium = {
@@ -232,6 +237,12 @@ return {
           lazydev = {
             name = "[LazyDev]",
             module = "lazydev.integrations.blink",
+            score_offset = 3,
+            async = true,
+          },
+          dadbod = {
+            name = "[DB]",
+            module = "vim_dadbod_completion.blink",
             score_offset = 3,
             async = true,
           },
