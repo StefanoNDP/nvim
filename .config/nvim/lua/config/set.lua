@@ -146,7 +146,7 @@ vim.opt.list = true -- Show some invisible characters (tab...
 vim.opt.listchars:append("lead:")
 
 -- Folds
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0" -- Show gutter
 vim.opt.foldmethod = "manual"
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"

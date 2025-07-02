@@ -41,6 +41,10 @@ return {
       vim.g.db_ui_use_nerd_fonts = true
       vim.g.db_ui_use_nvim_notify = true
 
+      vim.g.dbs = {
+        StefanoDB = "sqlserver://NBStefano01\\SQLEXPRESS/StefanoDB?ODBC+Driver+21+for+SQL+Server",
+      }
+
       -- NOTE: The default behavior of auto-execution of queries on save is disabled
       -- this is useful when you have a big query that you don't want to run every time
       -- you save the file running those queries can crash neovim to run use the
@@ -49,3 +53,43 @@ return {
     end,
   },
 }
+
+-- For connecting to M$SQL Server using Dadbod/Dadbod-ui:
+-- sqlserver://PCNAME\INSTANCENAME/DBNAME?ODBC+Driver+xx+for+SQL+Server
+-- PCNAME: Windows, go to Settings (Win + i) -> System -> About -> Device Name
+--    DESKTOP-XXXXX Is usually the default one
+-- INSTANCENAME: The Instance Name you used when setting up a SQL Server
+--    MSSQLSERVER if you chose "Default instance"
+--    YOUR_INSTANCE_NAME if you chose "Named instance"
+-- xx: Current Intalled/Used SQL Server Management Studio
+--    17 for 2017
+--    19 for 2019
+--    21 for 2021
+--
+-- Ex: sqlserver://DESKTOP-asdasd123\MSSQLSERVER/MyAwesomeDB?ODBC+Driver+21+for+SQL+Server
+--
+-- For MSSQL
+-- Create a "connections.json" at the root of your project with at least
+-- the following info:
+-- CONNECTION_NAME: can be whatever you want
+-- server: usually localhost unless it's somewhere else
+-- authenticationType: SqlLogin unelss you used Windows Auth
+--    user: must be su unless you changed it or is using Windows Auth
+--    Password: is the one you created when setting up the SQL server or is using Windows Auth
+-- "initialCatalog": database name,
+--
+-- {
+--   "CONNECTION_NAME": {
+--     "server": "localhost",
+--     "database": "dbA",
+--     "authenticationType": "SqlLogin",
+--     "user": "sa",
+--     "password": "YOURPASSWORD",
+--     "dataSource": "DESKTOP-asdasd123\\MSSQLSERVER",
+--     "initialCatalog": "MyAwesomeDB",
+--     "persistSecurityInfo": true,
+--     "pooling": false,
+--     "encrypt": true,
+--     "trustServerCertificate": true
+--   }
+-- }

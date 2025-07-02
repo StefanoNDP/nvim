@@ -37,11 +37,19 @@ wk.add({
     },
 
     -- Diff
-    { "<leader>dt", ":windo diffthis<CR>", desc = "Diff current split windows" },
+    {
+      "<leader>dt",
+      ":windo diffthis<CR>",
+      desc = "Diff current split windows",
+    },
     { "<leader>do", ":windo diffoff<CR>", desc = "Stop Diff" },
 
     -- splits a one liner {} block separated by ';' into separate lines
-    { "]j", "f{i<CR><ESC>lli<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>", desc = "" },
+    {
+      "]j",
+      "f{i<CR><ESC>lli<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>f;a<CR><ESC>",
+      desc = "",
+    },
 
     -- Rectangular selection
     { "<leader>su", vim.cmd.UndotreeToggle, desc = "Open undotree" },
@@ -78,11 +86,31 @@ wk.add({
     { "<leader>j", "<cmd>lprev<CR>zz", desc = "Previous Location" },
 
     -- Window management
-    { "<C-M-i>", "<C-w>+", desc = "Increase Split relative to the current active split" },
-    { "<C-M-d>", "<C-w>-", desc = "Decrease Split relative to the current active split" },
-    { "<M-m>", "<C-w><", desc = "Increase Split relative to the current active split" },
-    { "<M-p>", "<C-w>>", desc = "Decrease Split relative to the current active split" },
-    { "<leader>sv", "<C-w>v<C-w>><C-w>><C-w>><C-w>>", desc = "Split window vertically" },
+    {
+      "<C-M-i>",
+      "<C-w>+",
+      desc = "Increase Split relative to the current active split",
+    },
+    {
+      "<C-M-d>",
+      "<C-w>-",
+      desc = "Decrease Split relative to the current active split",
+    },
+    {
+      "<M-m>",
+      "<C-w><",
+      desc = "Increase Split relative to the current active split",
+    },
+    {
+      "<M-p>",
+      "<C-w>>",
+      desc = "Decrease Split relative to the current active split",
+    },
+    {
+      "<leader>sv",
+      "<C-w>v<C-w>><C-w>><C-w>><C-w>>",
+      desc = "Split window vertically",
+    },
     { "<leader>sh", "<C-w>s", desc = "Split window horizontally" },
     { "<leader>se", "<C-w>=", desc = "Make splits equal size" },
     { "<leader>sx", "<cmd>close<CR>", desc = "Close current split" },
@@ -139,8 +167,8 @@ wk.add({
   { -- Normal and Visual and Select modes
     mode = { "n", "v" },
     -- Enable/Disable rectangular selection
-    { "<leader>ven", ":set ve=none<CR>", desc = "Disable rectangular selection" },
-    { "<leader>vea", ":set ve=all<CR>", desc = "Enable rectangular selection" },
+    -- { "<leader>ven", ":set ve=none<CR>", desc = "Disable rectangular selection" },
+    -- { "<leader>vea", ":set ve=all<CR>", desc = "Enable rectangular selection" },
 
     -- Register
     { "<leader>d", [["_d]], desc = "Delete without copying deleted content" },

@@ -25,7 +25,8 @@ M.get_dap_repl_winbar = function(active)
       return ""
     end
 
-    local background_color = string.format("lualine_b" .. "%s", active and get_mode() or "_inactive")
+    local background_color =
+      string.format("lualine_b" .. "%s", active and get_mode() or "_inactive")
 
     local controls_string = "%#" .. background_color .. "#"
     for element in require("dapui.controls").controls():gmatch("%S+") do
@@ -42,16 +43,21 @@ end
 
 M.conditions = {
   buffer_not_empty = function()
-    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 and M.conditions.checkFileSize()
+    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+      and M.conditions.checkFileSize()
   end,
   hide_in_width = function()
     return vim.fn.winwidth(0) > 80
   end,
   check_diagnostic = function()
-    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-    local warns = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-    local infos = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-    local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    local errors =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    local warns =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    local infos =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    local hints =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     if #errors > 0 or #warns > 0 or #infos > 0 or #hints > 0 then
       return true
     end
@@ -130,32 +136,7 @@ M.line = function()
         update_in_insert = true,
       },
     },
-    line_c = {
-      {
-        function()
-          return "%="
-        end,
-        cond = M.conditions.checkLsp,
-      },
-      {
-        function()
-          return ""
-        end,
-        cond = M.conditions.checkLsp,
-      },
-      {
-        M.conditions.lspInfo,
-        icon = " LSP:",
-        color = { fg = colors.white, gui = "bold" },
-        cond = M.conditions.checkLsp,
-      },
-      {
-        function()
-          return ""
-        end,
-        cond = M.conditions.checkLsp,
-      },
-    },
+    line_c = {},
     line_x = {
       {
         function()
@@ -212,28 +193,55 @@ M.line = function()
 end
 
 M.win = {
-  win_a = {},
+  win_a = {
+    {
+      "navic",
+      cond = function()
+        return package.loaded["nvim-navic"]
+          and require("nvim-navic").is_available()
+      end,
+      color_correction = "dynamic",
+    },
+  },
   win_b = {
     M.get_dap_repl_winbar(true),
   },
   win_c = {
     {
-      "navic",
-      cond = function()
-        return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+      function()
+        return "%="
       end,
-      color_correction = "dynamic",
+      cond = M.conditions.checkLsp,
+    },
+    {
+      function()
+        return ""
+      end,
+      cond = M.conditions.checkLsp,
+    },
+    {
+      M.conditions.lspInfo,
+      icon = " LSP:",
+      color = { fg = colors.white, gui = "bold" },
+      cond = M.conditions.checkLsp,
+    },
+    {
+      function()
+        return ""
+      end,
+      cond = M.conditions.checkLsp,
     },
   },
   win_x = {},
   win_y = {
-    "os.date('%d/%m/%Y %H:%M:%S')",
+    -- "os.date('%d/%m/%Y %H:%M:%S')",
   },
   win_z = {
 
-    function()
-      return "   "
-    end,
+    "os.date('%d/%m/%Y %H:%M:%S')",
+    -- function()
+    --   return "   "
+    -- end,
   },
 }
 
