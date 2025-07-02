@@ -18,7 +18,7 @@
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"lineEnding": "lf",
-		"lineWidth": 80,
+		"lineWidth": 88,
 		"attributePosition": "auto",
 		"useEditorconfig": false
 	},
@@ -35,7 +35,7 @@
 			"indentStyle": "tab",
 			"indentWidth": 2,
 			"lineEnding": "lf",
-			"lineWidth": 80,
+			"lineWidth": 88,
 			"trailingCommas": "none"
 		},
 		"linter": {
@@ -51,7 +51,7 @@
 			"indentStyle": "tab",
 			"indentWidth": 2,
 			"lineEnding": "lf",
-			"lineWidth": 80,
+			"lineWidth": 88,
 			"quoteStyle": "double"
 		},
 		"linter": {

@@ -81,7 +81,11 @@ return {
     },
     input = { enabled = true },
     -- lazygit = { enabled = true },
-    notifier = { enabled = true, margin = { top = 1, right = 1, bottom = 1 }, top_down = false },
+    notifier = {
+      enabled = true,
+      margin = { top = 1, right = 1, bottom = 1 },
+      top_down = false,
+    },
     notify = { enabled = true },
     profiler = { enabled = true },
     quickfile = { enabled = true },
@@ -107,7 +111,7 @@ return {
       cwd = vim.fn.getcwd(),
       formatters = {
         file = {
-          truncate = 80,
+          truncate = 88,
         },
       },
       sources = {
@@ -143,7 +147,12 @@ return {
                   { win = "input", height = 1, border = "rounded" },
                   { win = "list", border = "rounded" },
                 },
-                { win = "preview", title = "{preview}", width = 0.65, border = "rounded" },
+                {
+                  win = "preview",
+                  title = "{preview}",
+                  width = 0.65,
+                  border = "rounded",
+                },
               },
             },
           },
@@ -220,7 +229,8 @@ return {
         vim.g.snacks_animate = false
 
         -- Create some toggle mappings
-        local toggleConceal = { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }
+        local toggleConceal =
+          { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }
         -- local toggleBackground = { off = "light", on = "dark", name = "Dark Background" }
 
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
@@ -270,7 +280,8 @@ return {
           return table.insert(msg, v.msg) or not v.done
         end, p)
 
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+        local spinner =
+          { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
         vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,

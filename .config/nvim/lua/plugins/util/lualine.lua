@@ -43,21 +43,16 @@ end
 
 M.conditions = {
   buffer_not_empty = function()
-    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-      and M.conditions.checkFileSize()
+    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 and M.conditions.checkFileSize()
   end,
   hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
+    return vim.fn.winwidth(0) > 88
   end,
   check_diagnostic = function()
-    local errors =
-      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-    local warns =
-      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-    local infos =
-      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-    local hints =
-      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    local warns = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    local infos = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     if #errors > 0 or #warns > 0 or #infos > 0 or #hints > 0 then
       return true
     end
@@ -197,8 +192,7 @@ M.win = {
     {
       "navic",
       cond = function()
-        return package.loaded["nvim-navic"]
-          and require("nvim-navic").is_available()
+        return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
       end,
       color_correction = "dynamic",
     },

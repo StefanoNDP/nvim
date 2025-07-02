@@ -120,14 +120,14 @@ vim.opt.splitbelow = true -- Split horizontal window to the bottom
 vim.opt.showmode = false -- Dont show mode since we have a statusline
 vim.opt.mouse = "a" -- Enable mouse mode
 -- vim.opt.mousemoveevent = true
-vim.opt.sidescrolloff = 8 -- Columns of context
+vim.opt.sidescrolloff = 1 -- Columns of context
 vim.opt.scrolloff = 8 -- Lines of context
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 vim.opt.completeopt = "menu,menuone,preview,noselect" -- Better completion experience
-vim.opt.textwidth = 80 -- Max width/columns
+vim.opt.textwidth = 88 -- Max width/columns
 vim.opt.colorcolumn = "+1" -- Show gutter after textwidth
 vim.opt.signcolumn = "yes" -- Show sign column so that text doesn't shift
 

@@ -35,7 +35,7 @@ rules = all
 # Comma separated list of rules to exclude, or None
 exclude_rules = None
 # Below controls SQLFluff output, see max_line_length for SQL output
-output_line_length = 80
+output_line_length = 88
 # Number of passes to run before admitting defeat
 runaway_limit = 10
 # Ignore errors by category (one or more of the following, separated by commas: lexing,linting,parsing,templating)
@@ -78,7 +78,7 @@ processes = 1
 # Max line length is set by default to be in line with the dbt style guide.
 # https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
 # Set to zero or negative to disable checks.
-max_line_length = 80
+max_line_length = 88
 # NOTE: Templater Variant rendering should currently be considered EXPERIMENTAL.
 # Only set `render_variant_limit` to more than 1 if you know what you're doing!
 # Implementation of this will also depend on your templater.

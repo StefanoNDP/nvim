@@ -20,7 +20,7 @@ M.keymaps = wk.add({
         vim.lsp.buf.hover({
           border = "rounded",
           max_height = 25,
-          max_width = 80,
+          max_width = 88,
         })
       end,
       desc = "",
@@ -93,10 +93,7 @@ M.keymaps = wk.add({
             -- return client.name
             if
               lclient
-              and lclient:supports_method(
-                vim.lsp.protocol.Methods.codeLens,
-                buffer
-              )
+              and lclient:supports_method(vim.lsp.protocol.Methods.codeLens, buffer)
             then
               print("True")
               return true
