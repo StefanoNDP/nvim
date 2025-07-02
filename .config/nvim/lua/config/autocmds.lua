@@ -12,8 +12,18 @@ end
 -- api.nvim_command("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 vim.cmd([[autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni]])
 
+-- "Don't" allow horizontal scroll
+vim.cmd([[autocmd CursorMoved * norm!88zH]])
+
+-- Treat M$' xaml as xml
+vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
+
+-- Treat Avalonia's axaml as xml
+vim.cmd([[autocmd BufNewFile,BufRead *.axaml setf xml]])
+
 -- Turn on/off tmux statusline on vim enter/leave
-vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
+-- VimEnter conflicts with Snacks Explorer's preview
+vim.cmd([[silent !tmux set status off]])
 vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
 
 -- ftplugin start
@@ -48,12 +58,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "VimEnter", "BufWinEnter", "Colorscheme" }, {
-  pattern = { "*" },
-  callback = function()
-    loadftmodule(vim.bo.filetype, "syntax")
-  end,
-})
+vim.api.nvim_create_autocmd(
+  { "FileType", "BufEnter", "VimEnter", "BufWinEnter", "Colorscheme" },
+  {
+    pattern = { "*" },
+    callback = function()
+      loadftmodule(vim.bo.filetype, "syntax")
+    end,
+  }
+)
 -- ftplugin end
 
 -- It's free real estate
@@ -68,7 +81,17 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Set conceallevel for certain file types
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("ft_conceal"),
-  pattern = { "*.md", "*.json", "*.org", "*.norg", "markdown", "markdown.mdx", "rmd", "org", "norg" },
+  pattern = {
+    "*.md",
+    "*.json",
+    "*.org",
+    "*.norg",
+    "markdown",
+    "markdown.mdx",
+    "rmd",
+    "org",
+    "norg",
+  },
   callback = function()
     vim.opt_local.conceallevel = 2
   end,
@@ -122,7 +145,8 @@ vim.api.nvim_create_autocmd("FileType", {
 --   end,
 -- })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
+-- Auto create dir when saving a file, in case some intermediate directory does not
+-- exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
@@ -148,20 +172,23 @@ vim.api.nvim_create_autocmd("BufDelete", {
 })
 
 -- Roslyn: Diagnostic refresh
-vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" }, {
-  pattern = "*",
-  callback = function()
-    local clients = vim.lsp.get_clients({ name = "roslyn" })
-    if not clients or #clients == 0 then
-      return
-    end
+vim.api.nvim_create_autocmd(
+  { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
+  {
+    pattern = "*",
+    callback = function()
+      local clients = vim.lsp.get_clients({ name = "roslyn" })
+      if not clients or #clients == 0 then
+        return
+      end
 
-    local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
-    for _, buf in ipairs(buffers) do
-      vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
-    end
-  end,
-})
+      local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
+      for _, buf in ipairs(buffers) do
+        vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+      end
+    end,
+  }
+)
 
 -- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {

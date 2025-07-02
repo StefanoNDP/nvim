@@ -1,6 +1,5 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
-vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
 
 -- 0 for dap-ui 1 for dap-view
 vim.g.whichDap = 1
@@ -119,8 +118,9 @@ vim.opt.splitright = true -- Split vertical window to the right
 vim.opt.splitbelow = true -- Split horizontal window to the bottom
 vim.opt.showmode = false -- Dont show mode since we have a statusline
 vim.opt.mouse = "a" -- Enable mouse mode
+vim.o.mousescroll = "ver:3,hor:0" -- Enable/Disable vertival/horizontal scroll
 -- vim.opt.mousemoveevent = true
-vim.opt.sidescrolloff = 1 -- Columns of context
+vim.opt.sidescrolloff = 0 -- Columns of context
 vim.opt.scrolloff = 8 -- Lines of context
 vim.opt.isfname:append("@-@")
 
