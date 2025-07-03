@@ -111,7 +111,7 @@ return {
       cwd = vim.fn.getcwd(),
       formatters = {
         file = {
-          truncate = 88,
+          truncate = 96,
         },
       },
       sources = {
@@ -280,8 +280,7 @@ return {
           return table.insert(msg, v.msg) or not v.done
         end, p)
 
-        local spinner =
-          { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
         vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,

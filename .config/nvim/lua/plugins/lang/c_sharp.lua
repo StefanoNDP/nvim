@@ -92,11 +92,7 @@ return { -- C#
         return path
       end
       local sdkPath = function()
-        if require("easy-dotnet.extensions").isWindows() then
-          return "C:\\Program Files\\dotnet\\sdk\\8.0.410"
-        else
-          return "/usr/lib/dotnet/sdk/8.0.116"
-        end
+        return "C:\\Program Files\\dotnet\\sdk\\9.0.301"
       end
 
       return {
@@ -165,11 +161,7 @@ return { -- C#
               )
             end,
             test = function()
-              return string.format(
-                "dotnet test -v d --tl:on --interactive %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet test -v d --tl:on --interactive %s %s", path, args)
             end,
             restore = function()
               return string.format(
@@ -179,18 +171,10 @@ return { -- C#
               )
             end,
             build = function()
-              return string.format(
-                "dotnet build -v d --tl:on --interactive %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet build -v d --tl:on --interactive %s %s", path, args)
             end,
             watch = function()
-              return string.format(
-                "dotnet watch -v --project %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet watch -v --project %s %s", path, args)
             end,
           }
 

@@ -322,7 +322,7 @@ indent_size = 2
 # Markdown - match markdownlint settings
 [*.{md,markdown}]
 indent_size = 2
-max_line_length = 88
+max_line_length = 96
 
 # PowerShell - match defaults for New-ModuleManifest and PSScriptAnalyzer Invoke-Formatter
 [*.{ps1,psd1,psm1}]

@@ -46,7 +46,7 @@ M.conditions = {
     return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 and M.conditions.checkFileSize()
   end,
   hide_in_width = function()
-    return vim.fn.winwidth(0) > 88
+    return vim.fn.winwidth(0) > 96
   end,
   check_diagnostic = function()
     local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })

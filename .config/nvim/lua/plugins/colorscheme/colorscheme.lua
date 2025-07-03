@@ -25,18 +25,18 @@ return { -- colorscheme
       no_bold = false, -- Force no bold
       no_underline = false, -- Force no underline
       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        -- comments = { "italic" }, -- Change the style of comments
-        -- conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "bold" },
+        loops = { "bold" },
+        functions = { "bold" },
+        keywords = { "italic" },
         strings = {},
         variables = {},
         numbers = {},
-        booleans = {},
+        booleans = { "bold", "italic" },
         properties = {},
         types = {},
-        operators = {},
+        operators = { "bold" },
         miscs = {}, -- Uncomment to turn off hard-coded styles
       },
       optional = true,
@@ -75,7 +75,6 @@ return { -- colorscheme
           enabled = true,
           indent_scope_color = "mauve", -- catppuccin color (eg. `lavender`) Default: text
         },
-
         native_lsp = {
           enabled = true,
           virtual_text = {
@@ -97,6 +96,15 @@ return { -- colorscheme
           },
         },
       },
+      custom_highlights = function(colors)
+        return {
+          ["@comment"] = { fg = colors.green },
+          ["@comment.documentation"] = { fg = colors.green },
+          String = { fg = colors.peach },
+          ["@type.builtin"] = { fg = colors.blue },
+          ["@variable.member"] = { fg = colors.sky }, -- For fields.
+        }
+      end,
     }
   end,
   config = function(_, opts)

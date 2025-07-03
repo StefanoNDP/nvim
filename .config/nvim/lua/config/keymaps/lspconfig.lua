@@ -20,7 +20,7 @@ M.keymaps = wk.add({
         vim.lsp.buf.hover({
           border = "rounded",
           max_height = 25,
-          max_width = 88,
+          max_width = 96,
         })
       end,
       desc = "",

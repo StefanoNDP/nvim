@@ -12,8 +12,8 @@ end
 -- api.nvim_command("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 vim.cmd([[autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni]])
 
--- "Don't" allow horizontal scroll
-vim.cmd([[autocmd CursorMoved * norm!88zH]])
+-- -- "Don't" allow horizontal scroll
+-- vim.cmd([[autocmd CursorMoved * norm!96zH]])
 
 -- Treat M$' xaml as xml
 vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
@@ -25,6 +25,14 @@ vim.cmd([[autocmd BufNewFile,BufRead *.axaml setf xml]])
 -- VimEnter conflicts with Snacks Explorer's preview
 vim.cmd([[silent !tmux set status off]])
 vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
+
+-- Disable semantic tokens
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
+})
 
 -- ftplugin start
 local ftmodule = "ftplugin.%s"
@@ -172,23 +180,20 @@ vim.api.nvim_create_autocmd("BufDelete", {
 })
 
 -- Roslyn: Diagnostic refresh
-vim.api.nvim_create_autocmd(
-  { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
-  {
-    pattern = "*",
-    callback = function()
-      local clients = vim.lsp.get_clients({ name = "roslyn" })
-      if not clients or #clients == 0 then
-        return
-      end
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" }, {
+  pattern = "*",
+  callback = function()
+    local clients = vim.lsp.get_clients({ name = "roslyn" })
+    if not clients or #clients == 0 then
+      return
+    end
 
-      local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
-      for _, buf in ipairs(buffers) do
-        vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
-      end
-    end,
-  }
-)
+    local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
+    for _, buf in ipairs(buffers) do
+      vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+    end
+  end,
+})
 
 -- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {
