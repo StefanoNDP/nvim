@@ -111,7 +111,7 @@ return {
       cwd = vim.fn.getcwd(),
       formatters = {
         file = {
-          truncate = 96,
+          truncate = 80,
         },
       },
       sources = {

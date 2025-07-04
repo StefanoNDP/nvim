@@ -12,13 +12,15 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
+max_line_length = 96
 spelling_exclusion_path = SpellingExclusions.dic
 
 # Code files
 [*.{cs,csx,vb,vbx}]
-indent_size = 4
+indent_size = 2
 insert_final_newline = true
 charset = utf-8-bom
+max_line_length = 96
 
 formatters = csharpier
 
@@ -34,17 +36,25 @@ indent_size = 2
 [*.json]
 indent_size = 2
 
+# XML files
+[*.{xml,xaml}]
+indent_size = 2
+max_line_length = 96
+
 # Powershell files
 [*.ps1]
 indent_size = 2
+max_line_length = 80
 
 # Shell script files
 [*.sh]
 end_of_line = lf
 indent_size = 2
+max_line_length = 80
 
 # Dotnet code style settings:
 [*.{cs,vb}]
+max_line_length = 96
 
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
@@ -160,6 +170,10 @@ dotnet_diagnostic.IDE0055.severity = warning
 
 # CSharp code style settings:
 [*.cs]
+# Style
+csharp_style_namespace_declarations = file_scoped:suggestion
+max_line_length = 96
+
 # Newline settings
 csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
@@ -291,6 +305,7 @@ dotnet_diagnostic.IDE2006.severity = warning
 # CA1822: Make member static
 # There is a risk of accidentally breaking an internal API that partners rely on though IVT.
 dotnet_code_quality.CA1822.api_surface = private
+max_line_length = 96
 
 # .NET solution files - match defaults for VS
 [*.sln]
@@ -310,19 +325,15 @@ indent_size = 2
 
 # HTML, XML - match defaults for VS
 [*.{cshtml,html,xml}]
-indent_size = 4
+indent_size = 2
 
 # JavaScript and JS mixes - match eslint settings; JSON also matches .NET Core templates
 [*.{js,json,ts,vue}]
 indent_size = 2
 
 [*.lua]
-indent_size = 2
-
-# Markdown - match markdownlint settings
-[*.{md,markdown}]
-indent_size = 2
 max_line_length = 96
+indent_size = 2
 
 # PowerShell - match defaults for New-ModuleManifest and PSScriptAnalyzer Invoke-Formatter
 [*.{ps1,psd1,psm1}]
