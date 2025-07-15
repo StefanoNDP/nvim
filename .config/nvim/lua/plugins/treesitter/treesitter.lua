@@ -6,19 +6,28 @@ return {
       require("nvim-dap-repl-highlights").setup()
     end,
   },
-  -- { -- HTML and JSX
-  --   "windwp/nvim-ts-autotag",
-  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
-  --   enabled = true,
-  --   version = false,
-  --   event = "VeryLazy",
-  --   opts = function()
-  --     return {}
-  --   end,
-  --   config = function(_, opts)
-  --     require("nvim-ts-autotag").setup(opts)
-  --   end,
-  -- },
+  { -- HTML and JSX
+    "windwp/nvim-ts-autotag",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    enabled = true,
+    version = false,
+    opts = function()
+      return {
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = true,
+        },
+        aliases = {
+          ["cshtml"] = "html",
+          ["razor"] = "html",
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("nvim-ts-autotag").setup(opts)
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },

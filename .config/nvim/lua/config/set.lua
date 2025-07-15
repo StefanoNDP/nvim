@@ -1,6 +1,15 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
 
+vim.scriptencoding = "utf-8" -- Set encoding to utf-8
+vim.opt.encoding = "utf-8" -- Set encoding to utf-8
+vim.opt.fileencoding = "utf-8" -- Set encoding to utf-8
+vim.opt.path:append({ "**" })
+vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.formatoptions:append({ "r" })
+
+vim.opt.inccommand = "split" -- Preview commands
+
 -- 0 for dap-ui 1 for dap-view
 vim.g.whichDap = 0
 
@@ -113,11 +122,12 @@ vim.opt.cursorline = true -- Highlight current/cursor line
 vim.opt.hidden = true -- Keep buffers in memory
 vim.opt.termguicolors = true -- Use truecolor in the terminal
 vim.opt.background = "dark" -- Colorschemes that can be light or dark will be made dark
-vim.opt.backspace = "indent,eol,start" -- Allow backspace on indent, end of line or insert mode start position
+vim.opt.backspace = { "start", "eol", "indent" } -- Allow backspace on indent, end of line or insert mode start position
 vim.opt.splitright = true -- Split vertical window to the right
 vim.opt.splitbelow = true -- Split horizontal window to the bottom
+vim.opt.splitkeep = "cursor" --
 vim.opt.showmode = false -- Dont show mode since we have a statusline
-vim.opt.mouse = "a" -- Enable mouse mode
+vim.opt.mouse = "" -- Disable mouse mode
 -- vim.opt.mousemoveevent = true
 vim.opt.sidescrolloff = 1 -- Columns of context
 vim.opt.scrolloff = 8 -- Lines of context

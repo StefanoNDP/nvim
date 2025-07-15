@@ -40,11 +40,14 @@ return {
           "rzls", -- LSP -- Use ':MasonInstall rzls@9.0.0-preview.25156.2' instead
           -- GODOT SCRIPT
           "gdtoolkit", -- formatter and linter
-          -- -- HTML
+          -- HTML
           "html-lsp",
-          -- -- JavaScript/TypeScript
-          -- "typescript-language-server", -- LSP
-          -- "vtsls", -- LSP
+          -- CSS
+          "css-lsp",
+          -- JavaScript/TypeScript
+          "typescript-language-server", -- LSP
+          "tailwindcss-language-server", -- LSP
+          "vtsls", -- LSP
           -- "js-debug-adapter", -- DAP
           -- -- JSON
           "jsonls", -- LSP
