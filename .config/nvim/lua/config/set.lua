@@ -2,7 +2,7 @@
 vim.g.do_filetype_lua = 1 -- Enable
 
 -- 0 for dap-ui 1 for dap-view
-vim.g.whichDap = 1
+vim.g.whichDap = 0
 
 local funcs = require("config.functions")
 if funcs.getOSLowerCase():match("windows") ~= 0 then
@@ -229,9 +229,6 @@ vim.api.nvim_set_hl(0, "hl_fg_mantle", { fg = "#181825", bg = "#1e1e2e" })
 vim.api.nvim_set_hl(0, "hl_fg_crust", { fg = "#11111b", bg = "#1e1e2e" })
 
 vim.g.conceallevel = 0
-
--- Omnisharp
--- vim.g.Omnisharp_translate_cygwin_wsl = 1
 
 -- -- Godot
 -- local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"

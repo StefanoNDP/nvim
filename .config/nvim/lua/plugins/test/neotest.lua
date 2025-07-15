@@ -7,8 +7,12 @@ return {
   event = "VeryLazy",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
+    "nvim-neotest/nvim-nio",
+    "antoinemadec/FixCursorHold.nvim",
+    "nvim-lua/plenary.nvim",
     "nvim-neotest/neotest-plenary",
-    "Issafalcon/neotest-dotnet", -- Dotnet
+    -- "Issafalcon/neotest-dotnet", -- Dotnet
+    "nsidorenco/neotest-vstest", -- Dotnet
     -- "alfaix/neotest-gtest", -- C++
     "rcasia/neotest-bash", -- Bash
   },
@@ -16,11 +20,10 @@ return {
     require("config.keymaps.neotest")
     return {
       adapters = {
-        ["neotest-dotnet"] = {},
-        ["neotest-plenary"] = {},
-        -- ["neotest-gtest"] = {},
-        ["neotest-bash"] = {},
-        ["rustaceanvim.neotest"] = {},
+        require("neotest-vstest"),
+        -- require("neotest-dotnet"),
+        require("neotest-plenary"),
+        require("neotest-bash"),
       },
       status = { virtual_text = true },
       output = { open_on_run = true },

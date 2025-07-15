@@ -111,7 +111,15 @@ return {
     ---@type dapview.config
     opts = {
       winbar = {
-        sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+        sections = {
+          "watches",
+          "scopes",
+          "exceptions",
+          "breakpoints",
+          "threads",
+          "repl",
+          "console",
+        },
         -- sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
         headers = {
           -- breakpoints = "[B]reakpoints",
@@ -174,12 +182,12 @@ return {
         dap.listeners.before.launch.dapui_config = function()
           dapui.open()
         end
-        dap.listeners.before.event_terminated.dapui_config = function()
-          dapui.close()
-        end
-        dap.listeners.before.event_exited.dapui_config = function()
-          dapui.close()
-        end
+        -- dap.listeners.before.event_terminated.dapui_config = function()
+        --   dapui.close()
+        -- end
+        -- dap.listeners.before.event_exited.dapui_config = function()
+        --   dapui.close()
+        -- end
       else
         dapui = require("dap-view")
         -- DAP View
@@ -192,12 +200,12 @@ return {
         dap.listeners.before.launch["dap-view-config"] = function()
           dapui.open()
         end
-        dap.listeners.before.event_terminated["dap-view-config"] = function()
-          dapui.close()
-        end
-        dap.listeners.before.event_exited["dap-view-config"] = function()
-          dapui.close()
-        end
+        -- dap.listeners.before.event_terminated["dap-view-config"] = function()
+        --   dapui.close()
+        -- end
+        -- dap.listeners.before.event_exited["dap-view-config"] = function()
+        --   dapui.close()
+        -- end
       end
 
       -- vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })

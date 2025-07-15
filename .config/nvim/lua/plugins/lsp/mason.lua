@@ -37,11 +37,11 @@ return {
           "csharpier", -- Formatter
           "netcoredbg", -- DAP
           "roslyn", -- LSP
-          -- "rzls", -- LSP -- Use ':MasonInstall rzls@9.0.0-preview.25156.2' instead
+          "rzls", -- LSP -- Use ':MasonInstall rzls@9.0.0-preview.25156.2' instead
           -- GODOT SCRIPT
           "gdtoolkit", -- formatter and linter
           -- -- HTML
-          -- "html-lsp",
+          "html-lsp",
           -- -- JavaScript/TypeScript
           -- "typescript-language-server", -- LSP
           -- "vtsls", -- LSP

@@ -6,9 +6,11 @@ return {
   version = false,
   lazy = true,
   -- build = vars.getOSLowerCase():match("windows") ~= 0 and "make install_jsregexp" or nil,
+  -- build = "make install_jsregexp CC=zig",
   build = "make install_jsregexp",
   dependencies = {
     "rafamadriz/friendly-snippets",
+    "kmarius/jsregexp",
   },
   keys = function()
     return {}

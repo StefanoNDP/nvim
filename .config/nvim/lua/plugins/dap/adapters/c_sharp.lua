@@ -42,29 +42,16 @@ M.c_sharp = function()
     return dll
   end
 
-  for _, lang in ipairs({ "cs", "fsharp", "vb" }) do
+  for _, lang in ipairs({ "cs", "fsharp" }) do
     dap.configurations[lang] = {
       {
         type = "coreclr",
         name = "netcoredbg [coreclr]",
         request = "launch",
-        console = "integratedTerminal",
-        -- console = "externalTerminal",
-        -- console = "internalConsole",
-        -- justMyCode = false,
-        -- program = function()
-        --   return vim.fn.input(
-        --     "Path to dll: ",
-        --     vim.fn.getcwd() .. "/bin/Debug/",
-        --     "file"
-        --   )
-        -- end,
         env = function()
           local dll = ensure_dll()
-          local vars = dotnet.get_environment_variables(
-            dll.project_name,
-            dll.relative_project_path
-          )
+          local vars =
+            dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
           return vars or nil
         end,
         program = function()
@@ -91,7 +78,6 @@ M.c_sharp = function()
       type = "executable",
       command = "netcoredbg",
       args = { "--interpreter=vscode" },
-      options = { detached = false },
     }
   end
 end

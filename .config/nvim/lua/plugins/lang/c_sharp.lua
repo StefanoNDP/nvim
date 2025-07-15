@@ -29,13 +29,44 @@ return { -- C#
     version = false,
     lazy = true,
     ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
+    config = true,
   },
-  { "tris203/rzls.nvim", version = false, lazy = true },
+  {
+    "nsidorenco/neotest-vstest",
+    enabled = true,
+    version = false,
+    lazy = true,
+    ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
+  },
+  -- { "tris203/rzls.nvim", version = false, lazy = true },
+  -- { -- Unity
+  --   "apyra/nvim-unity-sync",
+  --   enabled = true,
+  --   version = false,
+  --   lazy = true,
+  --   ft = { "cs" },
+  --   opts = function()
+  --     return {}
+  --   end,
+  --   config = function(_, opts)
+  --     require("unity.plugin").setup(opts)
+  --   end,
+  -- },
   {
     "seblyng/roslyn.nvim",
+    init = function()
+      vim.filetype.add({
+        extension = {
+          razor = "razor",
+          cshtml = "razor",
+        },
+      })
+    end,
     dependencies = {
       {
         "tris203/rzls.nvim",
+        lazy = false,
+        version = false,
         -- config = function()
         --   ---@diagnostic disable-next-line: missing-fields
         --   require("rzls").setup({})
@@ -44,7 +75,7 @@ return { -- C#
       },
     },
     version = false,
-    ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
+    ft = { "cs", "razor" },
     opts = {
       filewatching = "roslyn",
       choose_target = nil,
@@ -70,7 +101,13 @@ return { -- C#
       "razor",
     },
     cmd = "Dotnet",
-    dependencies = { "nvim-lua/plenary.nvim", "folke/snacks.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+      "igorlfs/nvim-dap-view",
+    },
     event = "VeryLazy",
     opts = function()
       local function get_secret_path(secret_guid)
@@ -91,15 +128,15 @@ return { -- C#
         end
         return path
       end
-      local sdkPath = function()
-        return "C:\\Program Files\\dotnet\\sdk\\9.0.301"
-      end
+      -- local sdkPath = function()
+      --   return "C:\\Program Files\\dotnet\\sdk\\9.0.301"
+      -- end
 
       return {
         --Optional function to return the path for the dotnet sdk (e.g C:/ProgramFiles/dotnet/sdk/8.0.0)
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
-        get_sdk_path = sdkPath(),
+        -- get_sdk_path = sdkPath(),
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",
