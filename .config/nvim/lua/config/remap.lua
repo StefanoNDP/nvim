@@ -27,7 +27,26 @@ wk.add({
   },
   { -- Normal mode only
     mode = { "n" },
-
+    {
+      "<C-a>",
+      "gg<S-v>G",
+      desc = "Select all",
+    },
+    {
+      "+",
+      "<C-a>",
+      desc = "Increment",
+    },
+    {
+      "-",
+      "<C-x>",
+      desc = "Decrement",
+    },
+    {
+      "x",
+      '"_x',
+      desc = "Do not yank with x",
+    },
     {
       "<leader><leader>",
       function()

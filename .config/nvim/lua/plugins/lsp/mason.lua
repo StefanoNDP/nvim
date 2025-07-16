@@ -70,8 +70,7 @@ return {
           -- "yaml-language-server", -- LSP
           -- "yamllint", -- linter
           -- -- GLOBAL
-          "biome", -- formatter and linter - JS/TS, Json
-          -- "prettier", -- formatter - Markdown
+          "prettierd", -- formatter - Markdown
         },
         automatic_installation = true,
         auto_update = true,

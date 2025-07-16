@@ -4,9 +4,16 @@ vim.g.do_filetype_lua = 1 -- Enable
 vim.scriptencoding = "utf-8" -- Set encoding to utf-8
 vim.opt.encoding = "utf-8" -- Set encoding to utf-8
 vim.opt.fileencoding = "utf-8" -- Set encoding to utf-8
-vim.opt.path:append({ "**" })
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ "*/node_modules/*" })
-vim.opt.formatoptions:append({ "r" })
+vim.opt.wildoptions = "pum"
+vim.opt.pumblend = 5
+vim.opt.formatoptions:append({ "r" }) -- Add asterisk in blocked appends
+vim.opt.title = true
+
+vim.opt.showcmd = false
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 2
 
 vim.opt.inccommand = "split" -- Preview commands
 
@@ -73,8 +80,9 @@ vim.o.rnu = true
 -- }
 
 -- Clipboard accross everything
--- vim.opt.clipboard:append("unnamedplus") -- Use system clipboard as default register
-vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" }) -- Append system clipboard to the register
+vim.opt.clipboard:append("unnamedplus") -- Append system clipboard to the register
+-- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- Set python3 host prog
 vim.g.python3_host_prog = "/usr/bin/python3"
@@ -121,16 +129,17 @@ vim.opt.cursorline = true -- Highlight current/cursor line
 
 vim.opt.hidden = true -- Keep buffers in memory
 vim.opt.termguicolors = true -- Use truecolor in the terminal
+vim.opt.winblend = 0
 vim.opt.background = "dark" -- Colorschemes that can be light or dark will be made dark
 vim.opt.backspace = { "start", "eol", "indent" } -- Allow backspace on indent, end of line or insert mode start position
 vim.opt.splitright = true -- Split vertical window to the right
 vim.opt.splitbelow = true -- Split horizontal window to the bottom
 vim.opt.splitkeep = "cursor" --
 vim.opt.showmode = false -- Dont show mode since we have a statusline
-vim.opt.mouse = "" -- Disable mouse mode
+vim.opt.mouse = "a" -- Enable mouse mode
 -- vim.opt.mousemoveevent = true
 vim.opt.sidescrolloff = 1 -- Columns of context
-vim.opt.scrolloff = 8 -- Lines of context
+vim.opt.scrolloff = 10 -- Lines of context
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 250 -- Decrease update time

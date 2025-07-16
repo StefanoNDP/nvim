@@ -7,6 +7,7 @@ return {
     return {
       check_ts = true,
       map_cr = true,
+      disable_filetype = { "TelescopePrompt", "vim" },
     }
   end,
   config = function(_, opts)
@@ -20,6 +21,7 @@ return {
     npairs.add_rule(Rule("<", ">", {
       -- if you use nvim-ts-autotag, you may want to exclude these filetypes from this rule
       -- so that it doesn't conflict with nvim-ts-autotag
+      "-cshtml",
       "-html",
       "-javascriptreact",
       "-typescriptreact",

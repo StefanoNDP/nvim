@@ -7,19 +7,10 @@ return {
   opts = function()
     return {
       formatters = {
-        biome = {
-          -- args = { "--fix" },
-          require_cwd = true,
-        },
         ["markdown-toc"] = {
           condition = function(_, ctx)
-            for _, line in
-              ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false))
-            do
-              if
-                line:find("<!%-%- toc %-%->")
-                or line:find("<!%-%-toc:start%-%->")
-              then
+            for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
+              if line:find("<!%-%- toc %-%->") or line:find("<!%-%-toc:start%-%->") then
                 return true
               end
             end
@@ -46,6 +37,11 @@ return {
         xmlformatter = {
           command = "xmlformat --blanks indent-char ' ' compress",
         },
+        prettier = {
+          --   command = "prettierd",
+          --   args = { vim.api.nvim_buf_get_name(0) },
+          stdin = true,
+        },
       },
       formatters_by_ft = {
         bash = { "shellharden" },
@@ -53,8 +49,18 @@ return {
         csharp = { "csharpier" },
         lua = { "stylua" },
         gdscript = { "gdformat" },
-        json = { "biome" },
-        jsonc = { "biome" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        json5 = { "prettier" },
+        css = { "prettier" },
+        html = { "prettier" },
+        cshtml = { "prettier" },
+        scss = { "prettier" },
+        less = { "prettier" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
         xml = { "xmlformatter" },
         ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" }, -- Don't stop after first
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" }, -- Don't stop after first

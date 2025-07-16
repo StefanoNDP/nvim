@@ -35,10 +35,6 @@ local filetypes = {
 }
 
 return {
-  lspconfig.setupServer("biome", {
-    cmd = { "biome", "lsp-proxy" },
-    root_dir = funcs.getRoot(vars.rootPatterns.biome, false),
-  }),
   lspconfig.setupServer("vtsls", {
     filetypes = filetypes,
     settings = {
