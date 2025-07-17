@@ -265,6 +265,9 @@ PKGE=(
   '@vscode/vsce'
   '@fsouza/prettierd'
   'tree-sitter-cli'
+  '@angular/language-server'
+  '@angular/language-service'
+  '@angular/cli'
 )
 
 for PKG in "${PKGE[@]}"; do

@@ -1,6 +1,13 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
 
+vim.cmd([[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]])
+
 vim.scriptencoding = "utf-8" -- Set encoding to utf-8
 vim.opt.encoding = "utf-8" -- Set encoding to utf-8
 vim.opt.fileencoding = "utf-8" -- Set encoding to utf-8
@@ -11,8 +18,8 @@ vim.opt.pumblend = 5
 vim.opt.formatoptions:append({ "r" }) -- Add asterisk in blocked appends
 vim.opt.title = true
 
-vim.opt.showcmd = false
-vim.opt.cmdheight = 0
+vim.opt.showcmd = true
+vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 
 vim.opt.inccommand = "split" -- Preview commands
@@ -160,8 +167,8 @@ vim.opt.spelloptions = "camel" -- Split camelCase words when spellchecking
 -- vim.g.commentstring = "" -- Mini.nvim comment
 
 vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
-vim.opt.list = true -- Show some invisible characters (tab...
-vim.opt.listchars:append("lead:")
+vim.opt.listchars:append({ tab = " »", trail = "" })
+vim.opt.list = true -- Show some invisible characters (tab, space, white space, etc)
 
 -- Folds
 vim.opt.foldcolumn = "0" -- Show gutter

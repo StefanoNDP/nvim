@@ -205,7 +205,7 @@ return {
           -- lua = { "lazydev", "codeium", "cmdline", "lsp", "snippets", "path" },
           lua = { "lazydev", "cmdline", "lsp", "snippets", "path" },
           -- cs = { "easy-dotnet", "codeium", "cmdline", "lsp", "snippets", "path" },
-          cs = { "easy-dotnet", "cmdline", "lsp", "snippets", "path" },
+          cs = { "lsp", "easy-dotnet", "cmdline", "snippets", "path" },
           -- sql = { "dadbod", "codeium", "cmdline", "lsp", "snippets", "path" },
           sql = { "dadbod", "cmdline", "lsp", "snippets", "path" },
         },
@@ -252,7 +252,7 @@ return {
             async = true,
           },
           ["easy-dotnet"] = {
-            name = "[.NET]",
+            name = "easy-dotnet",
             enabled = true,
             module = "easy-dotnet.completion.blink",
             score_offset = 10000,

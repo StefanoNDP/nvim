@@ -25,6 +25,8 @@ return {
     opts = function()
       return {
         ensure_installed = {
+          -- ANGULAR
+          "angular-language-server",
           -- -- BASH
           -- "bash-language-server", -- LSP
           -- "bash-debug-adapter", -- DAP

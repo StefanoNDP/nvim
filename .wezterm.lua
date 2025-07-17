@@ -18,56 +18,32 @@ config.keys = {
   {
     key = "(",
     mods = "CTRL|SHIFT",
-    action = wezterm.action({
-      SplitHorizontal = { domain = "CurrentPaneDomain" },
-    }),
+    action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = ")",
     mods = "CTRL|SHIFT",
-    action = wezterm.action({
-      SplitVertical = { domain = "CurrentPaneDomain" },
-    }),
+    action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = '"',
     mods = "LEADER|SHIFT",
-    action = wezterm.action({
-      SplitVertical = { domain = "CurrentPaneDomain" },
-    }),
+    action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = "%",
     mods = "LEADER|SHIFT",
-    action = wezterm.action({
-      SplitHorizontal = { domain = "CurrentPaneDomain" },
-    }),
+    action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = "T",
     mods = "CTRL|SHIFT",
     action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
   },
-  {
-    key = "h",
-    mods = "LEADER",
-    action = wezterm.action({ ActivatePaneDirection = "Left" }),
-  },
-  {
-    key = "j",
-    mods = "LEADER",
-    action = wezterm.action({ ActivatePaneDirection = "Down" }),
-  },
-  {
-    key = "k",
-    mods = "LEADER",
-    action = wezterm.action({ ActivatePaneDirection = "Up" }),
-  },
-  {
-    key = "l",
-    mods = "LEADER",
-    action = wezterm.action({ ActivatePaneDirection = "Right" }),
-  },
+  { key = "h", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+  { key = "j", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+  { key = "k", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+  { key = "l", mods = "LEADER", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
   {
     key = "LeftArrow",
     mods = "LEADER",
@@ -88,18 +64,10 @@ config.keys = {
     mods = "LEADER",
     action = wezterm.action({ ActivatePaneDirection = "Right" }),
   },
-  {
-    key = "a",
-    mods = "LEADER|CTRL",
-    action = wezterm.action({ SendString = "\x01" }),
-  },
+  { key = "a", mods = "LEADER|CTRL", action = wezterm.action({ SendString = "\x01" }) },
   { key = "o", mods = "LEADER", action = "TogglePaneZoomState" },
   { key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
-  {
-    key = "c",
-    mods = "LEADER",
-    action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
-  },
+  { key = "c", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
   {
     key = "H",
     mods = "LEADER|SHIFT",
@@ -147,11 +115,12 @@ for i = 1, 9 do
 end
 
 -- config.default_prog = { "powershell.exe -NoProfile" }
--- config.default_prog = {  "C:\\Program Files\\PowerShell\\7\\pwsh.exe -WorkingDirectory ~" }
-config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu", "-u", "sd" }
+-- config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe -WorkingDirectory ~" }
+config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe" }
+-- config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu", "-u", "sd" }
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
-config.font_size = 14.0
+config.font_size = 12.0
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "HorizontalLcd"
 config.freetype_load_flags = "FORCE_AUTOHINT"
