@@ -60,10 +60,10 @@ return {
           "marksman",
           "markdownlint-cli2", -- Linter
           -- "markdown-toc", -- TOC Formatter
-          -- -- SQL
-          -- "sqlls", -- LSP
-          -- "sql-formatter", -- formatter
-          -- "sqlfluff", -- linter
+          -- SQL
+          "sqlls", -- LSP
+          "sql-formatter", -- formatter
+          "sqlfluff", -- linter
           -- XML
           "lemminx", -- LSP
           "sonarlint-language-server", -- Linter

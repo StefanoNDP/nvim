@@ -1,5 +1,3 @@
-local vars = require("config.vars")
-
 return {
   "L3MON4D3/LuaSnip",
   enabled = true,
@@ -41,6 +39,8 @@ return {
     luasnip.filetype_extend("lua", { "luadoc" })
     luasnip.filetype_extend("markdown", { "mddoc" })
     luasnip.filetype_extend("sh", { "shelldoc" })
+    luasnip.filetype_extend("javascript", { "jsdoc" })
+    luasnip.filetype_extend("typescript", { "tsdoc" })
 
     -- require("config.keymaps.snippets")
   end,

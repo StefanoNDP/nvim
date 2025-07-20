@@ -64,7 +64,7 @@ return {
           window = { border = "rounded", max_height = max_height },
           auto_show = true,
           auto_show_delay_ms = 200,
-          treesitter_highlighting = false,
+          -- treesitter_highlighting = false,
         },
         menu = {
           max_height = max_height,
@@ -135,8 +135,7 @@ return {
         ["<Tab>"] = {
           function(cmp)
             if
-              cmp.is_ghost_text_visible() and not cmp.is_menu_visible()
-              or cmp.snippet_active()
+              cmp.is_ghost_text_visible() and not cmp.is_menu_visible() or cmp.snippet_active()
             then
               return cmp.accept()
             else

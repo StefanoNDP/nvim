@@ -81,11 +81,7 @@ return {
     },
     input = { enabled = true },
     lazygit = { enabled = true },
-    notifier = {
-      enabled = true,
-      margin = { top = 1, right = 1, bottom = 1 },
-      top_down = false,
-    },
+    notifier = { enabled = true, margin = { top = 1, right = 1, bottom = 1 }, top_down = false },
     notify = { enabled = true },
     profiler = { enabled = true },
     quickfile = { enabled = true },
@@ -96,10 +92,8 @@ return {
     statuscolumn = {
       enabled = true,
       left = { "fold", "git" },
-      -- left = { "fold" },
       right = { "mark", "sign" },
       folds = { open = true, git_hl = true },
-      -- folds = { open = true, git_hl = false },
       git = { patterns = { "GitSign", "GitSigns", "MiniDiffSign" } },
     },
     terminal = { enabled = true },
@@ -147,12 +141,7 @@ return {
                   { win = "input", height = 1, border = "rounded" },
                   { win = "list", border = "rounded" },
                 },
-                {
-                  win = "preview",
-                  title = "{preview}",
-                  width = 0.65,
-                  border = "rounded",
-                },
+                { win = "preview", title = "{preview}", width = 0.65, border = "rounded" },
               },
             },
           },
@@ -281,7 +270,6 @@ return {
         end, p)
 
         local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        -- local spinner = { "|", "/", "-", "\\" }
         vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,

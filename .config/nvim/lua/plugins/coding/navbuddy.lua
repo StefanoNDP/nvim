@@ -10,12 +10,8 @@ return { -- Breadcrumbs-like navigation
   },
   opts = function()
     return {
-      window = {
-        border = "rounded",
-      },
-      lsp = {
-        auto_attach = true,
-      },
+      window = { border = "rounded" },
+      lsp = { auto_attach = true },
     }
   end,
   config = function(_, opts)

@@ -41,12 +41,37 @@ M.get_dap_repl_winbar = function(active)
   end
 end
 
+M.diff_source = function()
+  local added = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.added or 0
+  local modified = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.changed or 0
+  local removed = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.removed or 0
+  if added == 0 and modified == 0 and removed == 0 then
+    return nil
+  else
+    return { added = added, modified = modified, removed = removed }
+  end
+end
+
 M.conditions = {
   buffer_not_empty = function()
     return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 and M.conditions.checkFileSize()
   end,
   hide_in_width = function()
     return vim.fn.winwidth(0) > 96
+  end,
+  check_git_workspace = function()
+    local filepath = vim.fn.expand("%:p:h")
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+  end,
+  check_diff = function()
+    local added = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.added or 0
+    local modified = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.changed or 0
+    local removed = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.removed or 0
+    if added > 0 or modified > 0 or removed > 0 then
+      return true
+    end
+    return false
   end,
   check_diagnostic = function()
     local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -118,6 +143,27 @@ M.line = function()
     },
     line_b = {
       {
+        "branch",
+        cond = M.conditions.check_git_workspace,
+      },
+      -- stylua: ignore
+      {
+        function() return "" end,
+        cond = M.conditions.check_git_workspace and (M.conditions.check_diff or M.conditions.check_diagnostic),
+      },
+      {
+        "diff",
+        colored = true,
+        symbols = { added = "+", modified = "~", removed = "-" },
+        source = M.diff_source,
+        cond = M.conditions.hide_in_width,
+      },
+      -- stylua: ignore
+      {
+        function() return "" end,
+        cond = M.conditions.check_diagnostic and (M.conditions.check_git_workspace or M.conditions.check_diff),
+      },
+      {
         "diagnostics",
         sources = { "nvim_diagnostic" },
         symbols = { error = "✘ ", warn = "▲ ", hint = "⚑ ", info = "» " },
@@ -181,9 +227,9 @@ M.line = function()
       -- end,
       -- "location",
     },
-    -- line_z = {
-    --   "os.date('%d/%m/%Y %H:%M:%S')",
-    -- },
+    line_z = {
+      --   "os.date('%d/%m/%Y %H:%M:%S')",
+    },
   }
 end
 
@@ -231,7 +277,6 @@ M.win = {
     -- "os.date('%d/%m/%Y %H:%M:%S')",
   },
   win_z = {
-
     "os.date('%d/%m/%Y %H:%M:%S')",
     -- function()
     --   return "   "

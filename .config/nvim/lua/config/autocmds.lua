@@ -22,8 +22,7 @@ vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
 vim.cmd([[autocmd BufNewFile,BufRead *.axaml setf xml]])
 
 -- Turn on/off tmux statusline on vim enter/leave
--- VimEnter conflicts with Snacks Explorer's preview
-vim.cmd([[silent !tmux set status off]])
+vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
 vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
 
 -- Disable semantic tokens
@@ -113,7 +112,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- Check if we need to reload the file when it changed
+-- Check if we need to reload the file when it changes
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
@@ -161,8 +160,7 @@ vim.api.nvim_create_autocmd("FileType", {
 --   end,
 -- })
 
--- Auto create dir when saving a file, in case some intermediate directory does not
--- exist
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
@@ -205,6 +203,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextCh
 
 -- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*.cs",
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local bufnr = args.buf

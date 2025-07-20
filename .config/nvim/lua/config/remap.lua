@@ -56,11 +56,7 @@ wk.add({
     },
 
     -- Diff
-    {
-      "<leader>dt",
-      ":windo diffthis<CR>",
-      desc = "Diff current split windows",
-    },
+    { "<leader>dt", ":windo diffthis<CR>", desc = "Diff current split windows" },
     { "<leader>do", ":windo diffoff<CR>", desc = "Stop Diff" },
 
     -- splits a one liner {} block separated by ';' into separate lines
@@ -105,31 +101,11 @@ wk.add({
     { "<leader>j", "<cmd>lprev<CR>zz", desc = "Previous Location" },
 
     -- Window management
-    {
-      "<C-M-i>",
-      "<C-w>+",
-      desc = "Increase Split relative to the current active split",
-    },
-    {
-      "<C-M-d>",
-      "<C-w>-",
-      desc = "Decrease Split relative to the current active split",
-    },
-    {
-      "<M-m>",
-      "<C-w><",
-      desc = "Increase Split relative to the current active split",
-    },
-    {
-      "<M-p>",
-      "<C-w>>",
-      desc = "Decrease Split relative to the current active split",
-    },
-    {
-      "<leader>sv",
-      "<C-w>v<C-w>><C-w>><C-w>><C-w>>",
-      desc = "Split window vertically",
-    },
+    { "<C-M-i>", "<C-w>+", desc = "Increase Split relative to the current active split" },
+    { "<C-M-d>", "<C-w>-", desc = "Decrease Split relative to the current active split" },
+    { "<M-m>", "<C-w><", desc = "Increase Split relative to the current active split" },
+    { "<M-p>", "<C-w>>", desc = "Decrease Split relative to the current active split" },
+    { "<leader>sv", "<C-w>v<C-w>><C-w>><C-w>><C-w>>", desc = "Split window vertically" },
     { "<leader>sh", "<C-w>s", desc = "Split window horizontally" },
     { "<leader>se", "<C-w>=", desc = "Make splits equal size" },
     { "<leader>sx", "<cmd>close<CR>", desc = "Close current split" },

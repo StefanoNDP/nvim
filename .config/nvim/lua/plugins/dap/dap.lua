@@ -158,8 +158,6 @@ return {
     dependencies = { "jbyuki/one-small-step-for-vimkind", "igorlfs/nvim-dap-view" },
     config = function()
       local dap = require("dap")
-      -- local dapui = require("dapui")
-      -- local dapui = require("dap-view")
       local dapui
 
       dap.set_log_level("TRACE")

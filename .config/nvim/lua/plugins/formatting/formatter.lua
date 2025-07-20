@@ -24,10 +24,6 @@ return {
             return #diag > 0
           end,
         },
-        -- csharpier = {
-        --   command = "dotnet-csharpier",
-        --   args = { "--write-stdout" },
-        -- },
         csharpier = {
           command = "csharpier",
           args = { "format", "$FILENAME" },
@@ -41,6 +37,9 @@ return {
           --   command = "prettierd",
           --   args = { vim.api.nvim_buf_get_name(0) },
           stdin = true,
+        },
+        sqlfluff = {
+          args = { "format", "--dialect=ansi", "-" },
         },
       },
       formatters_by_ft = {

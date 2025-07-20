@@ -48,7 +48,12 @@ M.repeatable_keymap_set = function(mode, key, name, func, opts)
   assert(type(opts) == "table", "Expected a table from opts")
   assert(type(func) == "function" or "string", "Expected a function or string from func")
   assert(func and #func > 0, "Expected a non-empty string from func")
-  vim.keymap.set(mode, key, M.make_repeatable_keymap(mode, "<Plug>(" .. name .. ")", func), opts)
+  vim.keymap.set(
+    mode,
+    key,
+    M.make_repeatable_keymap(mode, "<Plug>(" .. name .. ")", func),
+    opts
+  )
 end
 
 M.getOS = function()
@@ -85,7 +90,8 @@ end
 M.getRoot = function(name, git)
   local ret = require("lspconfig.util").root_pattern(name)
   if git then
-    ret = require("lspconfig.util").root_pattern(name) or require("lspconfig.util").find_git_ancestor
+    ret = require("lspconfig.util").root_pattern(name)
+      or require("lspconfig.util").find_git_ancestor
   end
   return ret
 end
@@ -267,12 +273,6 @@ end
 --
 --
 --
---
---
---
---
---
---
 
 ---@type table<number, string>
 M.cache = {}
@@ -436,12 +436,6 @@ function M.git()
   return ret
 end
 
---
---
---
---
---
---
 --
 --
 --

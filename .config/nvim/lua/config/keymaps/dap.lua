@@ -1,8 +1,6 @@
 local M = {}
 
 local dap = ":lua require('dap')."
--- local dapui = ":lua require('dapui')."
--- local dapui = ":lua require('dap-view')."
 local dapui
 if vim.g.whichDap == 0 then
   dapui = ":lua require('dapui')."
@@ -18,8 +16,7 @@ local wk = require("which-key")
 M.keymaps = wk.add({
   {
     mode = { "n" },
-    -- { "<leader>du", dapui .. "toggle()<CR>", desc = "DAP UI Toggle" }, -- DAP UI
-    { "<leader>du", dapui .. "toggle()<CR>", desc = "DAP View Toggle" }, -- DAP View
+    { "<leader>du", dapui .. "toggle()<CR>", desc = "DAP Toggle" }, -- DAP View
     -- stylua: ignore
     { "<leader>dB", dap .. "set_breakpoint(vim.fn.input('Condition: '))", desc = "Breakpoint Condition" },
     {
@@ -58,12 +55,11 @@ M.keymaps = wk.add({
     { "<leader>dw", widgets .. "hover()<CR>", desc = "DAP Widgets" },
     { "<leader>dn", neotest .. "run.run({ strategy = 'dap' })<CR>", desc = "Debug Nearest" },
   },
-  -- {
-  --   mode = { "n", "v" },
-  --   { "<leader>d", "", desc = "+debuf" },
-  --   -- { "<leader>de", dapui .. "eval()<CR>", desc = "Eval" }, -- DAP UI
-  --   { "<leader>de", dapui .. "eval()<CR>", desc = "Eval" }, -- DAP View
-  -- },
+  {
+    mode = { "n", "v" },
+    { "<leader>d", "", desc = "+debuf" },
+    { "<leader>de", dapui .. "eval()<CR>", desc = "Eval" },
+  },
 })
 
 return M.keymaps

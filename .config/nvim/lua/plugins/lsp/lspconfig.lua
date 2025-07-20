@@ -33,7 +33,7 @@ return {
     event = "BufEnter",
     opts = function()
       return {
-        width = 90, -- Width of the floating window
+        width = 80, -- Width of the floating window
         height = 20, -- Height of the floating window
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- Border characters of the floating window
         default_mappings = true,
@@ -168,9 +168,6 @@ return {
           },
         },
       })
-
-      -- Show line diagnostics automatically in hover window
-      -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
     end,
   },
 }

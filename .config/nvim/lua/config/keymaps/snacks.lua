@@ -73,6 +73,13 @@ return {
     desc = "Find Help Pages",
   },
   {
+    "<leader>fgf",
+    function()
+      Snacks.picker.git_files()
+    end,
+    desc = "Find Git Files",
+  },
+  {
     "<leader>fm",
     function()
       Snacks.picker.marks()
@@ -97,6 +104,35 @@ return {
     "<leader>fn",
     ":Nerdy<CR>",
     desc = "Find Nerdfonts Glyphs",
+  },
+  -- Git
+  {
+    "<leader>gS",
+    function()
+      Snacks.gitbrowse.open()
+    end,
+    desc = "Open the repository of active file in the browser",
+  },
+  {
+    "<leader>gl",
+    function()
+      Snacks.lazygit()
+    end,
+    desc = "Opens lazygit",
+  },
+  {
+    "<leader>gll",
+    function()
+      Snacks.lazygit.log()
+    end,
+    desc = "Opens lazygit with the log view",
+  },
+  {
+    "<leader>glf",
+    function()
+      Snacks.lazygit.log_file()
+    end,
+    desc = "Opens lazygit with the log of the current file",
   },
   -- Notify(ier)
   {
