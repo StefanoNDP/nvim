@@ -18,7 +18,10 @@ return { -- fast file access
     }
   end,
   config = function(_, opts)
-    require("harpoon").setup(opts)
+    local harpoon = require("harpoon")
+    local ext = require("harpoon.extensions")
+    harpoon.setup(opts)
+    harpoon:extend(ext.builtins.highlight_current_file())
     require("config.keymaps.harpoon")
   end,
 }

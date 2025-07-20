@@ -280,8 +280,8 @@ return {
           return table.insert(msg, v.msg) or not v.done
         end, p)
 
-        -- local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        local spinner = { "|", "/", "-", "\\" }
+        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+        -- local spinner = { "|", "/", "-", "\\" }
         vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
           id = "lsp_progress",
           title = client.name,

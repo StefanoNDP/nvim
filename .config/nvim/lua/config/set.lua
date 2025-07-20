@@ -18,6 +18,8 @@ vim.opt.pumblend = 5
 vim.opt.formatoptions:append({ "r" }) -- Add asterisk in blocked appends
 vim.opt.title = true
 
+vim.o.autochdir = false
+
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
@@ -44,6 +46,8 @@ if funcs.getOSLowerCase():match("windows") ~= 0 then
   -- Setting shell quote options
   vim.o.shellquote = ""
   vim.o.shellxquote = ""
+
+  vim.g.undotree_DiffCommand = vim.fn.stdpath("config") .. "/bin/diff.exe"
 end
 
 -- recommended settings
@@ -143,8 +147,9 @@ vim.opt.splitright = true -- Split vertical window to the right
 vim.opt.splitbelow = true -- Split horizontal window to the bottom
 vim.opt.splitkeep = "cursor" --
 vim.opt.showmode = false -- Dont show mode since we have a statusline
-vim.opt.mouse = "a" -- Enable mouse mode
--- vim.opt.mousemoveevent = true
+-- vim.opt.mouse = "a" -- Enable mouse mode
+vim.opt.mouse = "" -- Disable mouse mode
+vim.opt.mousemoveevent = false
 vim.opt.sidescrolloff = 1 -- Columns of context
 vim.opt.scrolloff = 10 -- Lines of context
 vim.opt.isfname:append("@-@")
