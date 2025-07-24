@@ -27,7 +27,7 @@ vim.opt.laststatus = 2
 vim.opt.inccommand = "split" -- Preview commands
 
 -- 0 for dap-ui 1 for dap-view
-vim.g.whichDap = 0
+vim.g.whichDap = 1
 
 local funcs = require("config.functions")
 if funcs.getOSLowerCase():match("windows") ~= 0 then

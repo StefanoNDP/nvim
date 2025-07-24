@@ -69,7 +69,7 @@ wk.add({
     -- Rectangular selection
     { "<leader>su", vim.cmd.UndotreeToggle, desc = "Open undotree" },
     { "<leader>nh", "<cmd>nohl<CR>", desc = "[N]o [H]ighlights" },
-    { "D", "<cmd>bd<CR>", desc = "Cloes current buffer/tab" },
+    { "<leader>bd", "<cmd>bd<CR>", desc = "Cloes current buffer/tab" },
     { "<M-d>", "<cmd>delete<CR>", desc = "Same as 'dd'" },
 
     { "J", "mzJ`z", desc = "J stays at beginning of line" },

@@ -18,6 +18,7 @@ return { -- LUA
       { path = "LazyVim", words = { "LazyVim" } },
       { path = "snacks.nvim", words = { "Snacks" } },
       { path = "lazy.nvim", words = { "LazyVim" } },
+      { plugins = { "nvim-dap-ui" }, types = true },
       "nvim-dap-ui",
     },
   },

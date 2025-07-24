@@ -15,8 +15,10 @@ return {
         tab_size = 15,
         color_icons = true,
         get_element_icon = function(element)
-          local icon, hl =
-            require("nvim-web-devicons").get_icon_by_filetype(element.filetype, { default = false })
+          local icon, hl = require("nvim-web-devicons").get_icon_by_filetype(
+            element.filetype,
+            { default = false }
+          )
           return icon, hl
         end,
         show_buffer_close_icons = true,
@@ -32,6 +34,9 @@ return {
           enabled = true,
           delay = 1,
           reveal = { "close" },
+        },
+        indicator = {
+          style = "underline",
         },
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(count, level, diagnostics_dict, context)

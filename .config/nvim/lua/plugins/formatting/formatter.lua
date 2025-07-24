@@ -67,7 +67,7 @@ return {
         -- name = { "formatter1", "formatter2", stop_after_first = true },
       },
       format_on_save = {
-        timeout_ms = 2500,
+        timeout_ms = 5000,
         lsp_format = "fallback",
       },
     }

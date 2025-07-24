@@ -2,6 +2,51 @@ local max_height = 30
 local max_width = 120
 
 return {
+  -- {
+  --   "monkoose/neocodeium",
+  --   enabled = true,
+  --   event = "VeryLazy",
+  --   version = false,
+  --   opts = function()
+  --     local blink = require("blink.cmp")
+  --
+  --     return {
+  --       filetypes = {
+  --         TelescopePrompt = false,
+  --         ["dap-repl"] = false,
+  --       },
+  --       filter = function(bufnr)
+  --         if vim.endswith(vim.api.nvim_buf_get_name(bufnr), ".env") then
+  --           return false
+  --         elseif blink.is_visible() then
+  --           return false
+  --         end
+  --         return true
+  --         -- return not blink.is_visible()
+  --       end,
+  --     }
+  --   end,
+  --   config = function(_, opts)
+  --     local neocodeium = require("neocodeium")
+  --
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "BlinkCmpMenuOpen",
+  --       callback = function()
+  --         neocodeium.clear()
+  --       end,
+  --     })
+  --
+  --     -- stylua: ignore start
+  --     neocodeium.setup(opts)
+  --     vim.keymap.set("i", "<A-f>", neocodeium.accept)
+  --     vim.keymap.set("i", "<A-w>", function() require("neocodeium").accept_word() end)
+  --     vim.keymap.set("i", "<A-a>", function() require("neocodeium").accept_line() end)
+  --     vim.keymap.set("i", "<A-e>", function() require("neocodeium").cycle_or_complete() end)
+  --     vim.keymap.set("i", "<A-r>", function() require("neocodeium").cycle_or_complete(-1) end)
+  --     vim.keymap.set("i", "<A-c>", function() require("neocodeium").clear() end)
+  --     -- stylua: ignore end
+  --   end,
+  -- },
   {
     "Saghen/blink.cmp",
     enabled = true,
@@ -39,6 +84,8 @@ return {
       --       virtual_text = {
       --         enabled = true,
       --         enable_chat = true,
+      --         enable_local_search = true,
+      --         enable_index_search = true,
       --         -- filetypes = {
       --         --   python = true,
       --         --   markdown = true,
@@ -67,6 +114,9 @@ return {
           -- treesitter_highlighting = false,
         },
         menu = {
+          -- auto_show = function(ctx)
+          --   return ctx.mode ~= "default"
+          -- end,
           max_height = max_height,
           draw = {
             treesitter = { "lsp" },

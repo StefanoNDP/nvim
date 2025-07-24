@@ -91,12 +91,39 @@ return {
   },
   { -- DAP UI
     "rcarriga/nvim-dap-ui",
-    enabled = true,
+    enabled = false,
     version = false,
     event = "VeryLazy",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     opts = function()
-      return {}
+      return {
+        layouts = {
+          {
+            elements = {
+              { id = "repl", size = 0.5 },
+              { id = "console", size = 0.5 },
+            },
+            position = "top",
+            size = 10,
+          },
+          {
+            elements = {
+              { id = "stacks", size = 0.5 },
+              { id = "watches", size = 0.5 },
+            },
+            position = "bottom",
+            size = 10,
+          },
+          {
+            elements = {
+              { id = "scopes", size = 0.5 },
+              { id = "breakpoints", size = 0.5 },
+            },
+            position = "bottom",
+            size = 10,
+          },
+        },
+      }
     end,
     config = function(_, opts)
       require("dapui").setup(opts)
@@ -106,11 +133,13 @@ return {
     "igorlfs/nvim-dap-view",
     enabled = true,
     version = false,
-    lazy = true,
+    -- event = "VeryLazy",
+    -- lazy = true,
     ---@module 'dap-view'
     ---@type dapview.config
     opts = {
       winbar = {
+        -- sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
         sections = {
           "watches",
           "scopes",
@@ -119,23 +148,40 @@ return {
           "threads",
           "repl",
           "console",
+          "disassembly",
         },
-        -- sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl" },
-        headers = {
-          -- breakpoints = "[B]reakpoints",
-          -- scopes = "[S]copes",
-          -- exceptions = "[E]xceptions",
-          -- watches = "[W]atches",
-          -- threads = "[T]hreads",
-          -- repl = "[R]EPL",
-          -- console = "[C]onsole",
-          breakpoints = "Breakpoints",
-          scopes = "Scopes",
-          exceptions = "Exceptions",
-          watches = "Watches",
-          threads = "Threads",
-          repl = "REPL",
-          console = "Console",
+        -- custom_sections = {
+        --   disassembly = {
+        --     keymap = "D",
+        --     label = "Disassembly",
+        --   },
+        -- },
+        base_sections = {
+          breakpoints = {
+            label = "Breakpoints",
+          },
+          -- disassembly = {
+          --   keymap = "D",
+          --   label = "Disassembly",
+          -- },
+          scopes = {
+            label = "Scopes",
+          },
+          exceptions = {
+            label = "Exceptions",
+          },
+          watches = {
+            label = "Watches",
+          },
+          threads = {
+            label = "Threads",
+          },
+          repl = {
+            label = "Repl",
+          },
+          console = {
+            label = "Console",
+          },
         },
         default_section = "repl",
         controls = { enabled = true, position = "left" },

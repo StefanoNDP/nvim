@@ -122,22 +122,40 @@ config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 12.0
 config.freetype_load_target = "Normal"
-config.freetype_render_target = "HorizontalLcd"
-config.freetype_load_flags = "FORCE_AUTOHINT"
-config.window_background_opacity = 1.0
+config.freetype_render_target = "Normal"
+config.freetype_load_flags = "NO_HINTING"
 config.disable_default_key_bindings = false
 config.enable_wayland = false
 config.hide_tab_bar_if_only_one_tab = true
-config.front_end = "OpenGL"
+-- config.front_end = "OpenGL"
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
+config.webgpu_force_fallback_adapter = false
 
--- for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
---   if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
---     config.webgpu_preferred_adapter = gpu
---     config.front_end = "WebGpu"
---     config.webgpu_power_preference = "HighPerformance"
---     config.webgpu_force_fallback_adapter = false
---     break
---   end
--- end
+config.background = {
+  {
+    source = {
+      -- File = "C:/Users/sd/nvim/grateful_miyamoto_musashi.jpg",
+      File = "C:/Users/sd/nvim/musashi_myiamoto_grateful.jpg",
+    },
+  },
+  {
+    source = {
+      Color = "rgba(30, 30, 46, 0.95)",
+    },
+    width = "100%",
+    height = "100%",
+  },
+}
+
+for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
+  if gpu.backend == "Vulkan" and gpu.device_type == "DiscreteGpu" then
+    config.webgpu_preferred_adapter = gpu
+    -- config.front_end = "WebGpu"
+    -- config.webgpu_power_preference = "HighPerformance"
+    -- config.webgpu_force_fallback_adapter = false
+    break
+  end
+end
 
 return config
