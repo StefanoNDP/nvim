@@ -115,4 +115,48 @@ M.rootPatterns = {
 -- Probably won't use it
 M.kmOpts = { noremap = true, silent = true, remap = false }
 
+-- Catppuccin compatibility with DAP
+M.catppuccinDAP = function()
+  local sign = vim.fn.sign_define
+
+  local dapBreakpoint = {
+    breakpoint = {
+      text = "",
+      texthl = "DapBreakpoint",
+      linehl = "",
+      numhl = "",
+    },
+    breakpointCondition = {
+      text = "",
+      texthl = "DapBreakpointCondition",
+      linehl = "",
+      numhl = "",
+    },
+    dapLogPoint = {
+      text = "◆",
+      texthl = "DapLogPoint",
+      linehl = "",
+      numhl = "",
+    },
+    rejected = {
+      text = "",
+      texthl = "LspDiagnosticsSignHint",
+      linehl = "",
+      numhl = "",
+    },
+    stopped = {
+      text = "",
+      texthl = "LspDiagnosticsSignInformation",
+      linehl = "DiagnosticUnderlineInfo",
+      numhl = "LspDiagnosticsSignInformation",
+    },
+  }
+
+  sign("DapBreakpoint", dapBreakpoint.breakpoint)
+  sign("DapBreakpointCondition", dapBreakpoint.breakpointCondition)
+  sign("DapLogPoint", dapBreakpoint.dapLogPoint)
+  sign("DapStopped", dapBreakpoint.stopped)
+  sign("DapBreakpointRejected", dapBreakpoint.rejected)
+end
+
 return M

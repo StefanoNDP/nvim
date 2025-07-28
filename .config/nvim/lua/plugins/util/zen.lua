@@ -15,7 +15,7 @@ return {
       -- height and width can be:
       -- * an absolute number of cells when > 1
       -- * a percentage of the width / height of the editor when <= 1
-      width = 120, -- width of the focus window
+      width = 80, -- width of the focus window
       height = 1, -- height of the focus window
       -- by default, no options are changed in for the focus window
       -- add any vim.wo options you want to apply

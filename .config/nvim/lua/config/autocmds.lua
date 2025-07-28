@@ -13,7 +13,7 @@ end
 vim.cmd([[autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni]])
 
 -- -- "Don't" allow horizontal scroll
--- vim.cmd([[autocmd CursorMoved * norm!96zH]])
+-- vim.cmd([[autocmd CursorMoved * norm!80zH]])
 
 -- Treat M$' xaml as xml
 vim.cmd([[autocmd BufNewFile,BufRead *.xaml setf xml]])
@@ -59,12 +59,15 @@ local function loadftmodule(ft, action)
   end
 end
 
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "BufWinEnter", "Colorscheme" }, {
-  pattern = { "*" },
-  callback = function()
-    loadftmodule(vim.bo.filetype, "ftplugin")
-  end,
-})
+vim.api.nvim_create_autocmd(
+  { "FileType", "BufEnter", "BufWinEnter", "Colorscheme" },
+  {
+    pattern = { "*" },
+    callback = function()
+      loadftmodule(vim.bo.filetype, "ftplugin")
+    end,
+  }
+)
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "*" },
@@ -186,20 +189,23 @@ vim.api.nvim_create_autocmd("BufDelete", {
 })
 
 -- Roslyn: Diagnostic refresh
-vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" }, {
-  pattern = "*",
-  callback = function()
-    local clients = vim.lsp.get_clients({ name = "roslyn" })
-    if not clients or #clients == 0 then
-      return
-    end
+vim.api.nvim_create_autocmd(
+  { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
+  {
+    pattern = "*",
+    callback = function()
+      local clients = vim.lsp.get_clients({ name = "roslyn" })
+      if not clients or #clients == 0 then
+        return
+      end
 
-    local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
-    for _, buf in ipairs(buffers) do
-      vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
-    end
-  end,
-})
+      local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
+      for _, buf in ipairs(buffers) do
+        vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+      end
+    end,
+  }
+)
 
 -- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -281,6 +287,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "dap-view", "dap-view-term", "dap-repl" }, -- dap-repl is set by `nvim-dap`
   callback = function(evt)
-    require("which-key").add({ mode = { "n" }, { "q", "<C-w>q", buffer = evt.buf } })
+    require("which-key").add({
+      mode = { "n" },
+      { "q", "<C-w>q", buffer = evt.buf },
+    })
   end,
 })

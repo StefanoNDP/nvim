@@ -1,12 +1,7 @@
 local ft = {}
 
 ft.ftplugin = function()
-  vim.opt.autoindent = true -- Copy indent from current line when starting a new one
   vim.opt.expandtab = false -- Use tabs
-  vim.opt.smartindent = true
-  vim.opt.tabstop = 4
-  vim.opt.softtabstop = 4
-  vim.opt.shiftwidth = 4
 end
 
 ft.setup = function()

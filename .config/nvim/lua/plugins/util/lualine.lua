@@ -42,9 +42,14 @@ M.get_dap_repl_winbar = function(active)
 end
 
 M.diff_source = function()
-  local added = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.added or 0
-  local modified = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.changed or 0
-  local removed = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.removed or 0
+  local added = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.added
+    or 0
+  local modified = vim.b.gitsigns_status_dict
+      and vim.b.gitsigns_status_dict.changed
+    or 0
+  local removed = vim.b.gitsigns_status_dict
+      and vim.b.gitsigns_status_dict.removed
+    or 0
   if added == 0 and modified == 0 and removed == 0 then
     return nil
   else
@@ -54,10 +59,11 @@ end
 
 M.conditions = {
   buffer_not_empty = function()
-    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 and M.conditions.checkFileSize()
+    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+      and M.conditions.checkFileSize()
   end,
   hide_in_width = function()
-    return vim.fn.winwidth(0) > 96
+    return vim.fn.winwidth(0) > 80
   end,
   check_git_workspace = function()
     local filepath = vim.fn.expand("%:p:h")
@@ -65,19 +71,29 @@ M.conditions = {
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
   check_diff = function()
-    local added = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.added or 0
-    local modified = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.changed or 0
-    local removed = vim.b.gitsigns_status_dict and vim.b.gitsigns_status_dict.removed or 0
+    local added = vim.b.gitsigns_status_dict
+        and vim.b.gitsigns_status_dict.added
+      or 0
+    local modified = vim.b.gitsigns_status_dict
+        and vim.b.gitsigns_status_dict.changed
+      or 0
+    local removed = vim.b.gitsigns_status_dict
+        and vim.b.gitsigns_status_dict.removed
+      or 0
     if added > 0 or modified > 0 or removed > 0 then
       return true
     end
     return false
   end,
   check_diagnostic = function()
-    local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-    local warns = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-    local infos = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-    local hints = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    local errors =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    local warns =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    local infos =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    local hints =
+      vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     if #errors > 0 or #warns > 0 or #infos > 0 or #hints > 0 then
       return true
     end
@@ -166,7 +182,12 @@ M.line = function()
       {
         "diagnostics",
         sources = { "nvim_diagnostic" },
-        symbols = { error = "✘ ", warn = "▲ ", hint = "⚑ ", info = "» " },
+        symbols = {
+          error = "✘ ",
+          warn = "▲ ",
+          hint = "󰉀 ",
+          info = "» ",
+        },
         diagnostics_color = {
           error = { fg = colors.red },
           warn = { fg = colors.yellow },
@@ -238,7 +259,8 @@ M.win = {
     {
       "navic",
       cond = function()
-        return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+        return package.loaded["nvim-navic"]
+          and require("nvim-navic").is_available()
       end,
       color_correction = "dynamic",
     },
@@ -278,9 +300,10 @@ M.win = {
   },
   win_z = {
     "os.date('%d/%m/%Y %H:%M:%S')",
-    -- function()
-    --   return "   "
-    -- end,
+    function()
+      -- return "   "
+      return "  "
+    end,
   },
 }
 

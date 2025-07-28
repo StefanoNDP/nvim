@@ -42,11 +42,19 @@ return {
     require("mini.diff").setup({
       view = {
         style = vim.go.number and "number",
-        signs = { add = "+", change = "~", delete = "-", topdelete = "‾", changedelete = "~" },
+        signs = {
+          add = "+",
+          change = "~",
+          delete = "-",
+          topdelete = "‾",
+          changedelete = "~",
+        },
       },
     })
     -- vim.keymap.set("v", "<leader>to", ":lua require('mini.diff').toggle_overlay()<CR>", kopts)
-    require("mini.jump").setup({ mappings = { forward = "<M-f>", backward = "<M-F>" } })
+    require("mini.jump").setup({
+      mappings = { forward = "<M-f>", backward = "<M-F>" },
+    })
     require("mini.jump2d").setup({ mappings = { start_jumping = "<M-CR>" } })
 
     -- Appearance
@@ -84,7 +92,10 @@ return {
         warning = { pattern = "%f[%w]()WARNING()%f[%W]", group = "hl_red" },
         warnxxx = { pattern = "%f[%w]()XXX()%f[%W]", group = "hl_red" },
         perf = { pattern = "%f[%w]()PERF()%f[%W]", group = "hl_green" },
-        performance = { pattern = "%f[%w]()PERFORMANCE()%f[%W]", group = "hl_green" },
+        performance = {
+          pattern = "%f[%w]()PERFORMANCE()%f[%W]",
+          group = "hl_green",
+        },
         optim = { pattern = "%f[%w]()OPTIM()%f[%W]", group = "hl_green" },
         optimize = { pattern = "%f[%w]()OPTIMIZE()%f[%W]", group = "hl_green" },
         note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "hl_blue" },
@@ -103,20 +114,20 @@ return {
       },
     })
 
-    -- local map = require("mini.map")
-    -- require("mini.map").setup({
-    --   integrations = {
-    --     map.gen_integration.builtin_search(),
-    --     -- map.gen_integration.diff(),
-    --     map.gen_integration.diagnostic(),
-    --     -- map.gen_integration.gitsigns(),
-    --   },
-    --   window = {
-    --     width = 6,
-    --     show_integration_count = false,
-    --   },
-    -- })
-    -- require("mini.map").toggle()
+    local map = require("mini.map")
+    require("mini.map").setup({
+      integrations = {
+        map.gen_integration.builtin_search(),
+        map.gen_integration.diff(),
+        map.gen_integration.diagnostic(),
+        map.gen_integration.gitsigns(),
+      },
+      window = {
+        width = 5,
+        show_integration_count = true,
+      },
+    })
+    require("mini.map").toggle()
     require("mini.trailspace").setup({})
 
     -- Load keymaps

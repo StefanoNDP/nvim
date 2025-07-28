@@ -27,7 +27,7 @@ vim.opt.laststatus = 2
 vim.opt.inccommand = "split" -- Preview commands
 
 -- 0 for dap-ui 1 for dap-view
-vim.g.whichDap = 1
+vim.g.whichDap = 0
 
 local funcs = require("config.functions")
 if funcs.getOSLowerCase():match("windows") ~= 0 then
@@ -48,6 +48,11 @@ if funcs.getOSLowerCase():match("windows") ~= 0 then
   vim.o.shellxquote = ""
 
   vim.g.undotree_DiffCommand = vim.fn.stdpath("config") .. "/bin/diff.exe"
+
+  vim.opt.shellslash = false
+  vim.o.shellslash = false
+  vim.g.shellslash = false
+  vim.cmd([[set noshellslash]])
 end
 
 -- recommended settings
@@ -105,9 +110,9 @@ vim.g.loaded_ruby_provider = 0
 vim.g.editorconfig = true
 
 -- Tab and indentation
-vim.opt.tabstop = 2 -- 2 Spaces for tabs
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2 -- 2 Spaces for indent width
+vim.opt.tabstop = 4 -- 4 Spaces for tabs
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4 -- 4 Spaces for indent width
 vim.opt.expandtab = true -- Expand tab to spaces
 vim.opt.cindent = true
 vim.opt.smartindent = true
@@ -157,7 +162,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 vim.opt.completeopt = "menu,menuone,preview,noselect" -- Better completion experience
-vim.opt.textwidth = 96 -- Max width/columns
+vim.opt.textwidth = 80 -- Max width/columns
 vim.opt.colorcolumn = "+1" -- Show gutter after textwidth
 vim.opt.signcolumn = "yes" -- Show sign column so that text doesn't shift
 
@@ -172,7 +177,7 @@ vim.opt.spelloptions = "camel" -- Split camelCase words when spellchecking
 -- vim.g.commentstring = "" -- Mini.nvim comment
 
 vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
-vim.opt.listchars:append({ tab = " »", trail = "" })
+vim.opt.listchars:append({ lead = "_", tab = " »", trail = "" })
 vim.opt.list = true -- Show some invisible characters (tab, space, white space, etc)
 
 -- Folds

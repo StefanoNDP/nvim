@@ -1,6 +1,6 @@
 return {
   "Jorenar/nvim-dap-disasm",
-  dependencies = { "igorlfs/nvim-dap-view" },
+  dependencies = { "igorlfs/nvim-dap-view", "rcarriga/nvim-dap-ui" },
   enabled = true,
   version = false,
   -- event = "VeryLazy",

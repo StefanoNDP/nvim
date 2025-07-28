@@ -116,7 +116,8 @@ end
 
 -- config.default_prog = { "powershell.exe -NoProfile" }
 -- config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe -WorkingDirectory ~" }
-config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe" }
+-- config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe" }
+config.default_prog = { "C:\\Program Files\\Git\\bin\\bash.exe" }
 -- config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu", "-u", "sd" }
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
