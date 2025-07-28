@@ -25,21 +25,22 @@ vim.cmd([[autocmd BufNewFile,BufRead *.axaml setf xml]])
 vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
 vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
 
--- Disable semantic tokens
--- Besides rzls (and aftershave and html)
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if
-      client
-      and client.name ~= "rzls"
-      and client.name ~= "aftershave"
-      and client.name ~= "html"
-    then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  end,
-})
+-- -- Disable semantic tokens
+-- -- Besides rzls (and aftershave and html)
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if
+--       client
+--       and client.name ~= "rzls"
+--       and client.name ~= "aftershave"
+--       and client.name ~= "html"
+--       and client.name ~= "css"
+--     then
+--       client.server_capabilities.semanticTokensProvider = nil
+--     end
+--   end,
+-- })
 
 -- ftplugin start
 local ftmodule = "ftplugin.%s"

@@ -243,10 +243,10 @@ M.line = function()
     },
     line_y = {
       "progress",
-      -- function()
-      --   return ""
-      -- end,
-      -- "location",
+      function()
+        return ""
+      end,
+      "location",
     },
     line_z = {
       --   "os.date('%d/%m/%Y %H:%M:%S')",

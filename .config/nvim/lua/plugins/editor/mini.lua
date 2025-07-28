@@ -124,7 +124,7 @@ return {
       },
       window = {
         width = 5,
-        show_integration_count = true,
+        show_integration_count = false,
       },
     })
     require("mini.map").toggle()
