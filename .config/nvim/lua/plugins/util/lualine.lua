@@ -2,6 +2,8 @@ local M = {}
 
 local colors = require("config.colors").words
 
+local job_indicator = { require("easy-dotnet.ui-modules.jobs").lualine }
+
 M.merge_colors = function(foreground, background)
   local new_name = foreground .. background
 
@@ -132,13 +134,17 @@ M.line = function()
   local snacks = require("snacks")
   return {
     line_a = {
+      {
+        "mode",
+        job_indicator,
+      },
       -- "mode",
-      -- {
-      --   function()
-      --     return ""
-      --   end,
-      --   cond = M.conditions.checkFileSize,
-      -- },
+      {
+        function()
+          return ""
+        end,
+        cond = M.conditions.checkFileSize,
+      },
       {
         -- filesize component
         "filesize",

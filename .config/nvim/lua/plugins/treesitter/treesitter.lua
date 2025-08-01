@@ -144,7 +144,9 @@ return {
     config = function(_, opts)
       -- If treesitter is already loaded, we need to run config again for textobjects
       if require("config.functions").isLoaded("nvim-treesitter") then
-        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
+        require("nvim-treesitter.configs").setup({
+          textobjects = opts.textobjects,
+        })
       end
     end,
   },
@@ -244,7 +246,7 @@ return {
           "json",
           "json5",
           "jsonc",
-          -- "latex",
+          "latex",
           -- "llvm",
           "lua",
           "luadoc",

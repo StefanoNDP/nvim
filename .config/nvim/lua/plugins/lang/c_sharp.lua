@@ -198,7 +198,11 @@ return { -- C#
               )
             end,
             test = function()
-              return string.format("dotnet test -v d --tl:on --interactive %s %s", path, args)
+              return string.format(
+                "dotnet test -v d --tl:on --interactive %s %s",
+                path,
+                args
+              )
             end,
             restore = function()
               return string.format(
@@ -208,10 +212,18 @@ return { -- C#
               )
             end,
             build = function()
-              return string.format("dotnet build -v d --tl:on --interactive %s %s", path, args)
+              return string.format(
+                "dotnet build -v d --tl:on --interactive %s %s",
+                path,
+                args
+              )
             end,
             watch = function()
-              return string.format("dotnet watch -v --project %s %s", path, args)
+              return string.format(
+                "dotnet watch -v --project %s %s",
+                path,
+                args
+              )
             end,
           }
 
@@ -253,10 +265,6 @@ return { -- C#
     end,
   },
 }
-
--- -- lua/easy-dotnet/dotnet_cli.lua file from easy-dotnet line 21
--- -- function M.list_packages(sln_file_path) return string.format("dotnet solution %s list", sln_file_path) end
--- function M.list_packages(sln_file_path) return string.format("dotnet sln %s list", sln_file_path) end
 
 -- TODO: Add these to "Properties/launchSettings.json" automatically
 -- "NeovimDebugProject.Api": {

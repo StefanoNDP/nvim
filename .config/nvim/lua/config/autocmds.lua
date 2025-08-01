@@ -8,6 +8,11 @@ end
 -- autocmd VimEnter * cd $PWD
 -- ]])
 
+-- augroup cdpwd
+--     autocmd!
+--     autocmd VimEnter * cd $PWD
+-- augroup END
+
 -- Omnifunc
 -- api.nvim_command("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 vim.cmd([[autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni]])
@@ -24,6 +29,18 @@ vim.cmd([[autocmd BufNewFile,BufRead *.axaml setf xml]])
 -- Turn on/off tmux statusline on vim enter/leave
 vim.cmd([[silent !tmux set status off]]) -- VimEnter conflicts with Snacks Explorer's preview
 vim.cmd([[autocmd VimLeave * silent !tmux set status on]])
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    vim.cmd([[
+      highlight Normal guibg=none
+      highlight NonText guibg=none
+      highlight Normal ctermbg=none
+      highlight NonText ctermbg=none
+      highlight CursorColumn guibg=#313244 ctermbg=none
+    ]])
+  end,
+})
 
 -- -- Disable semantic tokens
 -- -- Besides rzls (and aftershave and html)

@@ -1,13 +1,6 @@
 -- Opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
 
-vim.cmd([[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]])
-
 vim.scriptencoding = "utf-8" -- Set encoding to utf-8
 vim.opt.encoding = "utf-8" -- Set encoding to utf-8
 vim.opt.fileencoding = "utf-8" -- Set encoding to utf-8
@@ -23,6 +16,7 @@ vim.o.autochdir = false
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
+-- vim.opt.statuscolumn = "%s %{v:relnum} %{v:lnum}"
 
 vim.opt.inccommand = "split" -- Preview commands
 
@@ -52,6 +46,9 @@ if funcs.getOSLowerCase():match("windows") ~= 0 then
   vim.opt.shellslash = false
   vim.o.shellslash = false
   vim.g.shellslash = false
+
+  vim.g.sqlite_clib_path = vim.fn.stdpath("config") .. "/sqlite/sqlite3.dll"
+
   vim.cmd([[set noshellslash]])
 end
 
@@ -94,10 +91,10 @@ vim.o.rnu = true
 --     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
 --   },
 -- }
+-- vim.g.clipboard = "osc52"
 
 -- Clipboard accross everything
-vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" }) -- Append system clipboard to the register
-vim.opt.clipboard:append("unnamedplus") -- Append system clipboard to the register
+vim.opt.clipboard:append({ "unnamed", "unnamedplus", vim.env.SSH_TTY }) -- Append system clipboard to the register
 -- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 -- Set python3 host prog
@@ -142,6 +139,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true -- Ignore case when searching
 vim.opt.smartcase = true -- If mixed case in search, assumes case-sensitive
 vim.opt.cursorline = true -- Highlight current/cursor line
+vim.opt.cursorcolumn = true -- Highlight current/cursor column
 
 vim.opt.hidden = true -- Keep buffers in memory
 vim.opt.termguicolors = true -- Use truecolor in the terminal
@@ -159,9 +157,19 @@ vim.opt.sidescrolloff = 1 -- Columns of context
 vim.opt.scrolloff = 10 -- Lines of context
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 250 -- Decrease update time
+-- Milliseconds to wait after nothing is typed before writting swapfile to disk
+-- Also used for CursorHold
+vim.opt.updatetime = 250
+
 vim.opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
-vim.opt.completeopt = "menu,menuone,preview,noselect" -- Better completion experience
+-- menu: popup menu to show possible completions
+-- menuone: popup even when there's only one match
+-- noselect: Do not select, force to select one from the menu
+-- noinsert: Do not insert text until a selection is made
+-- preview: Show extra information about the currently selected completion.
+vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert", "preview" } -- Better completion experience
+
+vim.opt.shortmess = vim.opt.shortmess + { c = true } -- Avoid showing extra messages when using completion
 vim.opt.textwidth = 80 -- Max width/columns
 vim.opt.colorcolumn = "+1" -- Show gutter after textwidth
 vim.opt.signcolumn = "yes" -- Show sign column so that text doesn't shift
@@ -271,3 +279,11 @@ vim.g.conceallevel = 0
 -- if not (vim.uv or vim.loop).fs_stat(pipepath) then
 --   vim.fn.serverstart(pipepath)
 -- end
+
+vim.cmd([[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+  highlight CursorColumn guibg=#313244 ctermbg=none
+]])

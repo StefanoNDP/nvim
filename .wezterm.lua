@@ -173,6 +173,15 @@ config.keys = {
     mods = "LEADER",
     action = wezterm.action.ActivateCopyMode,
   },
+  { key = "h", mods = "LEADER|ALT", action = act.MoveTabRelative(-1) },
+  { key = "l", mods = "LEADER|ALT", action = act.MoveTabRelative(1) },
+  -- Turn off the default alt-enter Fullscreen action since it conflicts with
+  -- my neovim's "mini.jump" key mapping
+  {
+    key = "Enter",
+    mods = "ALT",
+    action = wezterm.action.DisableDefaultAssignment,
+  },
 }
 
 for i = 1, 9 do
@@ -205,8 +214,8 @@ wezterm.font_with_fallback({
 })
 
 config.font_size = 12.0
-config.underline_position = -2
-config.underline_thickness = "100%"
+config.underline_position = -3
+config.underline_thickness = "250%"
 config.freetype_load_target = "Normal"
 config.freetype_render_target = "Normal"
 config.freetype_load_flags = "NO_HINTING"
@@ -231,11 +240,11 @@ config.background = {
       -- File = "C:/Users/sd/nvim/img/grateful_miyamoto_musashi.jpg",
       File = "C:/Users/sd/nvim/img/musashi_myiamoto_grateful.jpg",
     },
-    opacity = 0.125,
+    opacity = 0.075,
   },
   {
     source = {
-      Color = "rgba(30, 30, 46, 0.925)",
+      Color = "rgba(26, 26, 42, 0.95)",
     },
     width = "100%",
     height = "100%",

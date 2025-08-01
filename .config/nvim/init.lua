@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 if vim.g.neovide then
   -- Font
   vim.o.guifont = "JetBrainsMono Nerd Font Mono:h11"

@@ -4,7 +4,7 @@ local vars = require("config.vars")
 
 -- Credits to @wookayin: https://github.com/tpope/vim-repeat/issues/92#issuecomment-1826910664
 -- I modified his code to accept both string and function instead of function only
--- Not to be used directly, use my the function below it: rMap
+-- Not to be used directly, use my the function below it: repeatable_keymap_set
 
 ---Register a global internal keymap that wraps `rhs` to be repeatable.
 ---@param mode string|table keymap mode, see vim.keymap.set()
@@ -46,7 +46,10 @@ M.repeatable_keymap_set = function(mode, key, name, func, opts)
   assert(type(name) == "string", "Expected a string value from name")
   assert(name and #name > 0, "Expected a non-empty string from name")
   assert(type(opts) == "table", "Expected a table from opts")
-  assert(type(func) == "function" or "string", "Expected a function or string from func")
+  assert(
+    type(func) == "function" or "string",
+    "Expected a function or string from func"
+  )
   assert(func and #func > 0, "Expected a non-empty string from func")
   vim.keymap.set(
     mode,
@@ -131,7 +134,12 @@ function M.execute(opts)
       params = params,
     })
   else
-    return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
+    return vim.lsp.buf_request(
+      0,
+      "workspace/executeCommand",
+      params,
+      opts.handler
+    )
   end
 end
 
@@ -375,8 +383,12 @@ end
 ---@param opts? { buf?: number, spec?: LazyRootSpec[], all?: boolean }
 function M.detect(opts)
   opts = opts or {}
-  opts.spec = opts.spec or type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec
-  opts.buf = (opts.buf == nil or opts.buf == 0) and vim.api.nvim_get_current_buf() or opts.buf
+  opts.spec = opts.spec
+    or type(vim.g.root_spec) == "table" and vim.g.root_spec
+    or M.spec
+  opts.buf = (opts.buf == nil or opts.buf == 0)
+      and vim.api.nvim_get_current_buf()
+    or opts.buf
 
   local ret = {} ---@type LazyRoot[]
   for _, spec in ipairs(opts.spec) do
