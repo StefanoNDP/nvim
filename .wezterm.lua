@@ -8,78 +8,16 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
--- Begin
-
 config.automatically_reload_config = true
 config.check_for_updates = true
 
+-- config.term = "xterm-256color"
+config.term = "xterm-kitty"
+config.enable_kitty_graphics = true
+
 config.leader = { key = "Space", mods = "ALT", timeout_milliseconds = 1000 }
 
--- -- Neovim integration
--- -- https://github.com/mrjones2014/smart-splits.nvim#wezterm
--- local w = require("wezterm")
---
--- local function is_vim(pane)
---     -- this is set by the plugin, and unset on ExitPre in Neovim
---     return pane:get_user_vars().IS_NVIM == "true"
--- end
---
--- local direction_keys = {
---     Left = "h",
---     Down = "j",
---     Up = "k",
---     Right = "l",
---     -- reverse lookup
---     h = "Left",
---     j = "Down",
---     k = "Up",
---     l = "Right",
--- }
---
--- local function split_nav(resize_or_move, key)
---     return {
---         key = key,
---         mods = resize_or_move == "resize" and "META" or "CTRL",
---         action = w.action_callback(function(win, pane)
---             if is_vim(pane) then
---                 -- pass the keys through to vim/nvim
---                 win:perform_action({
---                     SendKey = {
---                         key = key,
---                         mods = resize_or_move == "resize" and "META" or "CTRL",
---                     },
---                 }, pane)
---             else
---                 if resize_or_move == "resize" then
---                     win:perform_action(
---                         { AdjustPaneSize = { direction_keys[key], 3 } },
---                         pane
---                     )
---                 else
---                     win:perform_action(
---                         { ActivatePaneDirection = direction_keys[key] },
---                         pane
---                     )
---                 end
---             end
---         end),
---     }
--- end
-
 config.keys = {
-  -- -- NEOVIM INTEGRATION START
-  -- -- move between split panes
-  -- split_nav("move", "h"),
-  -- split_nav("move", "j"),
-  -- split_nav("move", "k"),
-  -- split_nav("move", "l"),
-  -- -- resize panes
-  -- split_nav("resize", "h"),
-  -- split_nav("resize", "j"),
-  -- split_nav("resize", "k"),
-  -- split_nav("resize", "l"),
-  -- -- NEOVIM INTEGRATION END
-
   { -- Split horizontal
     key = "H",
     mods = "LEADER|SHIFT",
@@ -201,7 +139,8 @@ end
 -- config.default_prog = { "powershell.exe -NoProfile" }
 -- config.default_prog =
 --   { "C:\\Program Files\\PowerShell\\7\\pwsh.exe -WorkingDirectory ~" }
-config.default_prog = { "C:\\Program Files\\PowerShell\\7\\pwsh.exe" }
+config.default_prog =
+  { "C:\\Program Files\\PowerShell\\7\\pwsh.exe", "-NoLogo" }
 -- config.default_prog = { "C:\\Program Files\\Git\\bin\\bash.exe" }
 -- config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu", "-u", "sd" }
 config.color_scheme = "Catppuccin Mocha"
@@ -214,6 +153,7 @@ wezterm.font_with_fallback({
 })
 
 config.font_size = 12.0
+config.adjust_window_size_when_changing_font_size = false
 config.underline_position = -3
 config.underline_thickness = "250%"
 config.freetype_load_target = "Normal"
@@ -222,6 +162,8 @@ config.freetype_load_flags = "NO_HINTING"
 config.disable_default_key_bindings = false
 config.enable_wayland = false
 config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "NONE | RESIZE"
+config.initial_cols = 80
 -- config.front_end = "OpenGL"
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
