@@ -3,7 +3,7 @@
 # http://editorconfig.org/
 
 # This is the top-most EditorConfig file, all others must be set to false
-root = true
+root = false
 
 # Don't specify indent_size here. It has too many unintended consequences.
 [*]
@@ -328,7 +328,7 @@ indent_size = 4
 
 # HTML, XML - match defaults for VS
 [*.{cshtml,html,xml}]
-indent_size = 4
+indent_size = 2
 
 # JavaScript and JS mixes - match eslint settings; JSON also matches .NET Core templates
 [*.{js,json,ts,vue}]
