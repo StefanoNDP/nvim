@@ -3,7 +3,7 @@
 # http://editorconfig.org/
 
 # This is the top-most EditorConfig file, all others must be set to false
-root = false
+root = true
 
 # Don't specify indent_size here. It has too many unintended consequences.
 [*]
@@ -16,40 +16,83 @@ max_line_length = 80
 spelling_exclusion_path = SpellingExclusions.dic
 
 # Code files
+[{*.py,SConstruct,SCsub}]
+
+[{*.{yml,yaml},.clang{-format,-tidy,d}}]
+indent_size = 2
+
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
-insert_final_newline = true
-charset = utf-8-bom
 
 formatters = csharpier
 
 # XML project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
-indent_size = 4
+indent_size = 2
 
 # XML config files
 [*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
-indent_size = 4
-
-# JSON files
-[*.json]
-indent_size = 4
-
-# XML files
-[*.{xml,xaml}]
-indent_size = 4
-
-# Powershell files
-[*.ps1]
-indent_size = 4
+indent_size = 2
 
 # Shell script files
 [*.sh]
-end_of_line = lf
-indent_size = 4
+indent_size = 2
 
 # Dotnet code style settings:
 [*.{cs,vb}]
+
+# .NET solution files - match defaults for VS
+[*.sln]
+indent_style = tab
+
+# Config - match XML and default nuget.config template
+[*.config]
+indent_size = 4
+
+# Resources - match defaults for VS
+[*.resx]
+indent_size = 4
+
+# Static analysis rulesets - match defaults for VS
+[*.ruleset]
+indent_size = 4
+
+# HTML, XML - match defaults for VS
+[*.{cshtml,html,xml,xaml}]
+indent_size = 2
+
+# JavaScript and JS mixes - match eslint settings; JSON also matches .NET Core templates
+[*.{js,json,ts,vue}]
+indent_size = 4
+
+[*.lua]
+indent_size = 4
+
+# PowerShell - match defaults for New-ModuleManifest and PSScriptAnalyzer Invoke-Formatter
+[*.{ps1,psd1,psm1}]
+indent_size = 2
+charset = utf-8-bom
+end_of_line = crlf
+
+# ReStructuredText - standard indentation format from examples
+[*.rst]
+indent_size = 4
+
+# UNITY - API Scraping
+[*.asmdef]
+scrape_api = true
+
+# UNITY - API Scraping
+[**/Tests/**.asmdef]
+scrape_api = false
+
+# Override default spacing rules for .opt files.
+[*.opt]
+indent_size = 4
+
+# Makefiles are broken without using actual tabs for indentation.
+[Makefile]
+indent_style = tab
 
 # Name all private fields with `_` prefix and camelCase
 dotnet_naming_rule.camel_case_for_private_internal_fields.severity = suggestion
@@ -172,6 +215,22 @@ dotnet_public_api_analyzer.require_api_files = true
 # Workaround for https://github.com/dotnet/roslyn/issues/70570
 dotnet_diagnostic.IDE0055.severity = warning
 dotnet_diagnostic.IDE0059.severity = warning
+
+# https://github.com/dotnet/roslyn-analyzers/issues/7436 - False positives from valid GetDeclaredSymbol calls
+dotnet_diagnostic.RS1039.severity = none
+
+# These xUnit analyzers were disabled temporarily to let us move to the
+# new xUnit and get past several component governance issues. The
+# following issue tracks enabling them
+#
+# https://github.com/dotnet/roslyn/issues/75093
+dotnet_diagnostic.xUnit1012.severity = none
+dotnet_diagnostic.xUnit1030.severity = none
+dotnet_diagnostic.xUnit1031.severity = none
+dotnet_diagnostic.xUnit2005.severity = none
+dotnet_diagnostic.xUnit2020.severity = none
+dotnet_diagnostic.xUnit2023.severity = none
+dotnet_diagnostic.xUnit2029.severity = none
 
 # CSharp code style settings:
 [*.cs]
@@ -310,55 +369,19 @@ dotnet_diagnostic.IDE2006.severity = warning
 # There is a risk of accidentally breaking an internal API that partners rely on though IVT.
 dotnet_code_quality.CA1822.api_surface = private
 
-# .NET solution files - match defaults for VS
-[*.sln]
-indent_style = tab
+[**/{ExternalAccess}/**/*.{cs,vb}]
 
-# Config - match XML and default nuget.config template
-[*.config]
-indent_size = 4
+# RS0016: Only enable if API files are present
+dotnet_public_api_analyzer.require_api_files = true
 
-# Resources - match defaults for VS
-[*.resx]
-indent_size = 4
-
-# Static analysis rulesets - match defaults for VS
-[*.ruleset]
-indent_size = 4
-
-# HTML, XML - match defaults for VS
-[*.{cshtml,html,xml}]
-indent_size = 4
-
-# JavaScript and JS mixes - match eslint settings; JSON also matches .NET Core templates
-[*.{js,json,ts,vue}]
-indent_size = 4
-
-[*.lua]
-indent_size = 4
-
-# PowerShell - match defaults for New-ModuleManifest and PSScriptAnalyzer Invoke-Formatter
-[*.{ps1,psd1,psm1}]
-indent_size = 4
-charset = utf-8-bom
-end_of_line = crlf
-
-# ReStructuredText - standard indentation format from examples
-[*.rst]
-indent_size = 4
-
-# UNITY - API Scraping
-[*.asmdef]
-scrape_api = true
-
-# UNITY - API Scraping
-[**/Tests/**.asmdef]
-scrape_api = false
-
-# Override default spacing rules for .opt files.
-[*.opt]
-indent_size = 4
-
-# Makefiles are broken without using actual tabs for indentation.
-[Makefile]
-indent_style = tab
+dotnet_diagnostic.RS0051.severity = error
+dotnet_diagnostic.RS0052.severity = error
+dotnet_diagnostic.RS0053.severity = error
+dotnet_diagnostic.RS0054.severity = error
+dotnet_diagnostic.RS0055.severity = error
+dotnet_diagnostic.RS0056.severity = error
+dotnet_diagnostic.RS0057.severity = error
+dotnet_diagnostic.RS0058.severity = error
+dotnet_diagnostic.RS0059.severity = error
+dotnet_diagnostic.RS0060.severity = error
+dotnet_diagnostic.RS0061.severity = error
