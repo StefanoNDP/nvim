@@ -28,6 +28,11 @@ wk.add({
   { -- Normal mode only
     mode = { "n" },
     {
+      "<leader>cr",
+      ":lua vim.lsp.buf.rename()<CR>",
+      desc = "Rename",
+    },
+    {
       "<C-a>",
       "gg<S-v>G",
       desc = "Select all",
