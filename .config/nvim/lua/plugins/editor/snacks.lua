@@ -79,7 +79,9 @@ return {
         hl = vars.highlights,
       },
     },
-    input = { enabled = true },
+    input = {
+      enabled = true,
+    },
     lazygit = { enabled = true },
     notifier = {
       enabled = true,

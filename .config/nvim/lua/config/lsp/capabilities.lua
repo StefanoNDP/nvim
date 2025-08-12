@@ -3,7 +3,7 @@ local M = {}
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 -- Capabilities encoding
-M.capabilities.general.positionEncodings = { "utf-8", "utf-16", "utf-32" }
+M.capabilities.general.positionEncodings = { "utf-8", "utf-8-bom", "utf-16", "utf-32" }
 
 M.capabilities.workspace.configuration = true
 M.capabilities.workspace.didChangeConfiguration.dynamicRegistration = true

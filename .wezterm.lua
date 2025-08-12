@@ -162,6 +162,31 @@ config.freetype_load_flags = "NO_HINTING"
 config.disable_default_key_bindings = false
 config.enable_wayland = false
 config.hide_tab_bar_if_only_one_tab = true
+config.enable_tab_bar = false
+
+config.window_frame = {
+  font_size = 11.0,
+  active_titlebar_bg = "#181825",
+  inactive_titlebar_bg = "#11111b",
+}
+
+config.colors = {
+  tab_bar = {
+    active_tab = {
+      bg_color = "#cba6f7",
+      fg_color = "#45475a",
+    },
+    inactive_tab = {
+      bg_color = "#1e1e2e",
+      fg_color = "#a6adc8",
+    },
+    inactive_tab_hover = {
+      bg_color = "#313244",
+      fg_color = "#bac2de",
+      italic = true,
+    },
+  },
+}
 config.window_decorations = "NONE | RESIZE"
 config.initial_cols = 80
 -- config.front_end = "OpenGL"

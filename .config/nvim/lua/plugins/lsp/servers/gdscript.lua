@@ -1,42 +1,35 @@
 local lspconfig = require("config.lsp.setup")
 
--- HOW TO:
+-- HOW TO (EASY):
 -- https://github.com/Lommix/godot.nvim?tab=readme-ov-file#how-to-use-nvim-as-external-editor
---
---
--- Create a bash script, make it executeable.
--- Example: /home/USER/godotrc.sh
---
--- Add the following context
--- #!/usr/bin/env bash
--- [ -n "$1" ] && file=$1
--- nvim --server ~/.cache/nvim/godot.pipe --remote-send ':e '"$file"'<CR>'
 
--- In Godot, go to "Editor->Editor Settings->Text Editor->External" and make sure they look like this
--- "Exec Path": /home/USER/godotrc.sh
--- "Exec Flags": {file} <- This should already be set
--- "Use External Editor": Checked
---
--- You may also want to enable Auto Reload for external changes
--- Go to "Editor->Editor Settings->Text Editor->Behavior" and
--- enable "Auto Reload Scripts on External Change"
---
--- Now go to a godot project (or create) and open neovim with the following args:
--- nvim --listen ~/.cache/nvim/godot.pipe .
---
--- Now, with neovim open with those args, you can open godot and double-click/right-click->open any
--- script that it'll be openned in nvim
---
--- For more "advanced" users
+-- HOW TO (ADVANCED): (WINDOWS IS WIP)
 -- https://github.com/niscolas/nvim-godot
 -- Same as above but use this .sh script
 -- https://github.com/niscolas/nvim-godot/blob/main/run.sh
 --
--- And change "Exec Flags" of External Text Editor to
--- "Exec Flags": "{file}" "{line},{col}"
+-- The "run.sh" file above is already in this repo in "nvim/util/godotrc.sh"
+-- There's also a Windows version: "nvim/util/godotrc.ps1"
 --
--- Now you don't even need to have nvim opened with those args above, it'll automatically open a godot
--- nvim instance if there isn't one already.
+-- In Godot, go to "Editor->Editor Settings->Text Editor->External" and make
+-- sure they look like this:
+-- "Exec Path": /home/USER/godotrc.sh
+-- "Exec Flags": "{file}" "{line},{col}"
+-- "Use External Editor": Checked
+--
+-- You may also want to enable Auto Reload for external changes:
+-- Go to "Editor->Editor Settings->Text Editor->Behavior" and enable:
+-- "Auto Reload Scripts on External Change"
+--
+-- Now you can go to a godot project and open neovim with the following args:
+-- On Linux:
+-- nvim --listen ~/.cache/nvim/godot.pipe
+--
+-- On Windows:
+-- nvim --listen "\\.\pipe\nvim-godot"
+--
+-- Or you don't even need to have nvim opened with those args above, godot will
+-- automatically open a nvim instance if there isn't one already.
 
 return {
   lspconfig.setupServer("gdscript", {

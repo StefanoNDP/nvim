@@ -1,4 +1,4 @@
--- Opt-in to use filetype.lua for setting custom filetypes
+-- opt-in to use filetype.lua for setting custom filetypes
 vim.g.do_filetype_lua = 1 -- Enable
 
 vim.scriptencoding = "utf-8" -- Set encoding to utf-8
@@ -14,7 +14,7 @@ vim.opt.title = true
 vim.o.autochdir = false
 
 vim.opt.showcmd = true
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.laststatus = 2
 -- vim.opt.statuscolumn = "%s %{v:relnum} %{v:lnum}"
 
@@ -274,11 +274,17 @@ vim.api.nvim_set_hl(0, "hl_fg_crust", { fg = "#11111b", bg = "#1e1e2e" })
 
 vim.g.conceallevel = 0
 
--- -- Godot
--- local pipepath = vim.fn.stdpath("cache") .. "/server.pipe"
--- if not (vim.uv or vim.loop).fs_stat(pipepath) then
---   vim.fn.serverstart(pipepath)
--- end
+-- Godot
+local pipepath = nil
+
+if funcs.getOSLowerCase():match("windows") ~= 0 then
+  pipepath = [[\\.\pipe\nvim-godot]]
+else
+  pipepath = vim.fn.stdpath("cache") .. "/godot.pipe"
+end
+if pipepath and not (vim.uv or vim.loop).fs_stat(pipepath) then
+  vim.fn.serverstart(pipepath)
+end
 
 vim.cmd([[
   highlight Normal guibg=none

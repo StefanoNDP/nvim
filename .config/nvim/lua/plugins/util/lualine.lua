@@ -204,7 +204,32 @@ M.line = function()
         update_in_insert = true,
       },
     },
-    line_c = {},
+    line_c = {
+      {
+        function()
+          return "%="
+        end,
+        cond = M.conditions.checkLsp,
+      },
+      {
+        function()
+          return ""
+        end,
+        cond = M.conditions.checkLsp,
+      },
+      {
+        M.conditions.lspInfo,
+        icon = " LSP:",
+        color = { fg = colors.white, gui = "bold" },
+        cond = M.conditions.checkLsp,
+      },
+      {
+        function()
+          return ""
+        end,
+        cond = M.conditions.checkLsp,
+      },
+    },
     line_x = {
       {
         function()
@@ -255,7 +280,7 @@ M.line = function()
       "location",
     },
     line_z = {
-      --   "os.date('%d/%m/%Y %H:%M:%S')",
+      "os.date('%d/%m/%Y %H:%M:%S')",
     },
   }
 end
@@ -349,22 +374,22 @@ M.lualine = {
       },
       tabline = {},
       extensions = {},
-      winbar = {
-        lualine_a = M.win.win_a,
-        lualine_b = M.win.win_b,
-        lualine_c = M.win.win_c,
-        lualine_x = M.win.win_x,
-        lualine_y = M.win.win_y,
-        lualine_z = M.win.win_z,
-      },
-      inactive_winbar = {
-        lualine_a = M.win.win_a,
-        lualine_b = M.win.win_b,
-        lualine_c = M.win.win_c,
-        lualine_x = M.win.win_x,
-        lualine_y = M.win.win_y,
-        lualine_z = M.win.win_z,
-      },
+      -- winbar = {
+      --   lualine_a = M.win.win_a,
+      --   lualine_b = M.win.win_b,
+      --   lualine_c = M.win.win_c,
+      --   lualine_x = M.win.win_x,
+      --   lualine_y = M.win.win_y,
+      --   lualine_z = M.win.win_z,
+      -- },
+      -- inactive_winbar = {
+      --   lualine_a = M.win.win_a,
+      --   lualine_b = M.win.win_b,
+      --   lualine_c = M.win.win_c,
+      --   lualine_x = M.win.win_x,
+      --   lualine_y = M.win.win_y,
+      --   lualine_z = M.win.win_z,
+      -- },
     }
   end,
   config = function(_, opts)
