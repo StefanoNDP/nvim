@@ -1,6 +1,6 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({
     "git",
@@ -23,7 +23,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 ---@diagnostic disable-next-line: undefined-field
-local concurrency = ((vim.uv or vim.loop).available_parallelism())
+local concurrency = (vim.uv.available_parallelism())
 
 -- Setup lazy.nvim
 require("lazy").setup({

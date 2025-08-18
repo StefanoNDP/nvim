@@ -1,3 +1,5 @@
+local funcs = require("config.functions")
+
 return {
   { "kmarius/jsregexp", enabled = true, version = false, lazy = false },
   {
@@ -5,8 +7,7 @@ return {
     enabled = true,
     version = false,
     lazy = true,
-    -- build = vars.getOSLowerCase():match("windows") ~= 0 and "make install_jsregexp" or nil,
-    -- build = "make install_jsregexp",
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       "kmarius/jsregexp",

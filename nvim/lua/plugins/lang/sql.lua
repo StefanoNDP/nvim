@@ -1,13 +1,13 @@
 return {
-  {
-    "Kurren123/mssql.nvim",
-    enabled = true,
-    version = false,
-    opts = {
-      keymap_prefix = "<leader>m",
-    },
-    dependencies = { "folke/which-key.nvim" },
-  },
+  -- {
+  --   "Kurren123/mssql.nvim",
+  --   enabled = true,
+  --   version = false,
+  --   opts = {
+  --     keymap_prefix = "<leader>m",
+  --   },
+  --   dependencies = { "folke/which-key.nvim" },
+  -- },
   {
     "kristijanhusak/vim-dadbod-ui",
     enabled = true,

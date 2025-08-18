@@ -1,26 +1,27 @@
-local function pre_save()
-  -- remove buffers whose files are located outside of cwd
-  local cwd = vim.fn.getcwd() .. "/"
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    local bufpath = vim.api.nvim_buf_get_name(buf) .. "/"
-    if not bufpath:match("^" .. vim.pesc(cwd)) then
-      vim.api.nvim_buf_delete(buf, {})
-    end
-  end
-end
-
-return {
-  "folke/persistence.nvim",
-  enabled = true,
-  version = false,
-  event = "BufReadPre",
-  opts = function()
-    return {
-      pre_save = pre_save,
-    }
-  end,
-  config = function(_, opts)
-    require("persistence").setup(opts)
-  end,
-  keys = require("config.keymaps.persistence"),
-}
+return {}
+-- local function pre_save()
+--   -- remove buffers whose files are located outside of cwd
+--   local cwd = vim.fn.getcwd() .. "/"
+--   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+--     local bufpath = vim.api.nvim_buf_get_name(buf) .. "/"
+--     if not bufpath:match("^" .. vim.pesc(cwd)) then
+--       vim.api.nvim_buf_delete(buf, {})
+--     end
+--   end
+-- end
+--
+-- return {
+--   "folke/persistence.nvim",
+--   enabled = true,
+--   version = false,
+--   event = "BufReadPre",
+--   opts = function()
+--     return {
+--       pre_save = pre_save,
+--     }
+--   end,
+--   config = function(_, opts)
+--     require("persistence").setup(opts)
+--   end,
+--   keys = require("config.keymaps.persistence"),
+-- }

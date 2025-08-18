@@ -2,6 +2,13 @@ local vars = require("config.vars")
 
 return {
   {
+    "LiadOz/nvim-dap-repl-highlights",
+    lazy = true,
+    config = function()
+      require("nvim-dap-repl-highlights").setup()
+    end,
+  },
+  {
     "mfussenegger/nvim-dap",
     enabled = true,
     version = false,
@@ -23,6 +30,11 @@ return {
       require("plugins.dap.adapters.c_sharp")
       require("plugins.dap.adapters.godot")
       require("plugins.dap.adapters.lua")
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "dap_repl",
+        },
+      })
 
       if vim.g.whichDap == 0 then
         dapui = require("dapui")

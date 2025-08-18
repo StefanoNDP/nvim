@@ -312,14 +312,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- Autosave files on leaving insert mode
-vim.o.autowriteall = true
-vim.api.nvim_create_autocmd(
-  { "InsertLeavePre", "TextChanged", "TextChangedP" },
-  {
-    pattern = "*",
-    callback = function()
-      vim.cmd("silent! write")
-    end,
-  }
-)
+-- -- Autosave files on leaving insert mode
+-- vim.o.autowriteall = true
+-- vim.api.nvim_create_autocmd(
+--   { "InsertLeavePre", "TextChanged", "TextChangedP" },
+--   {
+--     pattern = "*",
+--     callback = function()
+--       vim.cmd("silent! write")
+--     end,
+--   }
+-- )

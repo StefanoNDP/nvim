@@ -59,12 +59,12 @@ M.repeatable_keymap_set = function(mode, key, name, func, opts)
   )
 end
 
-M.getOS = function()
-  return (vim.uv or vim.loop).os_uname().sysname
+M.get_os = function()
+  return vim.uv.os_uname().sysname
 end
 
-M.getOSLowerCase = function()
-  return (vim.uv or vim.loop).os_uname().sysname:lower()
+M.get_os_lower = function()
+  return vim.uv.os_uname().sysname:lower()
 end
 
 M.ignore = function(filename)

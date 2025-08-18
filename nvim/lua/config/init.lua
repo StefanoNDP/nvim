@@ -1,5 +1,6 @@
 require("config.set")
-require("config.autocmds")
 require("config.lazy")
+require("config.config")
+require("config.autocmds")
 require("config.remap")
 require("config.macro")

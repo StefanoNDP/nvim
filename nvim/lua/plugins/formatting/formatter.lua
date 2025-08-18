@@ -9,8 +9,13 @@ return {
       formatters = {
         ["markdown-toc"] = {
           condition = function(_, ctx)
-            for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
-              if line:find("<!%-%- toc %-%->") or line:find("<!%-%-toc:start%-%->") then
+            for _, line in
+              ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false))
+            do
+              if
+                line:find("<!%-%- toc %-%->")
+                or line:find("<!%-%-toc:start%-%->")
+              then
                 return true
               end
             end
@@ -43,7 +48,9 @@ return {
         },
       },
       formatters_by_ft = {
-        bash = { "shellharden" },
+        -- bash = { "shellharden" },
+        bash = { "shfmt" },
+        sh = { "shfmt" },
         cs = { "csharpier" },
         csharp = { "csharpier" },
         lua = { "stylua" },
