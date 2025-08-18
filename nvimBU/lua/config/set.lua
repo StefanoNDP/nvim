@@ -24,16 +24,7 @@ vim.opt.inccommand = "split" -- Preview commands
 vim.g.whichDap = 0
 
 local funcs = require("config.functions")
-<<<<<<< HEAD
-if funcs.get_os() == "windows" then
-||||||| 5adad98
 if funcs.getOSLowerCase():match("windows") ~= 0 then
-=======
-if funcs.get_os() == "windows" then
-  vim.g.undotree_DiffCommand = vim.fn.stdpath("config") .. "/bin/diff.exe"
-  vim.g.sqlite_clib_path = vim.fn.stdpath("config") .. "/sqlite/sqlite3.dll"
-
->>>>>>> df31f4152963cbde077545f259117fb74f7123a8
   vim.g.nofsync = true
 
   vim.opt.shell = "powershell"
@@ -50,9 +41,13 @@ if funcs.get_os() == "windows" then
   vim.o.shellquote = ""
   vim.o.shellxquote = ""
 
+  vim.g.undotree_DiffCommand = vim.fn.stdpath("config") .. "/bin/diff.exe"
+
   vim.opt.shellslash = false
   vim.o.shellslash = false
   vim.g.shellslash = false
+
+  vim.g.sqlite_clib_path = vim.fn.stdpath("config") .. "/sqlite/sqlite3.dll"
 
   vim.cmd([[set noshellslash]])
 end
@@ -78,7 +73,6 @@ vim.g.maplocalleader = ","
 
 -- Hide deprecation warnings
 vim.g.deprecation_warnings = false
-vim.g.VM_show_warnings = false
 
 -- Line numbers
 vim.o.nu = true
@@ -279,6 +273,18 @@ vim.api.nvim_set_hl(0, "hl_fg_mantle", { fg = "#181825", bg = "#1e1e2e" })
 vim.api.nvim_set_hl(0, "hl_fg_crust", { fg = "#11111b", bg = "#1e1e2e" })
 
 vim.g.conceallevel = 0
+
+-- Godot
+local pipepath = nil
+
+if funcs.getOSLowerCase():match("windows") ~= 0 then
+  pipepath = [[\\.\pipe\nvim-godot]]
+else
+  pipepath = vim.fn.stdpath("cache") .. "/godot.pipe"
+end
+if pipepath and not (vim.uv or vim.loop).fs_stat(pipepath) then
+  vim.fn.serverstart(pipepath)
+end
 
 vim.cmd([[
   highlight Normal guibg=none
