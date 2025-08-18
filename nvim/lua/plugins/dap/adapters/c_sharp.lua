@@ -27,7 +27,7 @@ M.c_sharp = function()
   local dotnet = require("easy-dotnet")
 
   local function file_exists(path)
-    local stat = vim.loop.fs_stat(path)
+    local stat = vim.uv.fs_stat(path)
     return stat and stat.type == "file"
   end
 
@@ -52,11 +52,14 @@ M.c_sharp = function()
           local dll = ensure_dll()
           local vars =
             -- dotnet.get_environment_variables(dll.project_name, dll.relative_project_path)
-            dotnet.get_environment_variables(dll.project_name, dll.absolute_project_path)
+            dotnet.get_environment_variables(
+              dll.project_name,
+              dll.absolute_project_path
+            )
           return vars or nil
         end,
         program = function()
-          if (vim.uv or vim.loop).os_uname().sysname:lower():match("windows") ~= 0 then
+          if vim.uv.os_uname().sysname:lower():match("windows") ~= 0 then
             vim.cmd([[set noshellslash]])
           end
 

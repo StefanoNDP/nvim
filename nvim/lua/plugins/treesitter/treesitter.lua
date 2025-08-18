@@ -1,11 +1,4 @@
 return {
-  {
-    "LiadOz/nvim-dap-repl-highlights",
-    lazy = true,
-    config = function()
-      require("nvim-dap-repl-highlights").setup()
-    end,
-  },
   { -- HTML and JSX
     "windwp/nvim-ts-autotag",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -207,7 +200,7 @@ return {
         return
       end
       require("nvim-treesitter.install").prefer_git = false
-      require("nvim-treesitter.install").compilers = { "zig" }
+      -- require("nvim-treesitter.install").compilers = { "zig" }
       vim.g.skip_ts_context_commentstring_module = true
 
       -- Windows: https://code.visualstudio.com/docs/cpp/config-mingw
@@ -225,11 +218,11 @@ return {
           "comment",
           "cpp",
           "css",
-          "dap_repl",
+          -- "dap_repl",
           "diff",
-          "gdscript",
-          "gdshader",
-          "godot_resource",
+          -- "gdscript",
+          -- "gdshader",
+          -- "godot_resource",
           "git_config",
           "git_rebase",
           "gitattributes",

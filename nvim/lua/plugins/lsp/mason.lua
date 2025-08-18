@@ -28,9 +28,11 @@ return {
           -- ANGULAR
           "angular-language-server",
           -- -- BASH
-          -- "bash-language-server", -- LSP
-          -- "bash-debug-adapter", -- DAP
-          -- "shellharden", -- formatter and linter
+          "bash-language-server", -- LSP
+          "bash-debug-adapter", -- DAP
+          "shellharden", -- formatter and linter
+          "shellcheck", -- formatter and linter
+          "shfmt",
           -- -- C/C++
           -- "clangd", -- LSP and linter
           -- "codelldb", -- DAP (lldb)

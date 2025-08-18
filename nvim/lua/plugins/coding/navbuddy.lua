@@ -1,5 +1,5 @@
 return { -- Breadcrumbs-like navigation
-  "SmiteshP/nvim-navbuddy",
+  "hasansujon786/nvim-navbuddy",
   enabled = true,
   version = false,
   -- lazy = true,
