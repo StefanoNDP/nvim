@@ -24,10 +24,16 @@ vim.opt.inccommand = "split" -- Preview commands
 vim.g.whichDap = 0
 
 local funcs = require("config.functions")
+<<<<<<< HEAD
+if funcs.get_os() == "windows" then
+||||||| 5adad98
+if funcs.getOSLowerCase():match("windows") ~= 0 then
+=======
 if funcs.get_os() == "windows" then
   vim.g.undotree_DiffCommand = vim.fn.stdpath("config") .. "/bin/diff.exe"
   vim.g.sqlite_clib_path = vim.fn.stdpath("config") .. "/sqlite/sqlite3.dll"
 
+>>>>>>> df31f4152963cbde077545f259117fb74f7123a8
   vim.g.nofsync = true
 
   vim.opt.shell = "powershell"
