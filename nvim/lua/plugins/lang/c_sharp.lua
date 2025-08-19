@@ -88,18 +88,18 @@ return { -- C#
   {
     "GustavEikaas/easy-dotnet.nvim",
     enabled = true,
-    ft = {
-      "cs",
-      "csproj",
-      "sln",
-      "slnx",
-      "props",
-      "csx",
-      "targets",
-      "fsharp",
-      "vb",
-      "razor",
-    },
+    -- ft = {
+    --   "cs",
+    --   "csproj",
+    --   "sln",
+    --   "slnx",
+    --   "props",
+    --   "csx",
+    --   "targets",
+    --   "fsharp",
+    --   "vb",
+    --   "razor",
+    -- },
     cmd = "Dotnet",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -128,18 +128,21 @@ return { -- C#
         end
         return path
       end
-      -- local sdkPath = function()
-      --   return "C:\\Program Files\\dotnet\\sdk\\9.0.301"
-      -- end
+
+      local sdk_path = function()
+        return "C:\\Program Files\\dotnet\\sdk\\9.0.304"
+      end
 
       return {
         --Optional function to return the path for the dotnet sdk (e.g C:/ProgramFiles/dotnet/sdk/8.0.0)
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
-        -- get_sdk_path = sdkPath(),
+        get_sdk_path = sdk_path,
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",
+          vsplit_width = nil,
+          vsplit_pos = nil,
           enable_buffer_test_execution = true, --Experimental, run tests directly from buffer
           noBuild = false,
           noRestore = false,
@@ -240,6 +243,10 @@ return { -- C#
           --block_scoped, file_scoped
           type = "block_scoped",
           enabled = true,
+          use_clipboard_json = {
+            behavior = "prompt", -- 'auto' | 'prompt' | 'never'
+            register = "+", -- which register to check
+          },
         },
         -- choose which picker to use with the plugin
         -- possible values are "telescope" | "fzf" | "snacks" | "basic"
