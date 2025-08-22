@@ -2,8 +2,8 @@ return {
   {
     "vhyrro/luarocks.nvim",
     enabled = true,
-    version = false,
-    lazy = false,
+    -- version = false,
+    -- lazy = false,
     priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
     config = true,
   },
