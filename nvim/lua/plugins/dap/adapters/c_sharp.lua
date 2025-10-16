@@ -42,7 +42,7 @@ M.c_sharp = function()
     return dll
   end
 
-  for _, lang in ipairs({ "cs", "fsharp" }) do
+  for _, lang in ipairs({ "cs", "c_sharp", "csharp", "fsharp" }) do
     dap.configurations[lang] = {
       {
         type = "coreclr",

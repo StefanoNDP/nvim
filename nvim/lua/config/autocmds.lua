@@ -59,6 +59,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --   end,
 -- })
 
+-- Enable razor files recognition
+vim.cmd([[autocmd BufNewFile,BufRead *.cshtml set filetype=html.cshtml.razor]])
+vim.cmd([[autocmd BufNewFile,BufRead *.razor set filetype=html.cshtml.razor]])
+
 -- ftplugin start
 local ftmodule = "ftplugin.%s"
 local function loadftmodule(ft, action)
@@ -206,24 +210,24 @@ vim.api.nvim_create_autocmd("BufDelete", {
   end,
 })
 
--- Roslyn: Diagnostic refresh
-vim.api.nvim_create_autocmd(
-  { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
-  {
-    pattern = "*",
-    callback = function()
-      local clients = vim.lsp.get_clients({ name = "roslyn" })
-      if not clients or #clients == 0 then
-        return
-      end
-
-      local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
-      for _, buf in ipairs(buffers) do
-        vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
-      end
-    end,
-  }
-)
+-- -- Roslyn: Diagnostic refresh
+-- vim.api.nvim_create_autocmd(
+--   { "BufWritePost", "BufEnter", "InsertLeave", "TextChanged" },
+--   {
+--     pattern = "*",
+--     callback = function()
+--       local clients = vim.lsp.get_clients({ name = "roslyn" })
+--       if not clients or #clients == 0 then
+--         return
+--       end
+--
+--       local buffers = vim.lsp.get_buffers_by_client_id(clients[1].id)
+--       for _, buf in ipairs(buffers) do
+--         vim.lsp.util._refresh("textDocument/diagnostic", { bufnr = buf })
+--       end
+--     end,
+--   }
+-- )
 
 -- Roslyn: textDocument/_vs_onAutoInsert
 vim.api.nvim_create_autocmd("LspAttach", {

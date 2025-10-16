@@ -5,7 +5,7 @@ return {
     ft = { "markdown", "markdown.mdx", "rmd", "org", "norg" },
     version = false,
     lazy = true,
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
     opts = function()
       return {
         pipe_table = { preset = "round" },

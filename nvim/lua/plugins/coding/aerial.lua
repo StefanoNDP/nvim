@@ -1,6 +1,6 @@
 return {
   "stevearc/aerial.nvim",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   dependencies = { "Saghen/blink.cmp" },
   event = "VeryLazy",

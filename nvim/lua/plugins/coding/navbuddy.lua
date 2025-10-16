@@ -1,6 +1,6 @@
 return { -- Breadcrumbs-like navigation
   "hasansujon786/nvim-navbuddy",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   -- lazy = true,
   event = "VeryLazy",

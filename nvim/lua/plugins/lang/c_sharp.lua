@@ -23,20 +23,20 @@ local add_dotnet_mappings = function()
 end
 
 return { -- C#
-  {
-    "Issafalcon/neotest-dotnet",
-    enabled = false,
-    version = false,
-    lazy = true,
-    ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
-    config = true,
-  },
+  -- {
+  --   "Issafalcon/neotest-dotnet",
+  --   enabled = false,
+  --   version = false,
+  --   lazy = true,
+  --   ft = { "cs", "c_sharp", "csharp", "csproj", "sln", "slnx", "csx", "razor" },
+  --   config = true,
+  -- },
   {
     "nsidorenco/neotest-vstest",
-    enabled = true,
+    enabled = vim.g.isDesktop,
     version = false,
     lazy = true,
-    ft = { "cs", "csproj", "sln", "slnx", "csx", "razor" },
+    ft = { "cs", "c_sharp", "csharp", "csproj", "sln", "slnx", "csx", "razor" },
   },
   -- { "tris203/rzls.nvim", version = false, lazy = true },
   -- { -- Unity
@@ -75,7 +75,7 @@ return { -- C#
       },
     },
     version = false,
-    ft = { "cs", "razor" },
+    ft = { "cs", "c_sharp", "csharp", "razor" },
     opts = {
       filewatching = "roslyn",
       choose_target = nil,
@@ -88,18 +88,20 @@ return { -- C#
   {
     "GustavEikaas/easy-dotnet.nvim",
     enabled = true,
-    -- ft = {
-    --   "cs",
-    --   "csproj",
-    --   "sln",
-    --   "slnx",
-    --   "props",
-    --   "csx",
-    --   "targets",
-    --   "fsharp",
-    --   "vb",
-    --   "razor",
-    -- },
+    ft = {
+      "cs",
+      "c_sharp",
+      "csharp",
+      "csproj",
+      "sln",
+      "slnx",
+      "props",
+      "csx",
+      "targets",
+      "fsharp",
+      "vb",
+      "razor",
+    },
     cmd = "Dotnet",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -129,15 +131,16 @@ return { -- C#
         return path
       end
 
-      local sdk_path = function()
-        return "C:\\Program Files\\dotnet\\sdk\\9.0.304"
-      end
+      -- local sdk_path = function()
+      --   return "C:\\Program Files\\dotnet\\sdk\\9.0.304"
+      -- end
 
       return {
         --Optional function to return the path for the dotnet sdk (e.g C:/ProgramFiles/dotnet/sdk/8.0.0)
         -- easy-dotnet will resolve the path automatically if this argument is omitted, for a performance improvement you can add a function that returns a hardcoded string
         -- You should define this function to return a hardcoded path for a performance improvement 🚀
-        get_sdk_path = sdk_path,
+        -- get_sdk_path = sdk_path,
+        ---@type TestRunnerOptions
         test_runner = {
           ---@type "split" | "float" | "buf"
           viewmode = "float",
@@ -163,12 +166,16 @@ return { -- C#
               lhs = "<leader>r",
               desc = "run test from buffer",
             },
+            peek_stack_trace_from_buffer = {
+              lhs = "<leader>p",
+              desc = "peek stack trace from buffer",
+            },
             filter_failed_tests = {
               lhs = "<leader>fe",
               desc = "filter failed tests",
             },
             debug_test = { lhs = "<leader>d", desc = "debug test" },
-            go_to_file = { lhs = "g", desc = "got to file" },
+            go_to_file = { lhs = "g", desc = "go to file" },
             run_all = { lhs = "<leader>R", desc = "run all tests" },
             run = { lhs = "<leader>r", desc = "run test" },
             peek_stacktrace = {
@@ -192,45 +199,29 @@ return { -- C#
         },
         ---@param action "test" | "restore" | "build" | "run"
         terminal = function(path, action, args)
+          args = args or ""
           local commands = {
             run = function()
-              return string.format(
-                "dotnet run -v d --tl:on --interactive --project %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet run --project %s %s", path, args)
             end,
             test = function()
-              return string.format(
-                "dotnet test -v d --tl:on --interactive %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet test %s %s", path, args)
             end,
             restore = function()
-              return string.format(
-                "dotnet restore -v d --tl:on --interactive %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet restore %s %s", path, args)
             end,
             build = function()
-              return string.format(
-                "dotnet build -v d --tl:on --interactive %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet build %s %s", path, args)
             end,
             watch = function()
-              return string.format(
-                "dotnet watch -v --project %s %s",
-                path,
-                args
-              )
+              return string.format("dotnet watch --project %s %s", path, args)
             end,
           }
 
-          local command = commands[action]() .. "\r"
+          local command = commands[action]()
+          if require("easy-dotnet.extensions").isWindows() == true then
+            command = command .. "\r"
+          end
           vim.cmd("split")
           vim.cmd("term " .. command)
         end,
@@ -248,6 +239,10 @@ return { -- C#
             register = "+", -- which register to check
           },
         },
+        server = {
+          ---@type nil | "Off" | "Critical" | "Error" | "Warning" | "Information" | "Verbose" | "All"
+          log_level = nil,
+        },
         -- choose which picker to use with the plugin
         -- possible values are "telescope" | "fzf" | "snacks" | "basic"
         -- if no picker is specified, the plugin will determine
@@ -255,6 +250,32 @@ return { -- C#
         -- telescope -> fzf -> snacks ->  basic
         picker = "snacks",
         background_scanning = true,
+        notifications = {
+          --Set this to false if you have configured lualine to avoid double logging
+          handler = function(start_event)
+            local spinner = require("easy-dotnet.ui-modules.spinner").new()
+            spinner:start_spinner(start_event.job.name)
+            ---@param finished_event JobEvent
+            return function(finished_event)
+              spinner:stop_spinner(
+                finished_event.result.text,
+                finished_event.result.level
+              )
+            end
+          end,
+        },
+        -- debugger = {
+        --   mappings = {
+        --     open_variable_viewer = { lhs = "T", desc = "open variable viewer" },
+        --   },
+        --   -- The path to netcoredbg
+        --   bin_path = vim.fn.stdpath("config") .. "\\mason\\bin\\netcoredbg.cmd",
+        --   auto_register_dap = true,
+        -- },
+        diagnostics = {
+          default_severity = "error",
+          setqflist = false,
+        },
       }
     end,
     config = function(_, opts)

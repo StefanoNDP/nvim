@@ -30,7 +30,7 @@ ft.setup = function()
   vim.lsp.start({
     name = "Godot",
     cmd = cmd,
-    filetypes = { "gdscript", "cs" },
+    filetypes = { "gdscript", "cs", "csharp", "c_sharp" },
     root_dir = vim.fs.dirname(vim.fs.find({ "project.godot", ".git" }, {
       upward = true,
       path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),

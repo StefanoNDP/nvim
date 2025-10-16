@@ -2,7 +2,7 @@ local funcs = require("config.functions")
 
 return {
   "nvim-neotest/neotest",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   event = "VeryLazy",
   dependencies = {
@@ -44,8 +44,11 @@ return {
       virtual_text = {
         format = function(diagnostic)
           -- Replace newline and tab characters with space for more compact diagnostics
-          local message =
-            diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+          local message = diagnostic.message
+            :gsub("\n", " ")
+            :gsub("\t", " ")
+            :gsub("%s+", " ")
+            :gsub("^%s+", "")
           return message
         end,
       },

@@ -1,6 +1,6 @@
 return {
   "danymat/neogen",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   event = "VeryLazy",
   cmd = "Neogen",

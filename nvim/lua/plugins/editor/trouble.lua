@@ -3,7 +3,7 @@ return {
   enabled = true,
   version = false,
   event = "VeryLazy",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "nvim-mini/mini.icons" },
   cmd = "Trouble",
   keys = require("config.keymaps.trouble"),
   opts = function()

@@ -1,6 +1,6 @@
 return {
   "HiPhish/rainbow-delimiters.nvim",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   -- lazy = false,
   event = "VeryLazy",
   opts = function()

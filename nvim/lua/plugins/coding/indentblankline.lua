@@ -1,7 +1,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   dependencies = { "HiPhish/rainbow-delimiters.nvim" },
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   event = "VeryLazy",
   opts = function()
@@ -43,6 +43,9 @@ return {
     local hooks = require("ibl.hooks")
 
     require("ibl").setup(opts)
-    hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    hooks.register(
+      hooks.type.SCOPE_HIGHLIGHT,
+      hooks.builtin.scope_highlight_from_extmark
+    )
   end,
 }

@@ -28,6 +28,8 @@ return {
       vars.catppuccinDAP()
       -- catppuccin()
       require("plugins.dap.adapters.c_sharp")
+      -- .NET specific setup using `easy-dotnet`
+      -- require("easy-dotnet.netcoredbg").register_dap_variables_viewer() -- special variables viewer specific for .NET
       require("plugins.dap.adapters.godot")
       require("plugins.dap.adapters.lua")
       require("nvim-treesitter.configs").setup({

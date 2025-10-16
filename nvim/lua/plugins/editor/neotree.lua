@@ -13,8 +13,6 @@ local checkExplorer = function()
   end
 end
 
-local enableNeoTree = false
-
 return {
   {
     "antosha417/nvim-lsp-file-operations",
@@ -22,7 +20,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
     },
-    enabled = enableNeoTree,
+    enabled = vim.g.enableNeoTree,
     version = false,
     lazy = true,
     config = function()
@@ -31,7 +29,7 @@ return {
   },
   {
     "s1n7ax/nvim-window-picker",
-    enabled = enableNeoTree,
+    enabled = vim.g.enableNeoTree,
     lazy = true,
     version = "2.*",
     config = function()
@@ -59,7 +57,7 @@ return {
       "antosha417/nvim-lsp-file-operations",
       "s1n7ax/nvim-window-picker",
     },
-    enabled = enableNeoTree,
+    enabled = vim.g.enableNeoTree,
     version = false,
     lazy = false,
     branch = "v3.x",

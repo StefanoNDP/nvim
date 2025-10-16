@@ -341,7 +341,9 @@ return {
         },
       },
       fuzzy = {
-        use_frecency = false,
+        frecency = {
+          enabled = false,
+        },
         -- use_typo_resistance = false,
         implementation = "prefer_rust_with_warning",
       },

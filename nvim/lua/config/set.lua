@@ -18,6 +18,9 @@ vim.opt.cmdheight = 0
 vim.opt.laststatus = 2
 -- vim.opt.statuscolumn = "%s %{v:relnum} %{v:lnum}"
 
+vim.g.isDesktop = false
+vim.g.enableNeoTree = false
+
 vim.opt.inccommand = "split" -- Preview commands
 
 -- 0 for dap-ui 1 for dap-view
@@ -52,7 +55,8 @@ if funcs.get_os() == "windows" then
 
   -- Set python3 host prog
   vim.g.python3_host_prog = "C:\\Python310\\python.exe"
-else
+end
+if funcs.get_os() == "linux" then
   -- Set python3 host prog
   vim.g.python3_host_prog = "/usr/bin/python3"
 end
@@ -103,9 +107,14 @@ vim.o.rnu = true
 vim.opt.clipboard:append({ "unnamed", "unnamedplus", vim.env.SSH_TTY }) -- Append system clipboard to the register
 -- vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
--- Disable Perl, Ruby
+-- Disable Python3, Perl, Ruby and Node support if unused
+vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+
+-- Limit LSP document size
+vim.lsp.buf.big_file_threshold = 1024 * 1024 -- 1MB
 
 vim.g.editorconfig = true
 

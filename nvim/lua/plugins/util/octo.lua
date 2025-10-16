@@ -1,13 +1,13 @@
 return {
   "pwntester/octo.nvim",
-  enabled = true,
+  enabled = vim.g.isDesktop,
   version = false,
   cmd = "Octo",
   event = { { event = "BufReadCmd", pattern = "octo://*" } },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "folke/snacks.nvim",
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
   },
   opts = function()
     return {

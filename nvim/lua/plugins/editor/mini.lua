@@ -10,7 +10,7 @@ local word_color_group = function(_, match)
 end
 
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   enabled = true,
   version = false,
   event = "VeryLazy",

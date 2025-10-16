@@ -37,6 +37,8 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load({ paths = path })
 
       luasnip.filetype_extend("cs", { "csharpdoc" })
+      luasnip.filetype_extend("c_sharp", { "csharpdoc" })
+      luasnip.filetype_extend("csharp", { "csharpdoc" })
       luasnip.filetype_extend("gdscript", { "gdscriptdoc" })
       luasnip.filetype_extend("lua", { "luadoc" })
       luasnip.filetype_extend("markdown", { "mddoc" })

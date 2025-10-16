@@ -40,6 +40,8 @@ M.rootPatterns = {
     "*.uproject", -- Unreal Engine
   },
   c_sharp = { ".git", "Makefile", "makefile", "*.sln", "*.fsproj", "*.csproj" },
+  csharp = { ".git", "Makefile", "makefile", "*.sln", "*.fsproj", "*.csproj" },
+  cs = { ".git", "Makefile", "makefile", "*.sln", "*.fsproj", "*.csproj" },
   gdscript = { ".git", "Makefile", "makefile", "project.godot" },
   json = { ".git", "Makefile", "makefile" },
   lua = {

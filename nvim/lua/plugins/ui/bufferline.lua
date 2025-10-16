@@ -2,7 +2,7 @@ return {
   "akinsho/bufferline.nvim",
   enabled = true,
   after = "catppuccin",
-  dependencies = { "echasnovski/mini.icons" },
+  dependencies = { "nvim-mini/mini.icons" },
   version = false,
   -- lazy = false,
   event = "VeryLazy",
@@ -82,7 +82,7 @@ return {
           },
         },
       },
-      highlights = require("catppuccin.groups.integrations.bufferline").get_theme(),
+      highlights = require("catppuccin.special.bufferline").get_theme(),
     }
   end,
   config = function(_, opts)
